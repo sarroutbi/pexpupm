@@ -1,0 +1,3 @@
+OCP exercise. Draw figures from a menu.
+
+Have to respect SRP and OCP.

@@ -1,0 +1,11 @@
+Class Comunity, create women, man, that have attribute name.
+
+Each of the members in the community sallutates
+
+When they salute each other:
+
+- Two man: shakes hands.
+
+- Man and women: give two kisses.
+
+- Two woman: look bad to each other.
