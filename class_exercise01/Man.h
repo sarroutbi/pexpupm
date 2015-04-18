@@ -2,17 +2,17 @@
 #define __MAN__
 
 #include "Person.h"
-#include "Woman.h"
 
 class Woman;
 
 class Man : public Person
 {
 public:
-  Man();
+  Man(const std::string& name);
   ~Man();
-  void greet(Man* man);
-  void greet(Woman* woman);
+  virtual void greet(Person* man);
+  virtual void greet(const Man& man);
+  virtual void greet(const Woman& woman);
 };
 
 #endif // __MAN__
