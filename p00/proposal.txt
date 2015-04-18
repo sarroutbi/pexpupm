@@ -1,0 +1,14 @@
+The proposal of this exercise is to implement the "Klondike" game. This card game is also known as solitaire. 
+
+A complete description of the game can be observed in: http://en.wikipedia.org/wiki/Klondike_%28solitaire%29
+
+- There are some limitations that must be considered for the game:
+  * The game will work based on text options (New game, Move, etc.)
+  * The game will only work on a Deal Mode
+
+However, it should be possible to change, easily, the code, taking into account next future change motivations:
+  * It should not be very difficult to change the game to have graphical interface
+  * Deal mode could be selectable by the user at any moment of the game
+  * The kind of movements should be easily changed
+  * The number of Tableaus should be changeable to a different number easily
+  * Deck should be easily changeable (from French to Spanish). In case Spanish deck is used, tableau will accept card that are of different suite (vs black red of French deck)
