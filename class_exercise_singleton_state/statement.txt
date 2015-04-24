@@ -1,0 +1,3 @@
+Same as singleton exercise. In this case, there is a necessity of having a handler to encapsulate the action (Print).
+The intention is to provide a single interface with global access. The client will have the control to configure
+the kind of printer to use, but it should be easy replaceable with a daemon that throws events indicating the kind of printer to use.
