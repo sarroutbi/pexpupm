@@ -1,0 +1,8 @@
+There are some classes that extend from another.
+
+      C                FC
+   X  Y  Z         FX  FY  FZ
+
+You should create a multiplon (multiple singleton) that, with a map, generate objects according.
+
+Parent class has a static map. There is a registry of the factories. In the constructor of the factory, have a singleton of C and register the type of the object, "X", and the object.
