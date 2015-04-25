@@ -1,0 +1,16 @@
+There is a huge class, which is ticket, that have:
+- Head
+- Foot 
+- Array of lines
+
+There is a set of operations:
+- Return // A client returns an object, and w
+- Abort  // Want to abort
+- Add product // Want to add a product to the ticket
+- Repetition // Want to repeat the action of adding a product, n times
+
+Use to visitors:
+- Print // To print the ticket
+- Pay   // Show the prize
+
+Assume each product has price equal to one.
