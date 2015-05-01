@@ -2,6 +2,7 @@
 #include <iostream>
 #include "MenuFacade.h"
 #include "TicketAddLine.h"
+#include "TicketRemoveLine.h"
 #include "PrintVisitor.h"
 
 void MenuFacade::addProduct()
@@ -10,12 +11,13 @@ void MenuFacade::addProduct()
   m_ticket.addLine(line);
 }
 
-void MenuFacade::returnProduct()
+void MenuFacade::removeProduct()
 {
-  ;
+  TicketLine* line = new TicketRemoveLine();
+  m_ticket.addLine(line);
 }
 
-void MenuFacade::abortProduct()
+void MenuFacade::returnProduct()
 {
   ;
 }
@@ -45,10 +47,10 @@ void MenuFacade::processOption(const int& option)
       addProduct();
       break;
     case 2:
-      returnProduct();
+      removeProduct();
       break;
     case 3:
-      abortProduct();
+      returnProduct();
       break;
     case 4:
       repeatProduct();

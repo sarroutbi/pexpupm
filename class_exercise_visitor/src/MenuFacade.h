@@ -10,7 +10,7 @@ public:
 private:
   void addProduct();
   void returnProduct();
-  void abortProduct();
+  void removeProduct();
   void repeatProduct();
   void printTicket();
   void calculateTicketPrize();

@@ -12,6 +12,6 @@ $(TICKET): $(TICKET_SRC)
 	$(CC) $(CCFLAGS) $(TICKET_INC) -o $@ $^
 
 clean:
-	@-rm $(TICKET)
-	@-rm *~
-	@-rm $(SRC_DIR)/*~
+	@-rm -f $(TICKET)
+	@-rm -f *~
+	@-rm -f $(SRC_DIR)/*~

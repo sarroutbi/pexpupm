@@ -8,8 +8,8 @@ int Menu::getMenuOption()
   int option = 0;
   while (!valid_option) {
     std::cout << "1 - Add product" << std::endl;
-    std::cout << "2 - Return product" << std::endl;
-    std::cout << "3 - Abort product" << std::endl;
+    std::cout << "2 - Remove product" << std::endl;
+    std::cout << "3 - Return product" << std::endl;
     std::cout << "4 - Repeat product" << std::endl;
     std::cout << "5 - Print Ticket" << std::endl;
     std::cout << "6 - Ticket Prize" << std::endl;

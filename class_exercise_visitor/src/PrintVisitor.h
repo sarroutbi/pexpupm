@@ -11,6 +11,7 @@ public:
   ~PrintVisitor();
   std::string getLinePrintout() { return m_linePrintout; }
   virtual void visitTicketAddLine(TicketAddLine* ticket_product);
+  virtual void visitTicketRemoveLine(TicketRemoveLine* ticket_product);
   /* virtual void VisitReturn(const TicketReturn& ticket_ret); */
   /* virtual void VisitAbort(const TicketAbort& ticket_abort); */
   /* virtual void VisitRepeat(const TicketRepeat& ticket_rep); */
