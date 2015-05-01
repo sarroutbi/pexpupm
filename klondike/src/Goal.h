@@ -27,22 +27,7 @@ public:
   /**
    * Empty Destructor
    */
-  virtual ~Goal ();
-
-  // Static Public attributes
-  //  
-
-  // Public attributes
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
+  ~Goal ();
 
 
   /**
@@ -51,58 +36,12 @@ public:
    */
   bool CheckSuccess (BoardLayout layout)
   {
+    return layout.GameFinished();
   }
 
 protected:
 
-  // Static Protected attributes
-  //  
-
-  // Protected attributes
-  //  
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-
 private:
-
-  // Static Private attributes
-  //  
-
-  // Private attributes
-  //  
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-
 
 };
 

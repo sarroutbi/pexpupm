@@ -30,29 +30,13 @@ public:
    */
   virtual ~Pile ();
 
-  // Static Public attributes
-  //  
-
-  // Public attributes
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-
   /**
    * @return bool
    * @param  card
    */
   virtual bool Push (Card card)
   {
-
+    ;
   }
 
 
@@ -62,9 +46,11 @@ public:
    */
   virtual Card Pop (Card card)
   {
-
+    ;
   }
 
+protected:
+  std::vector<Card> m_card_pile;
 };
 
 #endif // PILE_H

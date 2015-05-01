@@ -1,12 +1,11 @@
-
 #ifndef FOUNDATION_H
 #define FOUNDATION_H
-#include "Pile.h"
 
 #include <string>
 #include <vector>
 
-
+#include "Suite.h"
+#include "Pile.h"
 
 /**
   * class Foundation
@@ -17,86 +16,27 @@ class Foundation : public Pile
 {
 public:
 
-  // Constructors/Destructors
-  //  
-
-
   /**
    * Empty Constructor
    */
-  Foundation ();
+  Foundation (const Suite& suite,
+              const unsigned int max_cards);
 
   /**
    * Empty Destructor
    */
-  virtual ~Foundation ();
-
-  // Static Public attributes
-  //  
-
-  // Public attributes
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
+  ~Foundation ();
+  
+  /**
+   * Check if foundation is completed
+   */
+  const bool Completed () const;
 
 protected:
 
-  // Static Protected attributes
-  //  
-
-  // Protected attributes
-  //  
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-
 private:
-
-  // Static Private attributes
-  //  
-
-  // Private attributes
-  //  
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-
-
+  unsigned int m_max_cards;
+  Suite m_suite;
 };
 
 #endif // FOUNDATION_H

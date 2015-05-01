@@ -3,21 +3,12 @@
 // Constructors/Destructors
 //  
 
-Pile::Pile () {
+Pile::Pile () : m_card_pile()
+{
+  ;
 }
 
-Pile::~Pile () { }
-
-//  
-// Methods
-//  
-
-
-// Accessor methods
-//  
-
-
-// Other methods
-//  
-
-
+Pile::~Pile ()
+{ 
+  ;
+}

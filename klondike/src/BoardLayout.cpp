@@ -1,23 +1,31 @@
 #include "BoardLayout.h"
 
-// Constructors/Destructors
-//  
-
-BoardLayout::BoardLayout () {
+BoardLayout::BoardLayout (const unsigned int num_tableaus) 
+{
+  ;
 }
 
-BoardLayout::~BoardLayout () { }
+BoardLayout::~BoardLayout ()
+{ 
+  ;
+}
 
-//  
-// Methods
-//  
+void BoardLayout::ResetPiles ()
+{
+  ;
+}
 
+bool BoardLayout::GameFinished ()
+{
+  std::vector<Foundation>::const_iterator it;
 
-// Accessor methods
-//  
-
-
-// Other methods
-//  
+  for (it = m_foundations.begin(); it != m_foundations.end(); it++) {
+    if(!((*it).Completed())) {
+      return false;
+    }
+  }
+  
+  return true;
+}
 
 

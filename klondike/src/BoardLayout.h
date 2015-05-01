@@ -5,7 +5,10 @@
 #include <vector>
 
 #include "Movement.h"
+#include "Pile.h"
+#include "Foundation.h"
 
+const unsigned int DEFAULT_TABLEAU_AMOUNT = 7;
 /**
   * class BoardLayout
   * 
@@ -13,111 +16,33 @@
 class BoardLayout
 {
 public:
-
-  // Constructors/Destructors
-  //  
-
-
   /**
    * Empty Constructor
    */
-  BoardLayout ();
+  BoardLayout (const unsigned int num_tableaus = DEFAULT_TABLEAU_AMOUNT);
 
   /**
    * Empty Destructor
    */
   virtual ~BoardLayout ();
 
-  // Static Public attributes
-  //  
-
-  // Public attributes
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-
   /**
    */
-  void ResetPiles ()
-  {
-  }
+  void ResetPiles ();
 
 
   /**
    * @return bool
    */
-  bool GameFinished ()
-  {
-  }
-
-
-  /**
-   * @return bool
-   * @param  movement
-   */
-  bool Move (Movement movement)
-  {
-  }
+  bool GameFinished ();
 
 protected:
 
-  // Static Protected attributes
-  //  
-
-  // Protected attributes
-  //  
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-
 private:
-
-  // Static Private attributes
-  //  
-
-  // Private attributes
-  //  
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-
-
+  std::vector<Foundation> m_foundations;
+  std::vector<Pile> m_tableaus;
+  Pile m_deck;
+  Pile m_waste;
 };
 
 #endif // BOARDLAYOUT_H

@@ -7,6 +7,7 @@
 #include "BoardLayout.h"
 #include "Movement.h"
 #include "DealMode.h"
+#include "GameAction.h"
 
 /**
   * class PlayerView
@@ -30,54 +31,25 @@ public:
    */
   virtual ~PlayerView ();
 
-  // Static Public attributes
-  //  
-
-  // Public attributes
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-
-  /**
-   * @return bool
-   */
-  bool NewGame ()
-  {
-  }
-
-
-  /**
-   * @return Movement
-   * @param  layout
-   */
-  Movement GetMovement (BoardLayout layout)
-  {
-  }
-
-
-  /**
-   * @return DealMode
-   */
-  DealMode GetDealMode ()
-  {
-  }
-
-
   /**
    * @return bool
    * @param  layout
    */
   bool Draw (BoardLayout layout)
   {
+    ;
   }
+
+  /**
+   * @return GameAction*
+   * @param  
+   */
+  GameAction* GetPlayerAction() 
+  {
+    GameAction* action = NULL;
+    return action;
+  }
+
 
 protected:
 
