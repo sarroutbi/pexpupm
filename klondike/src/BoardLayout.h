@@ -5,8 +5,8 @@
 #include <vector>
 
 #include "Movement.h"
-#include "Pile.h"
 #include "Foundation.h"
+#include "PileSet.h"
 
 const unsigned int DEFAULT_TABLEAU_AMOUNT = 7;
 /**
@@ -39,10 +39,7 @@ public:
 protected:
 
 private:
-  std::vector<Foundation> m_foundations;
-  std::vector<Pile> m_tableaus;
-  Pile m_deck;
-  Pile m_waste;
+  PileSet m_pile_set;
 };
 
 #endif // BOARDLAYOUT_H

@@ -27,58 +27,45 @@ public:
   virtual ~Movement ();
 
 
-private:
-  Pile destination;
-  Pile source;
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
 
   /**
    * Set the value of destination
    * @param new_var the new value of destination
    */
-  void setDestination (Pile new_var)   {
-      destination = new_var;
+  void setDestination (Pile* new_var)
+  {
+      m_destination = new_var;
   }
 
   /**
    * Get the value of destination
    * @return the value of destination
    */
-  Pile getDestination () {
-    return destination;
+  Pile* getDestination ()
+  {
+    return m_destination;
   }
 
   /**
    * Set the value of source
    * @param new_var the new value of source
    */
-  void setSource (Pile new_var) {
-      source = new_var;
+  void setSource (Pile* new_var)
+  {
+      m_source = new_var;
   }
 
   /**
    * Get the value of source
    * @return the value of source
    */
-  Pile getSource () {
-    return source;
+  Pile* getSource ()
+  {
+    return m_source;
   }
 private:
-  void initAttributes () ;
-
+  Pile* m_source;
+  Pile* m_destination;
 };
 
 #endif // MOVEMENT_H

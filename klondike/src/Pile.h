@@ -15,11 +15,6 @@
 class Pile
 {
 public:
-
-  // Constructors/Destructors
-  //  
-
-
   /**
    * Empty Constructor
    */
@@ -31,23 +26,21 @@ public:
   virtual ~Pile ();
 
   /**
-   * @return bool
-   * @param  card
+   * @return Card
+   * @param  bool specifying if card was pushed (true) or not (false)
    */
-  virtual bool Push (Card card)
-  {
-    ;
-  }
-
+  virtual bool Push (Card card) = 0;
 
   /**
-   * @return Card
-   * @param  card
+   * @param  Card Card to pop
+   * @return bool specifying if card was popped (true) or not (false)
    */
-  virtual Card Pop (Card card)
-  {
-    ;
-  }
+  virtual bool Pop (Card card) = 0;
+
+  /**
+   * @return bool specifying if pile is full or not
+   */
+  virtual bool Full () = 0;
 
 protected:
   std::vector<Card> m_card_pile;
