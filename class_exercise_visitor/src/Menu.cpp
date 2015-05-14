@@ -13,9 +13,10 @@ int Menu::getMenuOption()
     std::cout << "4 - Repeat product" << std::endl;
     std::cout << "5 - Print Ticket" << std::endl;
     std::cout << "6 - Ticket Prize" << std::endl;
+    std::cout << "7 - Print stockage" << std::endl;
     std::cout << "Insert your option:";
     std::cin >> option;
-    if((option > 0) && (option <=6)) {
+    if((option > 0) && (option <= 7)) {
       valid_option = true;
     }
   }
@@ -33,6 +34,6 @@ void Menu::process()
 
 void Menu::processOption(const int& option)
 {
-  assert((option > 0) && (option <= 6));
+  assert((option > 0) && (option <= 7));
   m_menuFacade.processOption(option);
 }

@@ -3,6 +3,7 @@
 #include "PrintVisitor.h"
 #include "TicketAddLine.h"
 #include "TicketRemoveLine.h"
+#include "TicketReturnLine.h"
 
 PrintVisitor::PrintVisitor()
 {
@@ -29,6 +30,16 @@ void PrintVisitor::visitTicketRemoveLine(TicketRemoveLine* ticket_product)
   assert(ticket_product);
   std::stringstream ss;
   ss << "R: " << ticket_product->getDescription()
+     << " Price: " << ticket_product->getPrice();
+  m_linePrintout += ss.str();
+  m_linePrintout += '\n';
+}
+
+void PrintVisitor::visitTicketReturnLine(TicketReturnLine* ticket_product)
+{
+  assert(ticket_product);
+  std::stringstream ss;
+  ss << "B: " << ticket_product->getDescription()
      << " Price: " << ticket_product->getPrice();
   m_linePrintout += ss.str();
   m_linePrintout += '\n';

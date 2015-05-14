@@ -1,22 +1,23 @@
-#ifndef __PRINT_VISITOR__
-#define __PRINT_VISITOR__
+#ifndef __STOCK_VISITOR__
+#define __STOCK_VISITOR__
 
 #include <string>
 #include "TicketLineVisitor.h"
 
-class PrintVisitor : public TicketLineVisitor
+class StockVisitor : public TicketLineVisitor
 {
 public:
-  PrintVisitor();
-  ~PrintVisitor();
-  std::string getLinePrintout() { return m_linePrintout; }
+  StockVisitor();
+  ~StockVisitor();
+  std::string getStock();
   virtual void visitTicketAddLine(TicketAddLine* ticket_product);
   virtual void visitTicketRemoveLine(TicketRemoveLine* ticket_product);
   virtual void visitTicketReturnLine(TicketReturnLine* ticket_ret);
   /* virtual void VisitAbort(const TicketAbort& ticket_abort); */
   /* virtual void VisitRepeat(const TicketRepeat& ticket_rep); */
 private:
-  std::string m_linePrintout;
+  int num_products;
+  std::string m_stock;
 };
 
-#endif // __PRINT_VISITOR__
+#endif // __STOCK_VISITOR__

@@ -3,13 +3,14 @@
 
 class TicketAddLine;
 class TicketRemoveLine;
+class TicketReturnLine;
 
 class TicketLineVisitor
 {
 public:
   virtual void visitTicketAddLine(TicketAddLine* ticket_product) {};
   virtual void visitTicketRemoveLine(TicketRemoveLine* ticket_abort) {};
-  /* virtual void visitTicketReturnLine(const TicketReturn& ticket_ret); */
+  virtual void visitTicketReturnLine(TicketReturnLine* ticket_ret) {};
   /* virtual void visitTicketRepeatLine(const TicketRepeat& ticket_rep); */
 protected:
   TicketLineVisitor();

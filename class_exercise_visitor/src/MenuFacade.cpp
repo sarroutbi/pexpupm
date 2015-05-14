@@ -3,6 +3,7 @@
 #include "MenuFacade.h"
 #include "TicketAddLine.h"
 #include "TicketRemoveLine.h"
+#include "TicketReturnLine.h"
 #include "PrintVisitor.h"
 
 void MenuFacade::addProduct()
@@ -19,7 +20,8 @@ void MenuFacade::removeProduct()
 
 void MenuFacade::returnProduct()
 {
-  ;
+  TicketLine* line = new TicketReturnLine();
+  m_ticket.addLine(line);
 }
 
 void MenuFacade::repeatProduct()
@@ -36,7 +38,14 @@ void MenuFacade::printTicket()
 
 void MenuFacade::calculateTicketPrize()
 {
-  ;
+  std::cout << "\nPrize: ";
+  // std::cout << m_ticket.getPrize() << std::endl;
+}
+
+void MenuFacade::calculateStock()
+{
+  std::cout << "\nStock: ";
+  std::cout << m_ticket.getStock() << std::endl;
 }
 
 void MenuFacade::processOption(const int& option)
@@ -60,6 +69,9 @@ void MenuFacade::processOption(const int& option)
       break;
     case 6:
       calculateTicketPrize();
+      break;
+    case 7:
+      calculateStock();
       break;
     default:
       assert(0);

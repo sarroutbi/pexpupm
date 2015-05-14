@@ -1,6 +1,7 @@
 #include <assert.h>
 #include "Ticket.h"
 #include "PrintVisitor.h"
+#include "StockVisitor.h"
 
 Ticket::Ticket() : m_header("HEADER"), m_footer("FOOTER")
 {
@@ -37,3 +38,12 @@ std::string Ticket::getPrintout()
   return ticket;
 }
 
+std::string Ticket::getStock()
+{
+  std::vector<TicketLine*>::iterator it;
+  StockVisitor visitor;
+  for (it = m_lines.begin(); it != m_lines.end(); it++) {
+    (*it)->accept(visitor);
+  }
+  return visitor.getStock();
+}

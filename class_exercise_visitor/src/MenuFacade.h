@@ -14,6 +14,7 @@ private:
   void repeatProduct();
   void printTicket();
   void calculateTicketPrize();
+  void calculateStock();
   Ticket m_ticket;
 };
 
