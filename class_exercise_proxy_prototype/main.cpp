@@ -8,8 +8,8 @@ int dump_operations(Calculator* real)
 {
   std::stringstream ss;
   ss << "Fact  (5):" << real->factorial(5) << std::endl;
-  // ss << "Sum (2+3):" << real->sum(2, 3) << std::endl;
-  // ss << "Rand     :" << real->random() << std::endl;
+  ss << "Sum (2+3):" << real->sum(2, 3) << std::endl;
+  ss << "Rand     :" << real->random() << std::endl;
   std::cout << ss.str();
 }
 

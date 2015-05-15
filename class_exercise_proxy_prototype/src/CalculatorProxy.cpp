@@ -32,7 +32,7 @@ int CalculatorProxy::sum(int oper1, int oper2)
 int CalculatorProxy::random()
 {
   std::stringstream ss;
-  ss << "0";
+  ss << "2";
   m_tcp_sender.send(ss.str());
   return m_tcp_receiver.getLastResult();
 }

@@ -1,9 +1,13 @@
 #include "Dispatcher.h"
 #include "FactorialAnalyzer.h"
+#include "SumAnalyzer.h"
+#include "RandomAnalyzer.h"
 
 Dispatcher::Dispatcher(TcpReceiver* recv) : m_tcp_sender()
 {
   m_map["0"] = new FactorialAnalyzer();
+  m_map["1"] = new SumAnalyzer();
+  m_map["2"] = new RandomAnalyzer();
   m_tcp_sender = new TcpSender();
   m_tcp_sender->setRecv(recv);
 }
