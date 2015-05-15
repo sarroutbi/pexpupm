@@ -8,13 +8,16 @@
 #include "TcpSender.h"
 
 class TcpSender;
+class TcpReceiver;
 
 class Dispatcher {
   public:
-    Dispatcher();
+    Dispatcher(TcpReceiver* recv);
     ~Dispatcher();
     int dispatch(const std::string& string);
+    void setRecv(TcpReceiver* recv);
   private:
+    Dispatcher();
     TcpSender* m_tcp_sender;
     std::map<std::string, Analyzer*> m_map;
 };

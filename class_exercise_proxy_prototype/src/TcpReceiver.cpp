@@ -1,9 +1,8 @@
 #include "TcpReceiver.h"
 
-TcpReceiver::TcpReceiver() : 
-  m_dispatcher(NULL), m_sender(NULL), last_result(0)
+TcpReceiver::TcpReceiver() : m_dispatcher(NULL), m_last_result(0)
 {
-  m_dispatcher = new Dispatcher();
+  m_dispatcher = new Dispatcher(this);
 }
 
 void TcpReceiver::recv(const std::string& str)
@@ -11,12 +10,7 @@ void TcpReceiver::recv(const std::string& str)
   m_dispatcher->dispatch(str);
 }
 
-void TcpReceiver::recvResult(const int& res)
-{
-  last_result = res;
-}
-
 TcpReceiver::~TcpReceiver()
 {
-  ;
+  delete m_dispatcher;
 }

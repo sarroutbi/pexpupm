@@ -13,12 +13,11 @@ class TcpReceiver {
     TcpReceiver();
     ~TcpReceiver();
     void recv(const std::string& str);
-    void recvResult(const int& result);
-    int getLastResult () { return last_result; }
+    void recvResult(const int& result) { m_last_result = result; }
+    int getLastResult () { return m_last_result; }
   private:
     Dispatcher* m_dispatcher;
-    TcpSender* m_sender;
-    int last_result;
+    int m_last_result;
 };
 
 #endif // TCP_RECEIVER
