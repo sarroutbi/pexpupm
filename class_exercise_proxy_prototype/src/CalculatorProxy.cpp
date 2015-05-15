@@ -3,9 +3,9 @@
 #include <sstream>
 #include "CalculatorProxy.h"
 
-CalculatorProxy::CalculatorProxy()
+CalculatorProxy::CalculatorProxy() : m_tcp_sender(), m_tcp_receiver()
 {
-  ;
+  m_tcp_sender.setRecv(&m_tcp_receiver);
 }
 
 CalculatorProxy::~CalculatorProxy()

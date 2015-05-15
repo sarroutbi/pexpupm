@@ -7,14 +7,16 @@
 #include "Analyzer.h"
 #include "TcpSender.h"
 
+class TcpSender;
+
 class Dispatcher {
   public:
     Dispatcher();
     ~Dispatcher();
     int dispatch(const std::string& string);
   private:
+    TcpSender* m_tcp_sender;
     std::map<std::string, Analyzer*> m_map;
-    TcpSender m_tcp_sender;
 };
 
 #endif // DISPATCHER

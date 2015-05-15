@@ -3,6 +3,7 @@
 
 #include "Calculator.h"
 #include "TcpSender.h"
+#include "TcpReceiver.h"
 
 class CalculatorProxy : public Calculator {
 public:
@@ -13,6 +14,7 @@ public:
   int random();
 private:
   TcpSender m_tcp_sender;
+  TcpReceiver m_tcp_receiver;
 };
 
 #endif // CALCULATOR_PROXY_H
