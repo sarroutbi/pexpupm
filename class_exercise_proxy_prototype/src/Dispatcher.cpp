@@ -19,14 +19,16 @@ void Dispatcher::setRecv(TcpReceiver* recv)
 
 Dispatcher::~Dispatcher()
 {
-  //PENDING: DELETE all mmap analyzers;
-  
+  std::map<std::string, Analyzer*>::const_iterator it;
+  for (it = m_map.begin(); it != m_map.end(); it++) {
+    delete it->second;
+  }
   delete m_tcp_sender;
 }
 
 int Dispatcher::dispatch(const std::string& str)
 {
   std::string code(str.substr(0, 1));
-  Analyzer* analyzer = m_map[code];
+  Analyzer* analyzer = m_map[code]->clone();
   m_tcp_sender->sendResult(analyzer->dispatch(str));
 }

@@ -20,4 +20,7 @@ int main(void)
 
   Calculator* calc_proxy = new CalculatorProxy();
   dump_operations(calc_proxy);
+
+  delete calc_real;
+  delete calc_proxy;
 }
