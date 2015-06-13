@@ -34,11 +34,10 @@ void Game::MainLoop ()
     assert(action);
     ProcessAction(action);
   }
-  
   Init();
 }
 
-void Game::ProcessAction(GameAction* action) 
+void Game::ProcessAction(GameAction* action)
 {
   assert(action);
   action->PerformAction(m_layout);

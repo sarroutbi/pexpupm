@@ -14,35 +14,11 @@
 class Goal
 {
 public:
-
-  // Constructors/Destructors
-  //  
-
-
-  /**
-   * Empty Constructor
-   */
   Goal ();
-
-  /**
-   * Empty Destructor
-   */
   ~Goal ();
-
-
-  /**
-   * @return bool
-   * @param  layout
-   */
-  bool CheckSuccess (BoardLayout layout)
-  {
-    return layout.GameFinished();
-  }
-
+  bool CheckSuccess (BoardLayout layout) { return layout.GameFinished(); };
 protected:
-
 private:
-
 };
 
 #endif // GOAL_H

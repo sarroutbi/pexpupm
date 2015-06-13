@@ -1,20 +1,20 @@
-#ifndef INTERFACE_H
-#define INTERFACE_H
+#ifndef TEXT_INTERFACE_H
+#define TEXT_INTERFACE_H
 
 #include "Option.h"
 #include "BoardLayout.h"
 #include "GameAction.h"
+#include "Interface.h"
 
 class TextInterface : public Interface
 {
 public:
-  virtual void createOptions() = 0;
-  virtual void displayOptions() = 0;
-  virtual void draw(const BoardLayout& layout) = 0;
-  virtual GameAction& getPlayerAction() = 0;
+  virtual void createOptions();
+  virtual void displayOptions();
+  virtual void draw(const BoardLayout& layout);
+  virtual GameAction* getPlayerAction();
 protected:
 private:
-  std::vector<Option> m_option_list;
 };
 
-#endif INTERFACE_H
+#endif // TEXT_INTERFACE_H

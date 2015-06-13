@@ -9,35 +9,15 @@
 #include "PileSet.h"
 
 const unsigned int DEFAULT_TABLEAU_AMOUNT = 7;
-/**
-  * class BoardLayout
-  * 
-  */
+
 class BoardLayout
 {
 public:
-  /**
-   * Empty Constructor
-   */
   BoardLayout (const unsigned int num_tableaus = DEFAULT_TABLEAU_AMOUNT);
-
-  /**
-   * Empty Destructor
-   */
   virtual ~BoardLayout ();
-
-  /**
-   */
   void ResetPiles ();
-
-
-  /**
-   * @return bool
-   */
   bool GameFinished ();
-
 protected:
-
 private:
   PileSet m_pile_set;
 };

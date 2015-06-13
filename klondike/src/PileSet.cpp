@@ -2,7 +2,8 @@
 #include "PileSet.h"
 #include "Foundation.h"
 
-PileSet::PileSet()
+PileSet::PileSet() : m_foundations(), m_tableaus(),
+  m_deck(NULL), m_waste(NULL)
 {
   ;
 }

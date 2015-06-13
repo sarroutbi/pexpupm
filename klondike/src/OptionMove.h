@@ -2,15 +2,16 @@
 #define OPTION_MOVE_H
 
 #include <string>
+#include "Option.h"
 
 class OptionMove : public Option
 {
 public:
-  OptionMove();
-  ~OptionMove();
+  OptionMove()  {};
+  ~OptionMove() {};
   virtual void display() = 0;
-  virtual GameAction getGameAction() = 0;
+  virtual GameAction* getGameAction() = 0;
 protected:
 };
 
-#endif OPTION_MOVE_H
+#endif // OPTION_MOVE_H

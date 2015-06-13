@@ -15,7 +15,7 @@ Foundation::~Foundation ()
   ;
 }
 
-const bool Foundation::Completed () const
+const bool Foundation::Full () const
 {
   return m_card_pile.size() == m_max_cards;
 }
