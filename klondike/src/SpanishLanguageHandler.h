@@ -1,11 +1,14 @@
 #ifndef SPANISH_LANGUAGE_HANDLER_H
 #define SPANISH_LANGUAGE_HANDLER_H
 
-class SpanishLanguageHandler
+#include "LanguageHandler.h"
+
+class SpanishLanguageHandler : public LanguageHandler
 {
 public:
   SpanishLanguageHandler();
   ~SpanishLanguageHandler();
+protected:
   virtual void initDict();
 };
 
