@@ -6,18 +6,25 @@
 
 #include "Movement.h"
 #include "Pile.h"
+#include "Deck.h"
+#include "Pile.h"
 
 class PileSet 
 {
 public:
   PileSet();
   ~PileSet();
-  bool AllFoundationsFull();
+  bool allFoundationsFull();
+  virtual bool resetPiles();
+  Pile* getDeck();
+  Pile* getWaste();
 private:
+  bool resetFoundations();
+  bool resetTableaus();
   std::vector<Pile*> m_foundations;
   std::vector<Pile*> m_tableaus;
-  Pile* m_deck;
-  Pile* m_waste;
+  Deck* m_deck;
+  Waste* m_waste;
 };
 
 #endif // PILESET_H

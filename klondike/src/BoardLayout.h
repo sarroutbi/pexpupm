@@ -15,7 +15,7 @@ class BoardLayout
 public:
   BoardLayout (const unsigned int num_tableaus = DEFAULT_TABLEAU_AMOUNT);
   virtual ~BoardLayout ();
-  void ResetPiles ();
+  virtual void ResetPiles ();
   bool GameFinished ();
 protected:
 private:

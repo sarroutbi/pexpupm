@@ -17,7 +17,7 @@ void BoardLayout::ResetPiles ()
 
 bool BoardLayout::GameFinished ()
 {
-  return m_pile_set.AllFoundationsFull();
+  return m_pile_set.allFoundationsFull();
 }
 
 

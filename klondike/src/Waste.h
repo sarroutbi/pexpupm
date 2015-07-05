@@ -5,32 +5,22 @@
 
 #include <string>
 #include <vector>
+#include <stdint.h>
 
 /**
   * class Waste
   * 
   */
-
 class Waste : public Pile
 {
 public:
-
-  // Constructors/Destructors
-  //  
-
-
-  /**
-   * Empty Constructor
-   */
   Waste ();
-
-  /**
-   * Empty Destructor
-   */
   ~Waste ();
-
+  virtual bool push(Card* card);
+  virtual Card* pop (Card* card);
+  virtual bool full() const;
 private:
-
+  uint32_t m_full_size;
 };
 
 #endif // WASTE_H
