@@ -3,6 +3,7 @@
 \usepackage{hyperref}
 \usepackage[spanish]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
 \title{\textbf{Diseño de Software: Klondike}}
 \author{Sergio Arroutbi Braojos}
 \selectlanguage{spanish}
@@ -21,15 +22,19 @@ pdfborder={0 0 0}
    
 \maketitle
 
+\pagebreak
+
 \tableofcontents
 
 \pagebreak
 
 \section{Introducción}
 En este ejercicio se ha realizado el análisis, diseño y posterior implementación del juego del klondike. Este juego de cartas, también conocido como ``solitario'', es un juego en el que un único jugador interviene en el reparto y operación de las cartas. El tablero de cartas está formado por la baraja inicial, conocida como ``Deck'', el ``Waste'', donde se levantan las cartas de la baraja, una serie de ``Tableaus'', que permiten sacar de forma provisional las cartas del ``Waste'' ordenándolas por número descendente y alternando los colores de las cartas, y finalmente las ``Foundations'', que son cada uno de los palos del ``Deck'' en orden ascendente.
+
 En cada turno, el jugador puede sacar cartas del ``Deck'' al ``Waste'', colocar cartas del ``Waste'' a los ``Tableaus'' o a las ``Foundations'' y sacar igualmente carta de las ``Foundations'' para seguir combinando cartas en los ``Tableaus''.
 El motivo de este documento no es describir de forma muy detallada el juego, que puede consultarse en el siguiente enlace: \url{https://en.wikipedia.org/wiki/Klondike_(solitaire)}
 Además, existen ciertas reglas que son configurables en el juego, como el número de cartas del ``Deck'' que se ocultan en cada ronda de la baraja al ``Waste'', el número de veces que el ``Waste'' se puede dar la vuelta hacia el ``Deck''.
+
 Para realizar la implementación software de este juego de cartas se han realizado las diversas fases involucradas en el proceso de desarrollo unificado con diseño orientado a objetos. En este proceso se ha llevado a cabo la idea ``BDUF'' (Big Design Up Front), para el cual se han seguido las siguientes fases:
 
 \begin{itemize}\itemsep0pt
@@ -40,7 +45,7 @@ Para realizar la implementación software de este juego de cartas se han realiza
 \item{Pruebas}
 \end{itemize}
 
-En los siguientes capítulos se describen cada una de las anteriores fases y la aproximación que se ha llevado a cabo con el objetivo de llegar a una implementación con un objetivo final: Llegar a un software con un buen diseño orientado a objetos, cuya mantenibilidad sea lo más sencilla posible, y caracterizado por las cuatro premisas que este tipo de diseño trata de alcanzar:
+En los siguientes capítulos se describen cada una de las anteriores fases y la aproximación que se ha llevado a cabo con el objetivo de llegar a una implementación con un objetivo final: \textbf{Llegar a un software con un buen diseño orientado a objetos}, cuya mantenibilidad sea lo más sencilla posible, y caracterizado por las cuatro premisas que este tipo de diseño trata de alcanzar:
 
 \begin{itemize}\itemsep0pt
 \item{Abstracción}
@@ -77,5 +82,24 @@ A parte de lo descrito anteriormente, se han presentado ciertas características
 \item{El diseño debería facilitar que el número de Tableaus se pudiera modificar de forma sencilla}.
 \end{enumerate}
 
+\pagebreak
+
+\section{Fase de Análisis}
+La fase de análisis es, simplemente, un \textbf{``diseño preliminar''}. Se considera que esta fase de análisis se debe de llevar a cabo en una quinta parte del tiempo toal respecto a la fase de diseño.
+
+En esta fase de análisis, en el cual la solución al proceso de desarrollo empieza a tomar forma, se debe dar una primera visión interna del sistema, de forma que empiezan a aflorar los primeros diagramas estructurados por clases estereotipadas, y suele recoger aquellos detalles del dominio propios de los objetos tangibles del desarrollo en cuestión.
+
+En esta fase se debe empezar a comprender la forma del sistema por parte de los desarrolladores. En el caso del klondike, el análisis da lugar a un diagrama estructurado como el que sigue: 
+
+\includepdf[pages=-]{analysis00.pdf}
+
+En este análisis preliminar se muestra un primer boceto de la jerarquía de clases. Para ello, se han identificado los distintos tipos de clases que formarán la jerarquía de clases que permitan implementar el juego.
+
+A continuación se describe de forma resumida cada una de ellas:
+
+\section{Fase de Diseño}
+\subsection{Fase de Diseño}
+
+\section{Fase de Implementación}
 
 \end{document}
