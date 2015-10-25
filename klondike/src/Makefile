@@ -1,5 +1,5 @@
 CC=g++
-CCFLAGS=-ggdb
+CCFLAGS=-ggdb -std=c++11
 OUTPUT_DIR=o
 SRC_DIR=.
 TEST_DIR=test

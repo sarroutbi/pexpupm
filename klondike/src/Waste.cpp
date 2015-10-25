@@ -18,17 +18,10 @@ bool Waste::push(Card* card)
   return true;
 }
 
-Card* Waste::pop(Card* card)
+Card* Waste::pop()
 {
-  Card* ret = NULL;
-  std::vector<Card*>::iterator it = 
-    find(m_card_pile.begin(), m_card_pile.end(),
-         card);
-
-  if (it != m_card_pile.end()) {
-    return *it;
-  }
-  return NULL;
+  Card* card = m_card_pile.back();
+  return card;
 }
 
 bool Waste::full() const

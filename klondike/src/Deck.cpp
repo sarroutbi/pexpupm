@@ -5,7 +5,9 @@
 // Constructors/Destructors
 //  
 
-Deck::Deck () : m_initial_size(0)
+Deck::Deck () :
+  m_initial_size(0),
+  m_deck_builder(NULL)
 {
   ;
 }
@@ -20,13 +22,11 @@ bool Deck::push (Card* card)
   return false;
 }
 
-Card* Deck::pop (Card* card)
+Card* Deck::pop ()
 {
-  if(!card) {
-    Card* ret = *(m_card_pile.begin());
-    m_card_pile.erase(m_card_pile.begin());
-    return ret;
-  }
+  Card* ret = *(m_card_pile.begin());
+  m_card_pile.erase(m_card_pile.begin());
+  return ret;
 }
 
 void Deck::reset ()

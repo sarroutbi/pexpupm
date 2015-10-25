@@ -7,39 +7,13 @@
 #include "BoardLayout.h"
 
 
-/**
-  * class Board
-  * 
-  */
-
 class Board
 {
 public:
 
-  // Constructors/Destructors
-  //  
-
-
-  /**
-   * Empty Constructor
-   */
   Board ();
-
-  /**
-   * Empty Destructor
-   */
   virtual ~Board ();
-
-
-  /**
-   * @return bool
-   * @param  movement
-   */
   bool Move (Movement movement);
-
-  /**
-   * @return BoardLayout
-   */
   BoardLayout GetLayout ();
 };
 

@@ -5,7 +5,6 @@
 #include <string>
 #include <vector>
 
-
 /**
   * class Pile
   * 
@@ -16,7 +15,7 @@ public:
   Pile ();
   virtual ~Pile ();
   virtual bool push (Card* card) = 0;
-  virtual Card* pop (Card* card) = 0;
+  virtual Card* pop () = 0;
   virtual bool full () const = 0;
   void clean ();
 protected:

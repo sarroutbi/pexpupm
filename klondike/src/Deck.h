@@ -14,11 +14,10 @@
 class Deck : public Pile
 {
 public:
-
   Deck ();
   ~Deck ();
   virtual bool push(Card* card);
-  virtual Card* pop (Card* card);
+  virtual Card* pop ();
   virtual bool full() const;
   void reset();
   void setBuilder(DeckBuilder* builder);

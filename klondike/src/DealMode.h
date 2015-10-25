@@ -42,7 +42,6 @@ public:
    */
   bool SetDealType (e_deal_type type);
 
-
   /**
    * @return e_deal_type
    */

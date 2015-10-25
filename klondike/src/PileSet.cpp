@@ -1,15 +1,19 @@
+#include <assert.h>
 #include <vector>
 #include "PileSet.h"
 #include "Foundation.h"
 #include "Deck.h"
 #include "Waste.h"
 
-PileSet::PileSet() : m_foundations(), m_tableaus(),
-  m_deck(NULL), m_waste(NULL)
+PileSet::PileSet(FoundationsBuilder* foundations_builder) :
+  m_foundations(), m_tableaus(), m_deck(NULL), m_waste(NULL)
 {
+  assert(foundations_builder);
+  foundations_builder->setFoundations(m_foundations);
   m_deck = new Deck();
   m_waste = new Waste();
 }
+
 PileSet::~PileSet()
 {
   delete m_deck;
@@ -18,6 +22,7 @@ PileSet::~PileSet()
 
 bool PileSet::allFoundationsFull()
 {
+  assert(m_foundations.size() != 0);
   std::vector<Pile*>::const_iterator it;
   for (it = m_foundations.begin(); it != m_foundations.end(); it++) {
     if(!((*it)->full())) {

@@ -7,19 +7,23 @@
 #include "Movement.h"
 #include "Foundation.h"
 #include "PileSet.h"
+#include "BoardTypes.h"
+
+class PileSet;
 
 const unsigned int DEFAULT_TABLEAU_AMOUNT = 7;
 
 class BoardLayout
 {
 public:
-  BoardLayout (const unsigned int num_tableaus = DEFAULT_TABLEAU_AMOUNT);
+  BoardLayout (const unsigned int& num_tableaus = DEFAULT_TABLEAU_AMOUNT,
+               const e_board_type& board_type = BOARD_TYPE_FRENCH);
   virtual ~BoardLayout ();
   virtual void ResetPiles ();
   bool GameFinished ();
 protected:
 private:
-  PileSet m_pile_set;
+  PileSet* m_pile_set;
 };
 
 #endif // BOARDLAYOUT_H

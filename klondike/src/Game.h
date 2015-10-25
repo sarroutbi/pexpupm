@@ -21,31 +21,11 @@
 class Game
 {
 public:
-
-  // Constructors/Destructors
-  //  
-  /**
-   * Empty Constructor
-   */
   Game ();
-
-  /**
-   * Empty Destructor
-   */
   ~Game ();
-
   void ProcessAction(GameAction* action);
-
-  /**
-   */
   void Init ();
-
-  /**
-   */
   void StartGame ();
-
-  /**
-   */
   void MainLoop ();
 
 private:

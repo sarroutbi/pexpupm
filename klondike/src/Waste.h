@@ -17,7 +17,7 @@ public:
   Waste ();
   ~Waste ();
   virtual bool push(Card* card);
-  virtual Card* pop (Card* card);
+  virtual Card* pop ();
   virtual bool full() const;
 private:
   uint32_t m_full_size;

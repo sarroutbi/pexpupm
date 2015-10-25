@@ -7,12 +7,12 @@
 #include "Movement.h"
 #include "Pile.h"
 #include "Deck.h"
-#include "Pile.h"
+#include "FoundationsBuilder.h"
 
-class PileSet 
+class PileSet
 {
 public:
-  PileSet();
+  PileSet(FoundationsBuilder* pile_builder);
   ~PileSet();
   bool allFoundationsFull();
   virtual bool resetPiles();

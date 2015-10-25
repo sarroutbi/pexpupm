@@ -1,101 +1,23 @@
-
 #ifndef CARD_H
 #define CARD_H
 
 #include <string>
 #include <vector>
-
-
-
-/**
-  * class Card
-  * 
-  */
+#include <stdint.h>
+#include "Suit.h"
 
 class Card
 {
 public:
-
-  // Constructors/Destructors
-  //  
-
-
-  /**
-   * Empty Constructor
-   */
-  Card ();
-
-  /**
-   * Empty Destructor
-   */
-  virtual ~Card ();
-
-  // Static Public attributes
-  //  
-
-  // Public attributes
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
+  Card (const Suit& suit, const uint8_t num);
+  ~Card ();
+  Suit getSuit();
+  uint8_t getNumber();
 protected:
-
-  // Static Protected attributes
-  //  
-
-  // Protected attributes
-  //  
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-
+  uint8_t m_number;
+  Suit m_suit;
 private:
-
-  // Static Private attributes
-  //  
-
-  // Private attributes
-  //  
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-
-
+  bool m_turned;
 };
 
 #endif // CARD_H

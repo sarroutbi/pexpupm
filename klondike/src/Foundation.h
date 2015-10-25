@@ -5,22 +5,25 @@
 #include <string>
 #include <vector>
 
-#include "Suite.h"
+#include "Suit.h"
 #include "Pile.h"
+#include "Card.h"
 
 const uint8_t MAX_FOUNDATION_CARDS = 13;
 
 class Foundation : public Pile
 {
 public:
-  Foundation (const Suite& suite,
+  Foundation (const Suit& suite,
               const unsigned int max_cards = MAX_FOUNDATION_CARDS);
   ~Foundation ();
-  virtual const bool Full () const;
+  virtual bool push(Card* card);
+  virtual Card* pop();
+  virtual bool full () const;
 protected:
 private:
   unsigned int m_max_cards;
-  Suite m_suite;
+  Suit m_suite;
 };
 
 #endif // FOUNDATION_H
