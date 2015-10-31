@@ -9,14 +9,14 @@
 class Card
 {
 public:
-  Card (const Suit& suit, const uint8_t num);
+  Card (const Suit& suit, const uint8_t number);
   ~Card ();
-  Suit getSuit();
-  uint8_t getNumber();
+  const Suit& GetSuit() const;
+  uint8_t GetNumber() const;
+  const std::string ToString() const;
 protected:
   uint8_t m_number;
   Suit m_suit;
-private:
   bool m_turned;
 };
 

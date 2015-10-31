@@ -12,21 +12,19 @@ Waste::~Waste ()
 
 }
 
-bool Waste::push(Card* card)
+bool Waste::Push(Card* card)
 {
   m_card_pile.push_back(card);
   return true;
 }
 
-Card* Waste::pop()
+Card* Waste::Pop()
 {
   Card* card = m_card_pile.back();
   return card;
 }
 
-bool Waste::full() const
+bool Waste::Full() const
 {
   return (m_full_size && (m_card_pile.size() == m_full_size));
 }
-
-

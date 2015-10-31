@@ -1,9 +1,7 @@
 #include <assert.h>
 #include <stdint.h>
+#include <iostream>
 #include "Deck.h"
-
-// Constructors/Destructors
-//  
 
 Deck::Deck () :
   m_initial_size(0),
@@ -17,27 +15,36 @@ Deck::~Deck ()
   ;
 }
 
-bool Deck::push (Card* card)
+bool Deck::Push (Card* card)
 {
-  return false;
+  assert(card);
+  m_card_pile.push_back(card);
 }
 
-Card* Deck::pop ()
+Card* Deck::Pop ()
 {
-  Card* ret = *(m_card_pile.begin());
-  m_card_pile.erase(m_card_pile.begin());
+  if(m_card_pile.size() == 0) {
+    return NULL;
+  }
+  Card* ret = m_card_pile.front();
+  m_card_pile.pop_back();
   return ret;
 }
 
-void Deck::reset ()
+void Deck::Reset ()
 {
   assert(m_deck_builder);
-  m_deck_builder->createInitialDeck(this);
+  m_deck_builder->CreateInitialDeck(this);
   m_initial_size = m_card_pile.size();
 }
 
-bool Deck::full () const
+bool Deck::Full () const
 {
   return (m_initial_size && 
   (m_card_pile.size() == m_initial_size));
+}
+
+uint8_t Deck::Size() const
+{
+  return m_card_pile.size();
 }

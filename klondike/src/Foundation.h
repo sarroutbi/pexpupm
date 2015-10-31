@@ -17,9 +17,9 @@ public:
   Foundation (const Suit& suite,
               const unsigned int max_cards = MAX_FOUNDATION_CARDS);
   ~Foundation ();
-  virtual bool push(Card* card);
-  virtual Card* pop();
-  virtual bool full () const;
+  virtual bool Push(Card* card);
+  virtual Card* Pop();
+  virtual bool Full () const;
 protected:
 private:
   unsigned int m_max_cards;

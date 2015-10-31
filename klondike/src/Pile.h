@@ -14,10 +14,10 @@ class Pile
 public:
   Pile ();
   virtual ~Pile ();
-  virtual bool push (Card* card) = 0;
-  virtual Card* pop () = 0;
-  virtual bool full () const = 0;
-  void clean ();
+  virtual bool  Push (Card* card) = 0;
+  virtual Card* Pop () = 0;
+  virtual bool  Full () const = 0;
+  void Clean ();
 protected:
   std::vector<Card*> m_card_pile;
 };

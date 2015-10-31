@@ -25,7 +25,7 @@ bool PileSet::allFoundationsFull()
   assert(m_foundations.size() != 0);
   std::vector<Pile*>::const_iterator it;
   for (it = m_foundations.begin(); it != m_foundations.end(); it++) {
-    if(!((*it)->full())) {
+    if(!((*it)->Full())) {
       return false;
     }
   }
@@ -36,15 +36,15 @@ bool PileSet::resetPiles()
 {
   resetFoundations();
   resetTableaus();
-  m_deck->reset();
-  m_waste->clean();
+  m_deck->Reset();
+  m_waste->Clean();
 }
 
 bool PileSet::resetFoundations()
 {
   std::vector<Pile*>::iterator it = m_foundations.begin();
   while (it++ != m_foundations.end()) {
-    (*it)->clean();
+    (*it)->Clean();
     m_foundations.erase(it);
   }
 }
@@ -53,7 +53,7 @@ bool PileSet::resetTableaus()
 {
   std::vector<Pile*>::iterator it = m_tableaus.begin();
   while (it++ != m_tableaus.end()) {
-    (*it)->clean();
+    (*it)->Clean();
     m_tableaus.erase(it);
   }
 }

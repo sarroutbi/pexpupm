@@ -13,25 +13,25 @@ Foundation::~Foundation ()
   ;
 }
 
-bool Foundation::full () const
+bool Foundation::Full () const
 {
   return m_card_pile.size() == m_max_cards;
 }
 
-bool Foundation::push(Card* card)
+bool Foundation::Push(Card* card)
 {
   bool pushed = false;
   assert(card);
   Card* last_card = m_card_pile.back();
-  if((last_card->getSuit() == card->getSuit())
-     && (last_card->getNumber() == (card->getNumber()-1))) {
+  if((last_card->GetSuit() == card->GetSuit())
+     && (last_card->GetNumber() == (card->GetNumber()-1))) {
       m_card_pile.push_back(card);
       pushed = true;
   }
   return pushed;
 }
 
-Card* Foundation::pop()
+Card* Foundation::Pop()
 {
   Card* last_card = m_card_pile.back();
   m_card_pile.pop_back();

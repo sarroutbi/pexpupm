@@ -16,11 +16,12 @@ class Deck : public Pile
 public:
   Deck ();
   ~Deck ();
-  virtual bool push(Card* card);
-  virtual Card* pop ();
-  virtual bool full() const;
-  void reset();
-  void setBuilder(DeckBuilder* builder);
+  virtual bool Push(Card* card);
+  virtual Card* Pop ();
+  virtual bool Full() const;
+  void Reset();
+  void SetBuilder(DeckBuilder* builder);
+  uint8_t Size() const;
 private:
   DeckBuilder* m_deck_builder;
   uint32_t m_initial_size;

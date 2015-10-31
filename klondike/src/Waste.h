@@ -16,9 +16,9 @@ class Waste : public Pile
 public:
   Waste ();
   ~Waste ();
-  virtual bool push(Card* card);
-  virtual Card* pop ();
-  virtual bool full() const;
+  virtual bool Push(Card* card);
+  virtual Card* Pop ();
+  virtual bool Full() const;
 private:
   uint32_t m_full_size;
 };
