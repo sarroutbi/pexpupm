@@ -16,7 +16,7 @@ class Goal
 public:
   Goal ();
   ~Goal ();
-  bool CheckSuccess (BoardLayout layout) { return layout.GameFinished(); };
+  bool CheckSuccess (const BoardLayout& layout) const { return layout.GameFinished(); };
 protected:
 private:
 };

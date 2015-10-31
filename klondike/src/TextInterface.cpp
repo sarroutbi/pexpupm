@@ -1,4 +1,6 @@
 #include <iostream>
+#include <assert.h>
+#include <stdlib.h>
 #include "TextInterface.h"
 #include "OptionMoveText.h"
 #include "OptionExitText.h"
@@ -45,14 +47,21 @@ void TextInterface::DisplayOptions()
 
 void TextInterface::Draw(const BoardLayout& layout)
 {
-  ;
+  PileSet* pile_set = layout.GetPileSet();
+  assert(pile_set);
+  system("clear");
+  Draw(pile_set->GetDeck());
+  std::cout << " ";
+  Draw(pile_set->GetWaste());
+  std::cout << std::endl;
 }
 
 int TextInterface::PromptOption() const
 {
   int option = -1;
   // Prompt option
-  LanguageHandler* lang_handler = LanguageMap::getInstance()->getLanguageHandler();
+  LanguageHandler* lang_handler =
+    LanguageMap::getInstance()->getLanguageHandler();
   while(option < 0 && (m_option_list.find(option) == m_option_list.end())) {
     std::cout << lang_handler->getWord(INSERT) <<
     " " << lang_handler->getWord(OPTION) << ":" ;
@@ -67,4 +76,26 @@ GameAction* TextInterface::GetPlayerAction()
   DisplayOptions();
   option = PromptOption();
   GameAction* action = m_option_list[option]->getGameAction();
+}
+
+void TextInterface::Draw(Deck* deck) const
+{
+  assert(deck);
+  if(deck->Size() == 0) {
+    std::cout << "[ ]";
+  }
+  else {
+    std::cout << "[X]";
+  }
+}
+
+void TextInterface::Draw(Waste* waste) const
+{
+  assert(waste);
+  if(waste->Size() > 0) {
+    std::cout << "[" << waste->TopCard()->ToShortString() << "]";
+  }
+  else {
+    std::cout << "[ ]";
+  }
 }

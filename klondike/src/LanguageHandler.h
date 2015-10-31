@@ -19,6 +19,9 @@ typedef enum
   YES_NO = 10,
   AVAILABLE = 11,
   OPTIONS = 12,
+  MOVEMENT = 13,
+  MOVEMENTS = 14,
+  AVAILABLE_MOVEMENTS = 15,
 } word_e;
 
 class LanguageHandler

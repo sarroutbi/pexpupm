@@ -15,6 +15,7 @@ PlayerView::~PlayerView ()
 bool PlayerView::Draw (BoardLayout* layout)
 {
   assert(layout);
+  m_interface->Draw(*layout);
 }
 
 GameAction* PlayerView::GetPlayerAction() 

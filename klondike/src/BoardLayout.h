@@ -20,7 +20,8 @@ public:
                const e_board_type& board_type = BOARD_TYPE_FRENCH);
   virtual ~BoardLayout ();
   virtual void ResetPiles ();
-  bool GameFinished ();
+  bool GameFinished () const;
+  PileSet* GetPileSet() const { return m_pile_set; }
 protected:
 private:
   PileSet* m_pile_set;

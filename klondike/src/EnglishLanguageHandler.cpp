@@ -25,4 +25,7 @@ void EnglishLanguageHandler::initDict()
   m_dict[YES_NO] = "(Y)es/(N)o";
   m_dict[AVAILABLE] = "Available";
   m_dict[OPTIONS] = "Options";
+  m_dict[MOVEMENT] = "Movement";
+  m_dict[MOVEMENTS] = "Movements";
+  m_dict[AVAILABLE_MOVEMENTS] = "Available Movements";
 }

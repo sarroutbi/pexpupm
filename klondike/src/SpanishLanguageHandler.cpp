@@ -25,4 +25,8 @@ void SpanishLanguageHandler::initDict()
   m_dict[YES_NO] = "(S)í/(N)o";
   m_dict[AVAILABLE] = "Disponibles";
   m_dict[OPTIONS] = "Opciones";
+  m_dict[MOVEMENT] = "Movimiento";
+  m_dict[MOVEMENTS] = "Movimientos";
+  m_dict[AVAILABLE_MOVEMENTS] = "Movimientos Disponibles";
+
 }

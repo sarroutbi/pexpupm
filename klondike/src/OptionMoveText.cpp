@@ -18,22 +18,31 @@ void OptionMoveText::display()
   std::cout << std::to_string(m_pos) << ":" << m_text << std::endl;
 }
 
+void OptionMoveText::ShowMovements() const
+{
+  LanguageHandler* lang_handler = LanguageMap::getInstance()->getLanguageHandler();
+
+  std::cout << lang_handler->getWord(AVAILABLE_MOVEMENTS)<< ":";
+  std::cout << "";
+
+  std::cout << std::endl;
+}
+
 GameAction* OptionMoveText::getGameAction()
 {
   char option = 0;
   LanguageHandler* lang_handler = LanguageMap::getInstance()->getLanguageHandler();
 
+  ShowMovements();
+
   std::cout << lang_handler->getWord(INSERT)
-            << " " << lang_handler->getWord(PILE)<< ":";
+            << " " << lang_handler->getWord(MOVEMENT)<< ":";
   std::cin >> option;
 
-  // PENDING: Check Pile
+  // PENDING: Get Movement
 
   std::cout << lang_handler->getWord(INSERT)
             << " " << lang_handler->getWord(CARD)<< ":";
 
-  // PENDING: Check Card
-  
-  // PENDING create ActionMove with corresponding Move and return it
   
 }

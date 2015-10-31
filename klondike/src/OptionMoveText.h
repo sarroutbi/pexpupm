@@ -15,6 +15,7 @@ public:
   virtual GameAction* getGameAction();
 protected:
 private:
+  void ShowMovements() const;
 };
 
 #endif // OPTION_MOVE_H

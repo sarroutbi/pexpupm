@@ -3,7 +3,7 @@
 
 Foundation::Foundation (const Suit& suite, 
                         const unsigned int max_cards) :
-m_suite(suite), m_max_cards(max_cards)
+  m_suite(suite), m_max_cards(max_cards), Pile()
 {
   ;
 }

@@ -1,26 +1,38 @@
 #include <assert.h>
 #include <vector>
+
+// QUIT
+#include <iostream>
+
 #include "PileSet.h"
 #include "Foundation.h"
 #include "Deck.h"
 #include "Waste.h"
 
-PileSet::PileSet(FoundationsBuilder* foundations_builder) :
-  m_foundations(), m_tableaus(), m_deck(NULL), m_waste(NULL)
+PileSet::PileSet(FoundationsBuilder* foundations_builder,
+                 DeckBuilder* deck_builder) :
+  m_foundations(), m_tableaus(), m_deck(NULL), m_waste(NULL),
+  m_foundations_builder(foundations_builder),
+  m_deck_builder(deck_builder)
 {
-  assert(foundations_builder);
-  foundations_builder->setFoundations(m_foundations);
+  assert(m_foundations_builder);
+  assert(m_deck_builder);
   m_deck = new Deck();
   m_waste = new Waste();
+  m_foundations_builder->SetFoundations(m_foundations);
+  m_deck_builder->CreateInitialDeck(m_deck);
 }
 
 PileSet::~PileSet()
 {
+  assert(0);
   delete m_deck;
   delete m_waste;
+  delete m_foundations_builder;
+  delete m_deck_builder;
 }
 
-bool PileSet::allFoundationsFull()
+bool PileSet::AllFoundationsFull() const
 {
   assert(m_foundations.size() != 0);
   std::vector<Pile*>::const_iterator it;
@@ -32,27 +44,29 @@ bool PileSet::allFoundationsFull()
   return true;
 }
 
-bool PileSet::resetPiles()
+bool PileSet::ResetPiles()
 {
-  resetFoundations();
-  resetTableaus();
-  m_deck->Reset();
+  ResetFoundations();
+  ResetTableaus();
+  m_deck_builder->CreateInitialDeck(m_deck);
+  m_deck->Shuffle();
   m_waste->Clean();
 }
 
-bool PileSet::resetFoundations()
+bool PileSet::ResetFoundations()
 {
   std::vector<Pile*>::iterator it = m_foundations.begin();
-  while (it++ != m_foundations.end()) {
-    (*it)->Clean();
-    m_foundations.erase(it);
+  for (; it != m_foundations.end(); it++) {
+    if(!((*it)->Full())) {
+      (*it)->Clean();
+    }
   }
 }
 
-bool PileSet::resetTableaus()
+bool PileSet::ResetTableaus()
 {
   std::vector<Pile*>::iterator it = m_tableaus.begin();
-  while (it++ != m_tableaus.end()) {
+  for (; it != m_tableaus.end(); it++) {
     (*it)->Clean();
     m_tableaus.erase(it);
   }

@@ -5,6 +5,8 @@
 #include "BoardLayout.h"
 #include "GameAction.h"
 #include "Interface.h"
+#include "Deck.h"
+#include "Waste.h"
 
 class TextInterface : public Interface
 {
@@ -19,6 +21,8 @@ public:
   virtual GameAction* GetPlayerAction();
 protected:
 private:
+  void Draw(Deck* deck) const;
+  void Draw(Waste* deck) const;
 };
 
 #endif // TEXT_INTERFACE_H

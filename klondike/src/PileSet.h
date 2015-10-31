@@ -12,19 +12,22 @@
 class PileSet
 {
 public:
-  PileSet(FoundationsBuilder* pile_builder);
+  PileSet(FoundationsBuilder* pile_builder,
+          DeckBuilder* deck_builder);
   ~PileSet();
-  bool allFoundationsFull();
-  virtual bool resetPiles();
-  Pile* getDeck();
-  Pile* getWaste();
+  bool AllFoundationsFull() const;
+  virtual bool ResetPiles();
+  Deck* GetDeck() { return m_deck; }
+  Waste* GetWaste() { return m_waste; }
 private:
-  bool resetFoundations();
-  bool resetTableaus();
+  bool ResetFoundations();
+  bool ResetTableaus();
   std::vector<Pile*> m_foundations;
   std::vector<Pile*> m_tableaus;
   Deck* m_deck;
   Waste* m_waste;
+  FoundationsBuilder* m_foundations_builder;
+  DeckBuilder* m_deck_builder;
 };
 
 #endif // PILESET_H

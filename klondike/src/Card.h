@@ -16,6 +16,7 @@ public:
   const std::string ToString() const;
   const std::string ToShortString() const;
   void TurnDown() { m_turnedDown = true; }
+  void TurnUp() { m_turnedDown = false; }
   bool isTurnedDown() const { return m_turnedDown; }
 
 protected:

@@ -21,9 +21,8 @@ public:
   virtual bool Full() const;
   void Reset();
   void SetBuilder(DeckBuilder* builder);
-  uint8_t Size() const;
+  void Shuffle();
 private:
-  DeckBuilder* m_deck_builder;
   uint32_t m_initial_size;
 };
 

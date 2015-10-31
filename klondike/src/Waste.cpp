@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <assert.h>
 #include "Waste.h"
 #include "Card.h"
 
@@ -14,6 +15,8 @@ Waste::~Waste ()
 
 bool Waste::Push(Card* card)
 {
+  assert(card);
+  card->TurnUp();
   m_card_pile.push_back(card);
   return true;
 }

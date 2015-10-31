@@ -9,7 +9,7 @@ class FoundationsCreator
  public:
   FoundationsCreator()  {};
   virtual ~FoundationsCreator() {};
-  virtual void createFoundations(std::vector<Pile*>& foundations) const = 0;
+  virtual void CreateFoundations(std::vector<Pile*>& foundations) const = 0;
 };
 
 #endif // FOUNDATIONS_CREATOR

@@ -1,11 +1,11 @@
 #include <assert.h>
 #include <stdint.h>
 #include <iostream>
+#include <algorithm>
 #include "Deck.h"
 
 Deck::Deck () :
-  m_initial_size(0),
-  m_deck_builder(NULL)
+  m_initial_size(0)
 {
   ;
 }
@@ -32,10 +32,9 @@ Card* Deck::Pop ()
   return ret;
 }
 
-void Deck::Reset ()
+void Deck::Shuffle ()
 {
-  assert(m_deck_builder);
-  m_deck_builder->CreateInitialDeck(this);
+  std::random_shuffle ( m_card_pile.begin(), m_card_pile.end() );
   m_initial_size = m_card_pile.size();
 }
 
@@ -43,9 +42,4 @@ bool Deck::Full () const
 {
   return (m_initial_size && 
   (m_card_pile.size() == m_initial_size));
-}
-
-uint8_t Deck::Size() const
-{
-  return m_card_pile.size();
 }
