@@ -18,8 +18,18 @@ uint8_t Card::GetNumber() const
 
 const std::string Card::ToString() const
 {
-  if(m_turned) {
-    return (std::to_string(GetNumber()) + GetSuit().ToString());
+  if(!m_turnedDown) {
+    return (std::to_string(GetNumber()) + " " + GetSuit().ToString());
+  }
+  else {
+    return "X";
+  }
+}
+
+const std::string Card::ToShortString() const
+{
+  if(!m_turnedDown) {
+    return (std::to_string(GetNumber()) + GetSuit().ToChar());
   }
   else {
     return "X";

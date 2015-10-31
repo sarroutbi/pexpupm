@@ -1,7 +1,7 @@
 #include "FrenchDeckBuilder.h"
 #include "gtest/gtest.h"
 
-TEST(FrenchDeckBuilder, klondike)
+TEST(FrenchDeckBuilderSize, klondike)
 {
   DeckBuilder* builder = new FrenchDeckBuilder;
   Deck deck;
@@ -10,7 +10,7 @@ TEST(FrenchDeckBuilder, klondike)
   delete builder;
 }
 
-TEST(FrenchDeckBuilderSize, klondike)
+TEST(FrenchDeckBuilderNumber, klondike)
 {
   DeckBuilder* builder = new FrenchDeckBuilder;
   Deck deck;
@@ -19,6 +19,19 @@ TEST(FrenchDeckBuilderSize, klondike)
   while((card = deck.Pop())) {
     EXPECT_GE(card->GetNumber(), 1);
     EXPECT_LE(card->GetNumber(), 13);
+  }
+
+  delete builder;
+}
+
+TEST(FrenchDeckBuilderTurned, klondike)
+{
+  DeckBuilder* builder = new FrenchDeckBuilder;
+  Deck deck;
+  builder->CreateInitialDeck(&deck);
+  Card* card = NULL;
+  while((card = deck.Pop())) {
+    EXPECT_TRUE(card->isTurnedDown());
   }
 
   delete builder;

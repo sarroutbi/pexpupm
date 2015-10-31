@@ -9,7 +9,7 @@ class Suit
 public:
  explicit Suit(const uint8_t& suit);
   ~Suit();
- const uint8_t getSuit() const { return m_suit; };
+ const uint8_t GetSuit() const { return m_suit; };
  const bool operator==(const Suit& suit) const { return m_suit == suit.m_suit;}
  virtual const std::string ToString() const { return "UNDEFINED"; };
  virtual const std::string ToChar() const { return "X"; };

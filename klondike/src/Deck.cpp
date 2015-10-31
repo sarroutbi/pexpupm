@@ -18,6 +18,7 @@ Deck::~Deck ()
 bool Deck::Push (Card* card)
 {
   assert(card);
+  card->TurnDown();
   m_card_pile.push_back(card);
 }
 

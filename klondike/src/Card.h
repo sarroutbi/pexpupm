@@ -14,10 +14,14 @@ public:
   const Suit& GetSuit() const;
   uint8_t GetNumber() const;
   const std::string ToString() const;
+  const std::string ToShortString() const;
+  void TurnDown() { m_turnedDown = true; }
+  bool isTurnedDown() const { return m_turnedDown; }
+
 protected:
   uint8_t m_number;
   Suit m_suit;
-  bool m_turned;
+  bool m_turnedDown;
 };
 
 #endif // CARD_H
