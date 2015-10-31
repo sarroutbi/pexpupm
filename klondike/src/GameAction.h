@@ -3,27 +3,11 @@
 
 #include "BoardLayout.h"
 
-/**
-  * class GameAction
-  * 
-  */
 class GameAction
 {
 public:
-
-  /**
-   * Empty Constructor
-   */
   GameAction ();
-
-  /**
-   * Empty Destructor
-   */
   ~GameAction ();
-
-  /**
-   * Action performer
-   */
   virtual void PerformAction(BoardLayout& layout) const = 0;
 };
 

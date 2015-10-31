@@ -23,4 +23,6 @@ void EnglishLanguageHandler::initDict()
   m_dict[INSERT] = "Insert";
   m_dict[OPTION] = "Option";
   m_dict[YES_NO] = "(Y)es/(N)o";
+  m_dict[AVAILABLE] = "Available";
+  m_dict[OPTIONS] = "Options";
 }

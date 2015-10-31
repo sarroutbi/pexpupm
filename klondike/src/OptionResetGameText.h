@@ -3,11 +3,13 @@
 
 #include <string>
 #include "OptionResetGame.h"
+#include "OptionText.h"
 
-class OptionResetGameText : public OptionResetGame
+class OptionResetGameText : public OptionResetGame, OptionText
 {
 public:
-  OptionResetGameText();
+  OptionResetGameText(const std::string& text,
+                      const uint8_t& pos);
   ~OptionResetGameText();
   virtual void display();
   virtual GameAction* getGameAction();

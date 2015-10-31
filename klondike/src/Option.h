@@ -7,11 +7,9 @@
 class Option
 {
 public:
+  Option() {};
   virtual void display() = 0;
   virtual GameAction* getGameAction() = 0;
-protected:
-private:
-  std::string m_text;
 };
 
 #endif // OPTION_H

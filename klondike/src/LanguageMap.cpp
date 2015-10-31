@@ -9,6 +9,7 @@ LanguageMap* LanguageMap::getInstance()
   if(!g_lang_map) {
     g_lang_map = new LanguageMap();
   }
+  return g_lang_map;
 }
 
 LanguageMap::LanguageMap () : m_active_language(ENGLISH)

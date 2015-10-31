@@ -17,6 +17,8 @@ typedef enum
   INSERT = 8,
   OPTION = 9,
   YES_NO = 10,
+  AVAILABLE = 11,
+  OPTIONS = 12,
 } word_e;
 
 class LanguageHandler

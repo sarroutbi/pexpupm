@@ -3,7 +3,8 @@
 #include "LanguageMap.h"
 #include "LanguageHandler.h"
 
-OptionResetGameText::OptionResetGameText()
+OptionResetGameText::OptionResetGameText(const std::string& text,
+                                         const uint8_t& pos) : OptionText(text, pos)
 {
   ;
 }
@@ -15,7 +16,7 @@ OptionResetGameText::~OptionResetGameText()
 
 void OptionResetGameText::display()
 {
-  ;
+  std::cout << std::to_string(m_pos) << ":" << m_text << std::endl;
 }
 
 GameAction* OptionResetGameText::getGameAction()

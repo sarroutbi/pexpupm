@@ -3,15 +3,16 @@
 
 #include <string>
 #include "OptionExit.h"
+#include "OptionText.h"
 
-class OptionExitText : public OptionExit
+class OptionExitText : public OptionExit, OptionText
 {
 public:
-  OptionExitText();
+  OptionExitText(const std::string& text,
+                 const uint8_t& pos);
   ~OptionExitText();
   virtual void display();
   virtual GameAction* getGameAction();
-protected:
 };
 
 #endif // OPTION_EXIT_H

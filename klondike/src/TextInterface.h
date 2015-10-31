@@ -9,10 +9,14 @@
 class TextInterface : public Interface
 {
 public:
-  virtual void createOptions();
-  virtual void displayOptions();
-  virtual void draw(const BoardLayout& layout);
-  virtual GameAction* getPlayerAction();
+  TextInterface();
+  ~TextInterface();
+  void CreateOptions();
+  void DeleteOptions() const;
+  void DisplayOptions();
+  virtual void Draw(const BoardLayout& layout);
+  int PromptOption() const;
+  virtual GameAction* GetPlayerAction();
 protected:
 private:
 };

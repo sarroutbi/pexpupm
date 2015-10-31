@@ -3,27 +3,22 @@
 
 #include <string>
 #include <vector>
-#include <assert.h>
 
 #include "BoardLayout.h"
 #include "Movement.h"
 #include "DealMode.h"
 #include "GameAction.h"
+#include "Interface.h"
 
 class PlayerView
 {
 public:
   PlayerView ();
   virtual ~PlayerView ();
-  bool Draw (BoardLayout* layout)
-  {
-    assert(layout);
-  }
-  GameAction* GetPlayerAction() 
-  {
-    GameAction* action = NULL;
-    return action;
-  }
+  bool Draw(BoardLayout* layout);
+  GameAction* GetPlayerAction();
+private:
+  Interface* m_interface;
 };
 
 #endif // PLAYERVIEW_H

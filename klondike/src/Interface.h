@@ -11,11 +11,10 @@ class Interface
 {
 public:
   Interface();
-  ~Interface();
-  virtual void createOptions() = 0;
-  virtual void displayOptions();
-  virtual void draw(const BoardLayout& layout) = 0;
-  virtual GameAction* getPlayerAction() = 0;
+  virtual ~Interface();
+  void DisplayOptions();
+  virtual void Draw(const BoardLayout& layout) = 0;
+  virtual GameAction* GetPlayerAction() = 0;
 protected:
   std::map<uint8_t, Option*> m_option_list;
 private:

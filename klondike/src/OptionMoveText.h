@@ -3,11 +3,13 @@
 
 #include <string>
 #include "OptionMove.h"
+#include "OptionText.h"
 
-class OptionMoveText : public OptionMove
+class OptionMoveText : public OptionMove, OptionText
 {
 public:
-  OptionMoveText();
+  OptionMoveText(const std::string& text,
+                 const uint8_t& pos);
   ~OptionMoveText();
   virtual void display();
   virtual GameAction* getGameAction();
