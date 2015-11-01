@@ -13,7 +13,7 @@ public:
 
   Board ();
   virtual ~Board ();
-  bool Move (Movement movement);
+  bool Move (const Movement& movement);
   BoardLayout GetLayout ();
 };
 

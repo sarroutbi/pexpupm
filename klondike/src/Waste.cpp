@@ -17,13 +17,14 @@ bool Waste::Push(Card* card)
 {
   assert(card);
   card->TurnUp();
-  m_card_pile.push_back(card);
+  m_card_pile.insert(m_card_pile.begin(), card);
   return true;
 }
 
 Card* Waste::Pop()
 {
-  Card* card = m_card_pile.back();
+  Card* card = m_card_pile.front();
+  m_card_pile.erase(m_card_pile.begin());
   return card;
 }
 

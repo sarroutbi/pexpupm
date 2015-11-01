@@ -4,8 +4,7 @@
 #include <algorithm>
 #include "Deck.h"
 
-Deck::Deck () :
-  m_initial_size(0)
+Deck::Deck () : m_initial_size(0)
 {
   ;
 }
@@ -19,6 +18,7 @@ bool Deck::Push (Card* card)
 {
   assert(card);
   card->TurnDown();
+
   m_card_pile.push_back(card);
 }
 
@@ -27,14 +27,15 @@ Card* Deck::Pop ()
   if(m_card_pile.size() == 0) {
     return NULL;
   }
-  Card* ret = m_card_pile.front();
+  Card* ret = m_card_pile.back();
   m_card_pile.pop_back();
   return ret;
 }
 
 void Deck::Shuffle ()
 {
-  std::random_shuffle ( m_card_pile.begin(), m_card_pile.end() );
+  srand(unsigned(time(NULL)));
+  std::random_shuffle ( m_card_pile.begin(), m_card_pile.end());
   m_initial_size = m_card_pile.size();
 }
 

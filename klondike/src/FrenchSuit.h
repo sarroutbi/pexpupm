@@ -17,8 +17,8 @@ class FrenchSuit : public Suit
 public:
  FrenchSuit(const e_french_suite& suit) : Suit(suit) {};
  ~FrenchSuit() {};
- virtual const std::string ToString();
- virtual const std::string ToChar();
+ virtual const std::string ToString() const;
+ virtual const std::string ToChar() const;
 };
 
 #endif // FRENCH_SUIT_H

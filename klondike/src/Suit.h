@@ -11,8 +11,8 @@ public:
   ~Suit();
  const uint8_t GetSuit() const { return m_suit; };
  const bool operator==(const Suit& suit) const { return m_suit == suit.m_suit;}
- virtual const std::string ToString() const { return "UNDEFINED"; };
- virtual const std::string ToChar() const { return "X"; };
+ virtual const std::string ToString() const = 0;
+ virtual const std::string ToChar() const = 0;
 protected:
   uint8_t m_suit;
 };

@@ -6,9 +6,9 @@
 class ActionExit : public GameAction
 {
 public:
-  ActionExit()  {};
-  ~ActionExit() {};
-  virtual void PerformAction(BoardLayout& layout) const {};
+  ActionExit()  ;
+  ~ActionExit() ;
+  virtual void PerformAction(BoardLayout* layout) const ;
 private:
 };
 

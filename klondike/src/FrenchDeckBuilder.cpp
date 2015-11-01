@@ -11,28 +11,29 @@ FrenchDeckBuilder::FrenchDeckBuilder ()
 
 FrenchDeckBuilder::~FrenchDeckBuilder ()
 {
-  ;
+  m_suit_list.clear();
 }
 
 void FrenchDeckBuilder::CreateInitialDeck(Deck* deck)
 {
   assert(deck);
-  std::list<Suit> suit_list;
-  CreateSuitList(suit_list);
-  uint8_t number = 1;
-  for(auto suit_it : suit_list) {
-    for (; number <= MAX_CARD_NUMBER; number++) {
+  deck->Clean();
+  CreateSuitList();
+  uint8_t number = MAX_CARD_NUMBER;
+  for(auto suit_it : m_suit_list) {
+    for (; number >= 1; number--) {
       Card* card = new Card(suit_it, number);
       deck->Push(card);
     }
-    number = 1;
+    number = MAX_CARD_NUMBER;
   }
 }
 
-void FrenchDeckBuilder::CreateSuitList(std::list<Suit>& suit_list)
+void FrenchDeckBuilder::CreateSuitList()
 {
-  suit_list.push_back(FrenchSuit(SUIT_HEARTS));
-  suit_list.push_back(FrenchSuit(SUIT_CLUBS));
-  suit_list.push_back(FrenchSuit(SUIT_DIAMONDS));
-  suit_list.push_back(FrenchSuit(SUIT_SPADES));
+  m_suit_list.clear();
+  m_suit_list.push_back(new FrenchSuit(SUIT_HEARTS));
+  m_suit_list.push_back(new FrenchSuit(SUIT_CLUBS));
+  m_suit_list.push_back(new FrenchSuit(SUIT_DIAMONDS));
+  m_suit_list.push_back(new FrenchSuit(SUIT_SPADES));
 }

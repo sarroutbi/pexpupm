@@ -2,68 +2,26 @@
 #define MOVEMENT_H
 
 #include <string>
-#include <vector>
+#include <stdint.h>
 #include "Pile.h"
 
-
-
-/**
-  * class Movement
-  * 
-  */
+class BoardLayout;
 
 class Movement
 {
 public:
-
-  /**
-   * Empty Constructor
-   */
-  Movement ();
-
-  /**
-   * Empty Destructor
-   */
-  virtual ~Movement ();
-
-
-
-  /**
-   * Set the value of destination
-   * @param new_var the new value of destination
-   */
-  void setDestination (Pile* new_var)
-  {
-      m_destination = new_var;
-  }
-
-  /**
-   * Get the value of destination
-   * @return the value of destination
-   */
-  Pile* getDestination ()
-  {
-    return m_destination;
-  }
-
-  /**
-   * Set the value of source
-   * @param new_var the new value of source
-   */
-  void setSource (Pile* new_var)
-  {
-      m_source = new_var;
-  }
-
-  /**
-   * Get the value of source
-   * @return the value of source
-   */
-  Pile* getSource ()
-  {
-    return m_source;
-  }
+  Movement () : m_source(NULL), m_destination(NULL), m_id(0) {};
+  explicit  Movement (uint8_t id) : m_source(NULL), m_destination(NULL), m_id(id) {};
+  virtual ~Movement () {};
+  void SetDestination (Pile* dst) { m_destination = dst; }
+  Pile* GetDestination () { return m_destination; }
+  void SetSource (Pile* source) { m_source = source;  }
+  Pile* GetSource () { return m_source; }
+  uint8_t GetId() { return m_id;}
+  virtual std::string ToString() const = 0;
+  virtual bool PerformMovement(BoardLayout* layout) = 0;
 private:
+  uint8_t m_id;
   Pile* m_source;
   Pile* m_destination;
 };

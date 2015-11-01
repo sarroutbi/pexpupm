@@ -26,3 +26,9 @@ bool BoardLayout::GameFinished () const
   return m_pile_set->AllFoundationsFull();
 }
 
+PileSet* BoardLayout::GetPileSet() const
+{ 
+  return m_pile_set;
+}
+
+

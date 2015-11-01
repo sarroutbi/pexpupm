@@ -1,9 +1,9 @@
 #include <assert.h>
 #include "Foundation.h"
 
-Foundation::Foundation (const Suit& suite, 
+Foundation::Foundation (Suit* suite, 
                         const unsigned int max_cards) :
-  m_suite(suite), m_max_cards(max_cards), Pile()
+  m_suit(suite), m_max_cards(max_cards), Pile()
 {
   ;
 }
@@ -22,11 +22,19 @@ bool Foundation::Push(Card* card)
 {
   bool pushed = false;
   assert(card);
-  Card* last_card = m_card_pile.back();
-  if((last_card->GetSuit() == card->GetSuit())
-     && (last_card->GetNumber() == (card->GetNumber()-1))) {
-      m_card_pile.push_back(card);
+  if(Size() == 0) {
+    if((card->GetNumber() == 1) && (*(card->GetSuit()) == *(GetSuit()))) {
+      m_card_pile.insert(m_card_pile.begin(), card);
       pushed = true;
+    }
+  }
+  else {
+    Card* last_card = m_card_pile.back();
+    if((*(last_card->GetSuit()) == *(card->GetSuit()))
+       && (last_card->GetNumber() == (card->GetNumber()-1))) {
+      m_card_pile.insert(m_card_pile.begin(), card);
+      pushed = true;
+    }
   }
   return pushed;
 }

@@ -13,4 +13,4 @@ $(KLONDIKE): $(KLONDIKE_SRC)
 	$(CC) $(CCFLAGS) $(KLONDIKE_INC) -o $@ $^
 
 clean:
-	rm $(KLONDIKE) *~
+	rm -f $(KLONDIKE) *~

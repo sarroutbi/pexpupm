@@ -11,8 +11,8 @@ public:
   OptionResetGameText(const std::string& text,
                       const uint8_t& pos);
   ~OptionResetGameText();
-  virtual void display();
-  virtual GameAction* getGameAction();
+  virtual void Display();
+  virtual GameAction* GetGameAction();
 protected:
 };
 

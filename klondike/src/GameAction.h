@@ -8,7 +8,7 @@ class GameAction
 public:
   GameAction ();
   ~GameAction ();
-  virtual void PerformAction(BoardLayout& layout) const = 0;
+  virtual void PerformAction(BoardLayout* layout) const = 0;
 };
 
 #endif // GAME_ACTION_H

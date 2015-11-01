@@ -23,6 +23,7 @@ protected:
 private:
   void Draw(Deck* deck) const;
   void Draw(Waste* deck) const;
+  void Draw(std::vector<Foundation*>* foundation) const;
 };
 
 #endif // TEXT_INTERFACE_H

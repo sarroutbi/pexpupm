@@ -13,12 +13,12 @@ OptionExitText::~OptionExitText()
   ;
 }
 
-void OptionExitText::display()
+void OptionExitText::Display()
 {
   std::cout << std::to_string(m_pos) << ":" << m_text << std::endl;
 }
 
-GameAction* OptionExitText::getGameAction()
+GameAction* OptionExitText::GetGameAction()
 {
   return new ActionExit;
 }

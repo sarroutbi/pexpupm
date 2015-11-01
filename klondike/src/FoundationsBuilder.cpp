@@ -15,7 +15,7 @@ FoundationsBuilder::~FoundationsBuilder()
 }
 
 void
-FoundationsBuilder::SetFoundations(std::vector<Pile*>& foundations)
+FoundationsBuilder::SetFoundations(std::vector<Foundation*>& foundations)
 {
   m_foundations_creator[m_board_type]->CreateFoundations(foundations);
 }

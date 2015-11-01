@@ -39,6 +39,7 @@ void TextInterface::DeleteOptions() const
 void TextInterface::DisplayOptions()
 {
   LanguageHandler* lang_handler = LanguageMap::getInstance()->getLanguageHandler();
+  std::cout << std::endl;
   std::cout << lang_handler->getWord(AVAILABLE)
   << " " << lang_handler->getWord(OPTIONS)
   << ":" << std::endl;
@@ -53,6 +54,10 @@ void TextInterface::Draw(const BoardLayout& layout)
   Draw(pile_set->GetDeck());
   std::cout << " ";
   Draw(pile_set->GetWaste());
+  std::cout << " ";
+  std::cout << " ";
+  std::cout << " ";
+  Draw(pile_set->GetFoundations());
   std::cout << std::endl;
 }
 
@@ -75,7 +80,8 @@ GameAction* TextInterface::GetPlayerAction()
   int option = 0;
   DisplayOptions();
   option = PromptOption();
-  GameAction* action = m_option_list[option]->getGameAction();
+  GameAction* action = m_option_list[option]->GetGameAction();
+  return action;
 }
 
 void TextInterface::Draw(Deck* deck) const
@@ -97,5 +103,19 @@ void TextInterface::Draw(Waste* waste) const
   }
   else {
     std::cout << "[ ]";
+  }
+}
+
+void TextInterface::Draw(std::vector<Foundation*>* foundations) const
+{
+  assert(foundations);
+  for (auto foundations_it : *foundations) {
+    if(foundations_it->Size() > 0) {
+      std::cout << "[" << foundations_it->TopCard()->ToShortString() << "]";
+    }
+    else {
+      std::cout << "[ ]";
+    }
+    std::cout << " ";
   }
 }

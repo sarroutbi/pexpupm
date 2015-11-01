@@ -6,10 +6,13 @@
 class ActionMove : public GameAction
 {
 public:
-  ActionMove()  {};
-  ~ActionMove() {};
-  virtual void PerformAction(BoardLayout& layout) const;
+  ActionMove();
+  explicit ActionMove(Movement* movement);
+  ~ActionMove();
+  virtual void PerformAction(BoardLayout* layout) const;
+  void SetMovement (Movement* movement) { m_movement = movement;};
 private:
+  Movement* m_movement;
 };
 
 #endif //EXIT

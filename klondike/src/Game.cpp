@@ -40,5 +40,6 @@ void Game::MainLoop ()
 void Game::ProcessAction(GameAction* action)
 {
   assert(action);
-  action->PerformAction(m_layout);
+  action->PerformAction(&m_layout);
+  delete action;
 }

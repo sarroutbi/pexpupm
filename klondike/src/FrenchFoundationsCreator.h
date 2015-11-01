@@ -8,6 +8,6 @@ class FrenchFoundationsCreator : public FoundationsCreator
 public:
   FrenchFoundationsCreator();
   ~FrenchFoundationsCreator();
-  virtual void CreateFoundations(std::vector<Pile*>& foundations) const;
+  virtual void CreateFoundations(std::vector<Foundation*>& foundations) const;
 };
 #endif

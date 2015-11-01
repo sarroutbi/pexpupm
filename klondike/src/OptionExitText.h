@@ -11,8 +11,8 @@ public:
   OptionExitText(const std::string& text,
                  const uint8_t& pos);
   ~OptionExitText();
-  virtual void display();
-  virtual GameAction* getGameAction();
+  virtual void Display();
+  virtual GameAction* GetGameAction();
 };
 
 #endif // OPTION_EXIT_H

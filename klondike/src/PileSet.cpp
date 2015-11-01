@@ -1,9 +1,6 @@
 #include <assert.h>
 #include <vector>
 
-// QUIT
-#include <iostream>
-
 #include "PileSet.h"
 #include "Foundation.h"
 #include "Deck.h"
@@ -35,7 +32,7 @@ PileSet::~PileSet()
 bool PileSet::AllFoundationsFull() const
 {
   assert(m_foundations.size() != 0);
-  std::vector<Pile*>::const_iterator it;
+  std::vector<Foundation*>::const_iterator it;
   for (it = m_foundations.begin(); it != m_foundations.end(); it++) {
     if(!((*it)->Full())) {
       return false;
@@ -48,6 +45,7 @@ bool PileSet::ResetPiles()
 {
   ResetFoundations();
   ResetTableaus();
+  m_deck->Clean();
   m_deck_builder->CreateInitialDeck(m_deck);
   m_deck->Shuffle();
   m_waste->Clean();
@@ -55,7 +53,7 @@ bool PileSet::ResetPiles()
 
 bool PileSet::ResetFoundations()
 {
-  std::vector<Pile*>::iterator it = m_foundations.begin();
+  std::vector<Foundation*>::iterator it = m_foundations.begin();
   for (; it != m_foundations.end(); it++) {
     if(!((*it)->Full())) {
       (*it)->Clean();
@@ -65,9 +63,20 @@ bool PileSet::ResetFoundations()
 
 bool PileSet::ResetTableaus()
 {
-  std::vector<Pile*>::iterator it = m_tableaus.begin();
+  std::vector<Tableau*>::iterator it = m_tableaus.begin();
   for (; it != m_tableaus.end(); it++) {
     (*it)->Clean();
     m_tableaus.erase(it);
   }
+}
+
+Foundation* PileSet::GetFoundation(const Suit* suit)
+{
+  assert(suit);
+  for (auto foundations_it : m_foundations) {
+    if((*(foundations_it->GetSuit())) == *suit) {
+      return foundations_it;
+    }
+  }
+  return NULL;
 }

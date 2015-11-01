@@ -6,9 +6,9 @@
 class ActionReset : public GameAction 
 {
 public:
-  ActionReset()  {};
-  ~ActionReset() {};
-  virtual void PerformAction(BoardLayout& layout) const;
+  ActionReset()  ;
+  ~ActionReset() ;
+  virtual void PerformAction(BoardLayout* layout) const;
 private:
 };
 

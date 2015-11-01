@@ -10,7 +10,7 @@ Board::~Board ()
 
 }
 
-bool Board::Move (Movement movement)
+bool Board::Move (const Movement& movement)
 {
 
 }

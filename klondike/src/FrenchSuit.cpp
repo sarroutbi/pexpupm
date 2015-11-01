@@ -1,6 +1,6 @@
 #include "FrenchSuit.h"
 
-const std::string FrenchSuit::ToString()
+const std::string FrenchSuit::ToString() const
 {
   switch(GetSuit()) {
   case SUIT_HEARTS:
@@ -16,17 +16,17 @@ const std::string FrenchSuit::ToString()
   }
 }
 
-const std::string FrenchSuit::ToChar()
+const std::string FrenchSuit::ToChar() const
 {
   switch(GetSuit()) {
   case SUIT_HEARTS:
-    return "♥";
+    return "H";
   case SUIT_CLUBS:
-    return "♣";
+    return "C";
   case SUIT_DIAMONDS:
-    return "♦";
+    return "D";
   case SUIT_SPADES:
-    return "♠";
+    return "S";
   default:
     return "-";
   }

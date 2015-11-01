@@ -9,8 +9,8 @@ class OptionMove : public Option
 public:
   OptionMove()  {};
   ~OptionMove() {};
-  virtual void display() = 0;
-  virtual GameAction* getGameAction() = 0;
+  virtual void Display() = 0;
+  virtual GameAction* GetGameAction() = 0;
 protected:
 };
 

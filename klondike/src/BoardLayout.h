@@ -18,10 +18,10 @@ class BoardLayout
 public:
   BoardLayout (const unsigned int& num_tableaus = DEFAULT_TABLEAU_AMOUNT,
                const e_board_type& board_type = BOARD_TYPE_FRENCH);
-  virtual ~BoardLayout ();
-  virtual void ResetPiles ();
+  ~BoardLayout ();
+  void ResetPiles ();
   bool GameFinished () const;
-  PileSet* GetPileSet() const { return m_pile_set; }
+  PileSet* GetPileSet() const;
 protected:
 private:
   PileSet* m_pile_set;

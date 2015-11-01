@@ -8,8 +8,8 @@ class OptionResetGame : public Option
 public:
   OptionResetGame()  {};
   ~OptionResetGame() {};
-  virtual void display() = 0;
-  virtual GameAction* getGameAction() = 0;
+  virtual void Display() = 0;
+  virtual GameAction* GetGameAction() = 0;
 protected:
 };
 

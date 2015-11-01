@@ -23,6 +23,7 @@ public:
   void SetBuilder(DeckBuilder* builder);
   void Shuffle();
 private:
+  int RandomFunction (int seed);
   uint32_t m_initial_size;
 };
 
