@@ -29,4 +29,5 @@ void EnglishLanguageHandler::initDict()
   m_dict[MOVEMENTS] = "Movements";
   m_dict[AVAILABLE_MOVEMENTS] = "Available Movements";
   m_dict[DESTINATION_TABLEAU] = "Destination Tableau";
+  m_dict[ORIGIN_TABLEAU] = "Origin Tableau";
 }

@@ -136,17 +136,14 @@ void TextInterface::Draw(std::vector<Tableau*>* tableaus,
   for (uint8_t line_counter = 0; line_counter < num_lines; line_counter++) {
 
     for (auto tableau_it : *tableaus) {
-      if(tableau_it->Size()) {
-  
-        Card* card = tableau_it->CardAt(line_counter);
-        if(card) {
-          std::cout.width(6);
-          std::cout << std::right << card->ToShortString();
-        }
-        else {
-          std::cout.width(6);
-          std::cout << std::right << "";
-        }
+      Card* card = tableau_it->CardAt(line_counter);
+      if(card) {
+        std::cout.width(6);
+        std::cout << std::right << card->ToShortString();
+      }
+      else {
+        std::cout.width(6);
+        std::cout << std::right << "";
       }
     }
     std::cout << std::endl;

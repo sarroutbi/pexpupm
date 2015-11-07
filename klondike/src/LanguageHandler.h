@@ -23,6 +23,7 @@ typedef enum
   MOVEMENTS = 14,
   AVAILABLE_MOVEMENTS = 15,
   DESTINATION_TABLEAU = 16,
+  ORIGIN_TABLEAU = 17,
 } word_e;
 
 class LanguageHandler

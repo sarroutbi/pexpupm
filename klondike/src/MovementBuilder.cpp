@@ -2,19 +2,26 @@
 #include "DeckToWaste.h"
 #include "WasteToFoundation.h"
 #include "WasteToTableau.h"
+#include "TableauToFoundation.h"
 
 MovementBuilder::MovementBuilder()
 {
   Movement* deck_to_waste = new DeckToWaste;
   Movement* waste_to_foundation = new WasteToFoundation;
   Movement* waste_to_tableau = new WasteToTableau;
+  Movement* tableau_to_foundation = new TableauToFoundation;
+  
   m_movement_list.push_back(deck_to_waste);
   m_movement_list.push_back(waste_to_foundation);
   m_movement_list.push_back(waste_to_tableau);
+  m_movement_list.push_back(tableau_to_foundation);
 }
 
 MovementBuilder::~MovementBuilder()
 {
+  for (auto movement : m_movement_list) {
+    delete movement;
+  }
   m_movement_list.clear();
 }
 

@@ -19,7 +19,7 @@ bool Tableau::PushInGameCard(Card* card)
     m_card_pile.push_back(card);
     pushed = true;
   }
-  else {
+  else if (Size() != 0) {
     Card* last_card = m_card_pile.back();
     assert(last_card);
     if(!last_card->GetSuit()->SameColor(*card->GetSuit()) &&
@@ -61,6 +61,10 @@ Card* Tableau::Pop ()
   }
   Card* ret = m_card_pile.back();
   m_card_pile.pop_back();
+  if(m_card_pile.size() > 0) {
+    Card* new_top_card = m_card_pile.back();
+    new_top_card->TurnUp();
+  }
   return ret;
 }
 

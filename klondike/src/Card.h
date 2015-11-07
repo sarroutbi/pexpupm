@@ -18,7 +18,7 @@ public:
   void TurnDown() { m_turnedDown = true; }
   void TurnUp() { m_turnedDown = false; }
   bool IsTurnedDown() const { return m_turnedDown; }
-  bool SetHigher() { m_higher = false; };
+  bool SetHigher() { m_higher = true; };
   bool IsHigher() const { return m_higher; };
 protected:
   uint8_t m_number;
