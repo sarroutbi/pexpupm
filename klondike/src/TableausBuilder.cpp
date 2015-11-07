@@ -37,12 +37,14 @@ void TableausBuilder::CreateTableau(const uint8_t& tableau_number)
     tableau->Push(card);
     cards_to_put--;
   }
+  tableau->SetInGame();
   m_tableau_list->push_back(tableau);
 }
 
 void TableausBuilder::CreateInitialTableaus()
 {
   uint8_t tableau_counter;
+  m_tableau_list->clear();
   for(tableau_counter=0; tableau_counter < m_tableau_amount; tableau_counter++) {
     CreateTableau(tableau_counter);
   }

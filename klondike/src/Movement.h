@@ -20,6 +20,9 @@ public:
   uint8_t GetId() { return m_id;}
   virtual std::string ToString() const = 0;
   virtual bool PerformMovement(BoardLayout* layout) = 0;
+  virtual void SetOption(const uint8_t& option) { };
+  virtual std::string GetSuboption() const {};
+  virtual bool Complete() { return true; };
 private:
   uint8_t m_id;
   Pile* m_source;

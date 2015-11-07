@@ -49,6 +49,26 @@ char OptionMoveText::PromptMovementOption()
   return option;
 }
 
+char OptionMoveText::PromptMovementSuboption(Movement* movement)
+{
+  assert(movement);
+  char option;
+  std::cout << movement->GetSuboption() << ":";
+  std::cin >> option;
+  option = option - '0';
+  return option;
+}
+
+void OptionMoveText::PromptMovementSuboptions(Movement* movement)
+{
+  assert(movement);
+  char option;
+  do {
+    option = PromptMovementSuboption(movement);
+    movement->SetOption(option);
+  } while (!movement->Complete());
+}
+
 GameAction* OptionMoveText::PromptMovement()
 {
   Movement* movement = NULL;
@@ -59,6 +79,9 @@ GameAction* OptionMoveText::PromptMovement()
     option = PromptMovementOption();
   } while (!(movement = m_movement_builder.GetMovementWithId(option)));
 
+  if(!movement->Complete()) {
+    PromptMovementSuboptions(movement);
+  }
   GameAction* action = new ActionMove(movement);
   return action;
 }

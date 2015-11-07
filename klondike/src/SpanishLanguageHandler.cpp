@@ -28,5 +28,5 @@ void SpanishLanguageHandler::initDict()
   m_dict[MOVEMENT] = "Movimiento";
   m_dict[MOVEMENTS] = "Movimientos";
   m_dict[AVAILABLE_MOVEMENTS] = "Movimientos Disponibles";
-
+  m_dict[DESTINATION_TABLEAU] = "Tableau de Destino";
 }

@@ -13,4 +13,4 @@ public:
   virtual std::string ToString () const;
 };
 
-#endif // MOVEMENT_H
+#endif // DECK_TO_WASTE

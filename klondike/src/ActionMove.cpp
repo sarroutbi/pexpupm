@@ -44,6 +44,13 @@ void ActionMove::PerformAction(BoardLayout* layout) const
   // std::cout << std::endl;
   // std::cout << "Waste:" << waste->ToShortString();
   // std::cout << std::endl;
+  // std::cout << "Tableaus:" << std::endl;
+  // std::vector<Tableau*>* tableaus = pile->GetTableaus();
+  // for (auto tableau : *tableaus) {
+  //   std::cout << "ID:" << std::to_string(tableau->GetId()) << ":" << tableau->ToShortString();
+  //   std::cout << std::endl;
+  // }
+  // std::cout << std::endl;
   // sleep(1);
   // std::cout << std::endl;
 }

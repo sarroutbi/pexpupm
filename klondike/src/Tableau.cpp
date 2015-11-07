@@ -22,8 +22,8 @@ bool Tableau::PushInGameCard(Card* card)
   else {
     Card* last_card = m_card_pile.back();
     assert(last_card);
-    if((last_card->GetSuit()->SameColor(*(card->GetSuit()))) &&
-       (last_card->GetNumber() == (card->GetNumber()-1))) {
+    if(!last_card->GetSuit()->SameColor(*card->GetSuit()) &&
+       (last_card->GetNumber() == (card->GetNumber()+1))) {
       m_card_pile.push_back(card);
       pushed = true;
     }
