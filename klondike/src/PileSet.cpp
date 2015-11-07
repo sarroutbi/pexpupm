@@ -22,11 +22,10 @@ PileSet::PileSet(FoundationsBuilder* foundations_builder,
 
 PileSet::~PileSet()
 {
-  assert(0);
   delete m_deck;
   delete m_waste;
-  delete m_foundations_builder;
-  delete m_deck_builder;
+  m_foundations_builder;
+  m_deck_builder;
 }
 
 bool PileSet::AllFoundationsFull() const

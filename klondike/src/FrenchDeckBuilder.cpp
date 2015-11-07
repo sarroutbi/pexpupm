@@ -23,6 +23,9 @@ void FrenchDeckBuilder::CreateInitialDeck(Deck* deck)
   for(auto suit_it : m_suit_list) {
     for (; number >= 1; number--) {
       Card* card = new Card(suit_it, number);
+      if(number == MAX_CARD_NUMBER) {
+        card->SetHigher();
+      }
       deck->Push(card);
     }
     number = MAX_CARD_NUMBER;

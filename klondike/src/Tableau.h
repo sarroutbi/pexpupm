@@ -7,95 +7,21 @@
 #include <vector>
 
 
-/**
-  * class Tableau
-  * 
-  */
-
 class Tableau : public Pile
 {
 public:
-
-  // Constructors/Destructors
-  //  
-
-
-  /**
-   * Empty Constructor
-   */
-  Tableau ();
-
-  /**
-   * Empty Destructor
-   */
-  virtual ~Tableau ();
-
-  // Static Public attributes
-  //  
-
-  // Public attributes
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-  // Public attribute accessor methods
-  //  
-
-
-protected:
-
-  // Static Protected attributes
-  //  
-
-  // Protected attributes
-  //  
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-public:
-
-
-  // Protected attribute accessor methods
-  //  
-
-protected:
-
-
+  Tableau (const uint8_t& id);
+  ~Tableau ();
+  virtual bool Push(Card* card);
+  virtual Card* Pop ();
+  virtual bool Full() const;
+  void SetInGame() { m_in_game = true; };
+  bool IsInGame() const { return m_in_game; };
 private:
-
-  // Static Private attributes
-  //  
-
-  // Private attributes
-  //  
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-public:
-
-
-  // Private attribute accessor methods
-  //  
-
-private:
-
-
-
+  bool PushInGameCard(Card* card);
+  bool PushOutGameCard(Card* card);
+  uint8_t m_tableau_id;
+  bool m_in_game;
 };
 
 #endif // TABLEAU_H

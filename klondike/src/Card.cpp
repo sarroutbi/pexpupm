@@ -4,7 +4,7 @@
 #include "Card.h"
 
 Card::Card (Suit* suit, const uint8_t number):
-  m_suit(suit), m_number(number)
+  m_suit(suit), m_number(number), m_turnedDown(true), m_higher(false)
 {
   ;
 }
