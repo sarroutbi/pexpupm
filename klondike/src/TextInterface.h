@@ -24,6 +24,8 @@ private:
   void Draw(Deck* deck) const;
   void Draw(Waste* deck) const;
   void Draw(std::vector<Foundation*>* foundation) const;
+  void Draw(std::vector<Tableau*>* tableau,
+            const uint8_t& num_lines) const;
 };
 
 #endif // TEXT_INTERFACE_H

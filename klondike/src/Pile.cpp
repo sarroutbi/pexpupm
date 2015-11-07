@@ -22,12 +22,15 @@ Pile::Pile () : m_card_pile()
 }
 
 Pile::~Pile ()
-{ 
-  ;
+{
+  Clean();
 }
 
 void Pile::Clean ()
 {
+  for (auto card_it : m_card_pile) {
+    delete card_it;
+  }
   m_card_pile.clear();
 }
 
@@ -42,4 +45,12 @@ std::string Pile::ToShortString() const
     cards.erase(0, 1);
   }
   return cards;
+}
+
+Card* Pile::CardAt (const uint8_t& pos)
+{
+  if(pos < Size()) {
+    return m_card_pile[pos];
+  }
+  return NULL;
 }

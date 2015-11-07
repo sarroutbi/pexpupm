@@ -59,6 +59,8 @@ void TextInterface::Draw(const BoardLayout& layout)
   std::cout << " ";
   Draw(pile_set->GetFoundations());
   std::cout << std::endl;
+  Draw(pile_set->GetTableaus(), pile_set->CardAmountInBiggerTableau());
+  std::cout << std::endl;
 }
 
 int TextInterface::PromptOption() const
@@ -117,5 +119,21 @@ void TextInterface::Draw(std::vector<Foundation*>* foundations) const
       std::cout << "[ ]";
     }
     std::cout << " ";
+  }
+}
+
+void TextInterface::Draw(std::vector<Tableau*>* tableaus,
+                         const uint8_t& num_lines) const
+{
+  assert(tableaus);
+  for (uint8_t line_counter = 0; line_counter < num_lines; line_counter++) {
+    for (auto tableau_it : *tableaus) {
+      Card* card = tableau_it->CardAt(line_counter);
+      if(card) {
+        std::cout << card->ToShortString();
+      }
+      std::cout << " ";
+    }
+    std::cout << std::endl;
   }
 }

@@ -15,6 +15,7 @@ public:
   virtual bool  Full () const = 0;
   Card* TopCard ();
   Card* BottomCard ();
+  Card* CardAt (const uint8_t& pos) ;
   uint8_t Size () const { return m_card_pile.size(); };
   void Clean ();
   std::string ToShortString() const;

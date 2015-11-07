@@ -16,7 +16,7 @@ class Foundation : public Pile
 public:
   Foundation (Suit* suite,
               const unsigned int max_cards = MAX_FOUNDATION_CARDS);
-  ~Foundation ();
+  virtual ~Foundation ();
   virtual bool Push(Card* card);
   virtual Card* Pop();
   virtual bool Full () const;

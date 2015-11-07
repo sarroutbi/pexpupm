@@ -24,8 +24,23 @@ PileSet::~PileSet()
 {
   delete m_deck;
   delete m_waste;
-  m_foundations_builder;
-  m_deck_builder;
+  delete m_foundations_builder;
+  CleanTableaus();
+  CleanFoundations();
+}
+
+void PileSet::CleanTableaus()
+{
+  for (auto tableau_it : m_tableaus) {
+    delete tableau_it;
+  }
+}
+
+void PileSet::CleanFoundations()
+{
+  for (auto foundation_it : m_foundations) {
+    delete foundation_it;
+  }
 }
 
 bool PileSet::AllFoundationsFull() const
@@ -54,9 +69,7 @@ bool PileSet::ResetFoundations()
 {
   std::vector<Foundation*>::iterator it = m_foundations.begin();
   for (; it != m_foundations.end(); it++) {
-    if(!((*it)->Full())) {
-      (*it)->Clean();
-    }
+    (*it)->Clean();
   }
 }
 
@@ -65,7 +78,6 @@ bool PileSet::ResetTableaus()
   std::vector<Tableau*>::iterator it = m_tableaus.begin();
   for (; it != m_tableaus.end(); it++) {
     (*it)->Clean();
-    m_tableaus.erase(it);
   }
 }
 
@@ -78,4 +90,15 @@ Foundation* PileSet::GetFoundation(const Suit* suit)
     }
   }
   return NULL;
+}
+
+uint8_t PileSet::CardAmountInBiggerTableau()
+{
+  uint8_t higher_size = 0;
+  for (auto tableaus_it : m_tableaus) {
+    if(((tableaus_it->Size())) > higher_size) {
+      higher_size = tableaus_it->Size();
+    }
+  }
+  return higher_size;
 }

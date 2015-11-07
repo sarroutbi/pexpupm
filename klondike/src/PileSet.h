@@ -24,7 +24,10 @@ public:
   Foundation* GetFoundation(const Suit* suit);
   std::vector<Foundation*>* GetFoundations() { return &m_foundations;};
   std::vector<Tableau*>* GetTableaus() { return &m_tableaus;};
+  uint8_t CardAmountInBiggerTableau();
 private:
+  void CleanTableaus();
+  void CleanFoundations();
   bool ResetFoundations();
   bool ResetTableaus();
   std::vector<Foundation*> m_foundations;

@@ -10,7 +10,7 @@ Foundation::Foundation (Suit* suite,
 
 Foundation::~Foundation () 
 { 
-  ;
+  delete m_suit;
 }
 
 bool Foundation::Full () const
