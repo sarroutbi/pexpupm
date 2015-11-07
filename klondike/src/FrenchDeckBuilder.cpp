@@ -11,6 +11,9 @@ FrenchDeckBuilder::FrenchDeckBuilder ()
 
 FrenchDeckBuilder::~FrenchDeckBuilder ()
 {
+  for(auto suit_it : m_suit_list) {
+    delete suit_it;
+  }
   m_suit_list.clear();
 }
 

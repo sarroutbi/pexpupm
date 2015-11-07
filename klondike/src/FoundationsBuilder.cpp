@@ -11,7 +11,9 @@ FoundationsBuilder::FoundationsBuilder(e_board_type type)
 
 FoundationsBuilder::~FoundationsBuilder()
 {
-  ;
+  for (auto creator_it : m_foundations_creator) {
+    delete creator_it.second;
+  }
 }
 
 void
