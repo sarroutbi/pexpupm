@@ -17,6 +17,7 @@ public:
   virtual bool Full() const;
   void SetInGame() { m_in_game = true; };
   bool IsInGame() const { return m_in_game; };
+  uint8_t GetId() const { return m_tableau_id; };
 private:
   bool PushInGameCard(Card* card);
   bool PushOutGameCard(Card* card);

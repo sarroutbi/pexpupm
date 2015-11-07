@@ -33,7 +33,7 @@ bool Tableau::PushInGameCard(Card* card)
 
 bool Tableau::PushOutGameCard(Card* card)
 {
-  Card* last_card = TopCard();
+  Card* last_card = BottomCard();
   if(last_card) {
     last_card->TurnDown();
   }

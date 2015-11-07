@@ -48,7 +48,7 @@ std::string Pile::ToShortString() const
 }
 
 Card* Pile::CardAt (const uint8_t& pos)
-{
+{  
   if(pos < Size()) {
     return m_card_pile[pos];
   }

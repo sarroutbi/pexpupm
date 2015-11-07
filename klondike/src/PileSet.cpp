@@ -7,24 +7,31 @@
 #include "Waste.h"
 
 PileSet::PileSet(FoundationsBuilder* foundations_builder,
-                 DeckBuilder* deck_builder) :
+                 DeckBuilder* deck_builder,
+                 TableausBuilder* tableaus_builder) :
   m_foundations(), m_tableaus(), m_deck(NULL), m_waste(NULL),
   m_foundations_builder(foundations_builder),
-  m_deck_builder(deck_builder)
+  m_deck_builder(deck_builder),
+  m_tableaus_builder(tableaus_builder)
 {
   assert(m_foundations_builder);
   assert(m_deck_builder);
+  assert(m_tableaus_builder);
   m_deck = new Deck();
   m_waste = new Waste();
   m_foundations_builder->SetFoundations(m_foundations);
   m_deck_builder->CreateInitialDeck(m_deck);
+  m_tableaus_builder->AssocPileSet(this);
+  ResetPiles();
 }
 
 PileSet::~PileSet()
 {
   delete m_deck;
   delete m_waste;
+  delete m_deck_builder;
   delete m_foundations_builder;
+  delete m_tableaus_builder;
   CleanTableaus();
   CleanFoundations();
 }
@@ -63,6 +70,7 @@ bool PileSet::ResetPiles()
   m_deck_builder->CreateInitialDeck(m_deck);
   m_deck->Shuffle();
   m_waste->Clean();
+  m_tableaus_builder->CreateInitialTableaus();
 }
 
 bool PileSet::ResetFoundations()

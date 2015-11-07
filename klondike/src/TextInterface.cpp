@@ -51,12 +51,11 @@ void TextInterface::Draw(const BoardLayout& layout)
   PileSet* pile_set = layout.GetPileSet();
   assert(pile_set);
   system("clear");
+  std::cout << "  ";
   Draw(pile_set->GetDeck());
   std::cout << " ";
   Draw(pile_set->GetWaste());
-  std::cout << " ";
-  std::cout << " ";
-  std::cout << " ";
+  std::cout << "      ";
   Draw(pile_set->GetFoundations());
   std::cout << std::endl;
   Draw(pile_set->GetTableaus(), pile_set->CardAmountInBiggerTableau());
@@ -101,10 +100,11 @@ void TextInterface::Draw(Waste* waste) const
 {
   assert(waste);
   if(waste->Size() > 0) {
+    std::cout.width(3);
     std::cout << "[" << waste->TopCard()->ToShortString() << "]";
   }
   else {
-    std::cout << "[ ]";
+    std::cout << "[  ]";
   }
 }
 
@@ -113,10 +113,11 @@ void TextInterface::Draw(std::vector<Foundation*>* foundations) const
   assert(foundations);
   for (auto foundations_it : *foundations) {
     if(foundations_it->Size() > 0) {
+      std::cout.width(3);
       std::cout << "[" << foundations_it->TopCard()->ToShortString() << "]";
     }
     else {
-      std::cout << "[ ]";
+      std::cout << "[  ]";
     }
     std::cout << " ";
   }
@@ -127,12 +128,20 @@ void TextInterface::Draw(std::vector<Tableau*>* tableaus,
 {
   assert(tableaus);
   for (uint8_t line_counter = 0; line_counter < num_lines; line_counter++) {
+
     for (auto tableau_it : *tableaus) {
-      Card* card = tableau_it->CardAt(line_counter);
-      if(card) {
-        std::cout << card->ToShortString();
+      if(tableau_it->Size()) {
+  
+        Card* card = tableau_it->CardAt(line_counter);
+        if(card) {
+          std::cout.width(5);
+          std::cout << std::right << card->ToShortString();
+        }
+        else {
+          std::cout.width(5);
+          std::cout << std::right << "";
+        }
       }
-      std::cout << " ";
     }
     std::cout << std::endl;
   }

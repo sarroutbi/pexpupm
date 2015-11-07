@@ -8,14 +8,18 @@
 #include "Pile.h"
 #include "Deck.h"
 #include "FoundationsBuilder.h"
+#include "TableausBuilder.h"
 #include "Foundation.h"
 #include "Tableau.h"
+
+class TableausBuilder;
 
 class PileSet
 {
 public:
   PileSet(FoundationsBuilder* pile_builder,
-          DeckBuilder* deck_builder);
+          DeckBuilder* deck_builder,
+          TableausBuilder* tableaus_builder);
   ~PileSet();
   bool AllFoundationsFull() const;
   virtual bool ResetPiles();
@@ -36,6 +40,7 @@ private:
   Waste* m_waste;
   FoundationsBuilder* m_foundations_builder;
   DeckBuilder* m_deck_builder;
+  TableausBuilder* m_tableaus_builder;
 };
 
 #endif // PILESET_H

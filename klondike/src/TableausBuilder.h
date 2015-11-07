@@ -1,20 +1,20 @@
-#ifndef TABLEAU_BUILDER_H
-#define TABLEAU_BUILDER_H
+#ifndef TABLEAUS_BUILDER_H
+#define TABLEAUS_BUILDER_H
 
 #include <stdint.h>
 #include "Tableau.h"
 #include "Deck.h"
 #include "PileSet.h"
 
-class Tableau;
+class PileSet;
 
-class TableauBuilder
+class TableausBuilder
 {
 public:
-  TableauBuilder(const uint8_t& tableau_amount);
-  ~TableauBuilder();
-  void CreateTableausFromDeck();
-  void AssocPile(PileSet* pile);
+  TableausBuilder(const uint8_t& tableau_amount);
+  ~TableausBuilder();
+  void CreateInitialTableaus();
+  void AssocPileSet(PileSet* pile);
 private:
   void CreateTableau(const uint8_t& tableau_number);
   uint8_t CardsInTableau(const uint8_t& tableau_number);
