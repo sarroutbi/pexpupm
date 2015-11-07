@@ -58,6 +58,7 @@ void TextInterface::Draw(const BoardLayout& layout)
   std::cout << "       ";
   Draw(pile_set->GetFoundations());
   std::cout << std::endl;
+  std::cout << std::endl;
   Draw(pile_set->GetTableaus(), pile_set->CardAmountInBiggerTableau());
   std::cout << std::endl;
 }
@@ -129,23 +130,41 @@ void TextInterface::Draw(std::vector<Foundation*>* foundations) const
   }
 }
 
+void TextInterface::DrawTableausIds(std::vector<Tableau*>* tableaus) const
+{
+  assert(tableaus);
+  for (auto tableau_it : *tableaus) {
+    std::cout.width(4);
+    std::cout << "[Tb" << std::to_string(tableau_it->GetId()) << "]";
+    std::cout.width(1);
+  }
+  std::cout << std::endl;
+}
+
+void TextInterface::DrawTableausInLine(std::vector<Tableau*>* tableaus,
+                                       const uint8_t& line) const
+{
+  assert(tableaus);
+  for (auto tableau_it : *tableaus) {
+    Card* card = tableau_it->CardAt(line);
+    if(card) {
+      std::cout.width(6);
+      std::cout << std::right << card->ToShortString();
+    }
+    else {
+      std::cout.width(6);
+      std::cout << std::right << "";
+    }
+  }
+}
+
 void TextInterface::Draw(std::vector<Tableau*>* tableaus,
                          const uint8_t& num_lines) const
 {
   assert(tableaus);
+  DrawTableausIds(tableaus);
   for (uint8_t line_counter = 0; line_counter < num_lines; line_counter++) {
-
-    for (auto tableau_it : *tableaus) {
-      Card* card = tableau_it->CardAt(line_counter);
-      if(card) {
-        std::cout.width(6);
-        std::cout << std::right << card->ToShortString();
-      }
-      else {
-        std::cout.width(6);
-        std::cout << std::right << "";
-      }
-    }
+    DrawTableausInLine(tableaus, line_counter);
     std::cout << std::endl;
   }
 }
