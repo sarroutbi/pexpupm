@@ -1,5 +1,5 @@
 #include "FrenchDeckBuilder.h"
-#include "TableauBuilder.h"
+#include "TableausBuilder.h"
 #include "BoardLayout.h"
 #include "gtest/gtest.h"
 
@@ -44,33 +44,27 @@ TEST(FrenchDeckBuilderTurned, klondike)
   delete builder;
 }
 
-TEST(TableauBuilderNumber, klondike)
+TEST(TableausBuilderNumber, klondike)
 {
-  TableauBuilder tableau_builder(7);
+  TableausBuilder* tableau_builder = new TableausBuilder(7);
   DeckBuilder* deck_builder = new FrenchDeckBuilder;
-  PileSet* pile_set = new PileSet(new FoundationsBuilder(BOARD_TYPE_FRENCH), deck_builder);
-  tableau_builder.AssocPile(pile_set);
-  tableau_builder.CreateTableausFromDeck();
+  PileSet* pile_set = new PileSet(new FoundationsBuilder(BOARD_TYPE_FRENCH), deck_builder,
+                                  tableau_builder);
   EXPECT_EQ(pile_set->GetTableaus()->size(), 7);
-  delete deck_builder;
   delete pile_set;
 }
 
-TEST(TableauBuilderCardNumber, klondike)
+TEST(TableausBuilderCardNumber, klondike)
 {
   uint8_t tableau_counter = 0;
   uint8_t tableau_number = 8;
-  TableauBuilder tableau_builder(tableau_number);
+  TableausBuilder* tableau_builder = new TableausBuilder(tableau_number);
   DeckBuilder* deck_builder = new FrenchDeckBuilder;
-  PileSet* pile_set = new PileSet(new FoundationsBuilder(BOARD_TYPE_FRENCH), deck_builder);
-  tableau_builder.AssocPile(pile_set);
-  tableau_builder.CreateTableausFromDeck();
-  std::vector<Tableau*>* tableaus = pile_set->GetTableaus();
+  PileSet pile_set(new FoundationsBuilder(BOARD_TYPE_FRENCH), deck_builder, tableau_builder);
+  std::vector<Tableau*>* tableaus = pile_set.GetTableaus();
   EXPECT_TRUE(tableaus != nullptr);
   for (tableau_counter = 0; tableau_counter < tableau_number; tableau_counter++) {
     EXPECT_TRUE(((*tableaus)[tableau_counter])->Size() == tableau_counter+1);
   }
-  delete deck_builder;
-  delete pile_set;
 }
 
