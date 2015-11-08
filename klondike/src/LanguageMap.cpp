@@ -24,3 +24,9 @@ LanguageHandler* LanguageMap::getLanguageHandler()
 {
   return m_language_map[m_active_language];
 }
+
+LanguageMap::~LanguageMap()
+{
+  delete m_language_map[ENGLISH];
+  delete m_language_map[SPANISH];
+}

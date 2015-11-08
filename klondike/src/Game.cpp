@@ -3,12 +3,12 @@
 
 Game::Game ()
 {
-
+  ;
 }
 
 Game::~Game ()
 {
-
+  ;
 }
 
 
@@ -35,7 +35,9 @@ void Game::MainLoop ()
       ProcessAction(action);
     }
   }
-  Init();
+  if(!m_layout.GameFinished()) {
+    Init();
+  }
 }
 
 void Game::ProcessAction(GameAction* action)

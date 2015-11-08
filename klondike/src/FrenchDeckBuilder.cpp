@@ -11,6 +11,11 @@ FrenchDeckBuilder::FrenchDeckBuilder ()
 
 FrenchDeckBuilder::~FrenchDeckBuilder ()
 {
+  CleanSuitList();
+}
+
+void FrenchDeckBuilder::CleanSuitList ()
+{
   for(auto suit_it : m_suit_list) {
     delete suit_it;
   }
@@ -21,6 +26,7 @@ void FrenchDeckBuilder::CreateInitialDeck(Deck* deck)
 {
   assert(deck);
   deck->Clean();
+  CleanSuitList();
   CreateSuitList();
   uint8_t number = MAX_CARD_NUMBER;
   for(auto suit_it : m_suit_list) {

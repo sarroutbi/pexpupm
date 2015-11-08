@@ -22,9 +22,11 @@ public:
   void ResetPiles ();
   bool GameFinished () const;
   PileSet* GetPileSet() const;
+  void SetGameFinished();
 protected:
 private:
   PileSet* m_pile_set;
+  bool m_game_finished;
 };
 
 #endif // BOARDLAYOUT_H

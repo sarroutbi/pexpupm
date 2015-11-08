@@ -7,7 +7,7 @@ class OptionResetGame : public Option
 {
 public:
   OptionResetGame()  {};
-  ~OptionResetGame() {};
+  virtual ~OptionResetGame() {};
   virtual void Display() = 0;
   virtual GameAction* GetGameAction() = 0;
 protected:

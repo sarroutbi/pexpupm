@@ -14,5 +14,5 @@ ActionExit::~ActionExit()
 void ActionExit::PerformAction(BoardLayout* layout) const
 {
   assert(layout);
-  exit(0);
+  layout->SetGameFinished();
 }

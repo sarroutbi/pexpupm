@@ -7,7 +7,7 @@ class OptionExit : public Option
 {
 public:
   OptionExit()  {};
-  ~OptionExit() {};
+  virtual ~OptionExit() {};
   virtual void Display() = 0;
   virtual GameAction* GetGameAction() = 0;
 protected:

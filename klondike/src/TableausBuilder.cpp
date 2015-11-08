@@ -9,7 +9,14 @@ TableausBuilder::TableausBuilder(const uint8_t& tableau_amount) :
 
 TableausBuilder::~TableausBuilder()
 {
-  ;
+  CleanTableaus();
+}
+
+void TableausBuilder::CleanTableaus() const
+{
+  for (auto tableau : *m_tableau_list) {
+    delete tableau;
+  }
 }
 
 void TableausBuilder::AssocPileSet(PileSet* pile)

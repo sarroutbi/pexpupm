@@ -64,12 +64,11 @@ bool PileSet::AllFoundationsFull() const
 
 bool PileSet::ResetPiles()
 {
-  ResetFoundations();
-  ResetTableaus();
   m_deck->Clean();
   m_deck_builder->CreateInitialDeck(m_deck);
   m_deck->Shuffle();
   m_waste->Clean();
+  m_tableaus_builder->CleanTableaus();
   m_tableaus_builder->CreateInitialTableaus();
 }
 

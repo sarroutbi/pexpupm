@@ -8,6 +8,7 @@ class Option
 {
 public:
   Option() {};
+  virtual ~Option() {};
   virtual void Display() = 0;
   virtual GameAction* GetGameAction() = 0;
 };

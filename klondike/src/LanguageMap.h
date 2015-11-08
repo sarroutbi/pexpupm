@@ -20,6 +20,7 @@ public:
 protected:
 private:
   LanguageMap();
+  ~LanguageMap();
   std::map<lang_e, LanguageHandler*> m_language_map;
   lang_e m_active_language;
 };

@@ -5,7 +5,7 @@
 
 BoardLayout::BoardLayout (const unsigned int& num_tableaus,
                           const e_board_type& type) :
-  m_pile_set(NULL)
+  m_pile_set(NULL), m_game_finished(false)
 {
   DeckBuilderFactory deck_builder_factory;
   DeckBuilder* deck_builder = deck_builder_factory.CreateDeckBuilder(type);
@@ -26,6 +26,9 @@ void BoardLayout::ResetPiles ()
 
 bool BoardLayout::GameFinished () const
 {
+  if(m_game_finished) {
+    return true;
+  }
   return m_pile_set->AllFoundationsFull();
 }
 
@@ -33,5 +36,11 @@ PileSet* BoardLayout::GetPileSet() const
 { 
   return m_pile_set;
 }
+
+void BoardLayout::SetGameFinished()
+{
+  m_game_finished = true;
+}
+
 
 

@@ -11,6 +11,7 @@ public:
   ~FrenchDeckBuilder ();
   virtual void CreateInitialDeck(Deck* deck);
   virtual void CreateSuitList();
+  virtual void CleanSuitList();
 private:
   static const uint8_t MAX_CARD_NUMBER = 13;
 };

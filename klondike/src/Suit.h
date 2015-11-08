@@ -8,7 +8,7 @@ class Suit
 {
 public:
  explicit Suit(const uint8_t& suit);
-  ~Suit();
+ virtual ~Suit();
  const uint8_t GetSuit() const { return m_suit; };
  const bool operator==(const Suit& suit) const { return m_suit == suit.m_suit;}
  virtual const bool SameColor(const Suit& suit) const = 0;

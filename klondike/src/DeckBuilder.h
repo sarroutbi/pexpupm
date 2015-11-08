@@ -13,6 +13,7 @@ public:
   virtual ~DeckBuilder () {};
   virtual void CreateInitialDeck(Deck* deck) = 0;
   virtual void CreateSuitList() = 0;
+  virtual void CleanSuitList() = 0;
 protected:
   std::list<Suit*> m_suit_list;
 };

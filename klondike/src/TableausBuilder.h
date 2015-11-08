@@ -15,6 +15,7 @@ public:
   ~TableausBuilder();
   void CreateInitialTableaus();
   void AssocPileSet(PileSet* pile);
+  void CleanTableaus() const;
 private:
   void CreateTableau(const uint8_t& tableau_number);
   uint8_t CardsInTableau(const uint8_t& tableau_number);
