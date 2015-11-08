@@ -7,7 +7,7 @@
 #include "Interface.h"
 #include "Deck.h"
 #include "Waste.h"
-#include "TextInterfaceDrawVisitor.h"
+#include "InterfaceDrawVisitor.h"
 
 class TextInterface : public Interface
 {
@@ -21,7 +21,7 @@ public:
   int PromptOption() const;
   virtual GameAction* GetPlayerAction();
   PileSet* GetPileSet() { return m_pile_set; };
-  void accept(const TextInterfaceDrawVisitor& draw_visitor);
+  void accept(const InterfaceDrawVisitor& draw_visitor);
 protected:
 private:
   PileSet* m_pile_set;

@@ -46,7 +46,7 @@ void TextInterface::DisplayOptions()
   Interface::DisplayOptions();
 }
 
-void TextInterface::accept(const TextInterfaceDrawVisitor& draw_visitor)
+void TextInterface::accept(const InterfaceDrawVisitor& draw_visitor)
 {
   draw_visitor.visitTextInterface(this);
 }
@@ -57,7 +57,7 @@ void TextInterface::Draw(const BoardLayout& layout)
   assert(pile_set);
   m_pile_set = pile_set;
   system("clear");
-  TextInterfaceDrawVisitor draw_visitor;
+  InterfaceDrawVisitor draw_visitor;
   accept(draw_visitor);
 }
 

@@ -1,19 +1,19 @@
 #include <assert.h>
-#include "TextInterfaceDrawVisitor.h"
+#include "InterfaceDrawVisitor.h"
 #include <iostream>
 #include "TextInterface.h"
 
-TextInterfaceDrawVisitor::TextInterfaceDrawVisitor()
+InterfaceDrawVisitor::InterfaceDrawVisitor()
 {
 
 }
 
-TextInterfaceDrawVisitor::~TextInterfaceDrawVisitor()
+InterfaceDrawVisitor::~InterfaceDrawVisitor()
 {
 
 }
  
-void TextInterfaceDrawVisitor::visitTextInterface(TextInterface* text_interface) const
+void InterfaceDrawVisitor::visitTextInterface(TextInterface* text_interface) const
 {
   assert(text_interface);
   PileSet* pile_set = text_interface->GetPileSet();
@@ -31,8 +31,8 @@ void TextInterfaceDrawVisitor::visitTextInterface(TextInterface* text_interface)
   std::cout << std::endl;
 }
 
-void TextInterfaceDrawVisitor::DrawDeckWasteFoundationHeader(std::vector<Foundation*>*
-                                                             foundations) const
+void InterfaceDrawVisitor::DrawDeckWasteFoundationHeader(std::vector<Foundation*>*
+                                                         foundations) const
 {
   std::cout << "[Deck][Waste]     ";
   for (auto foundation_it : *foundations) {
@@ -44,7 +44,7 @@ void TextInterfaceDrawVisitor::DrawDeckWasteFoundationHeader(std::vector<Foundat
 }
 
 
-void TextInterfaceDrawVisitor::Draw(Deck* deck) const
+void InterfaceDrawVisitor::Draw(Deck* deck) const
 {
   assert(deck);
   if(deck->Size() == 0) {
@@ -55,7 +55,7 @@ void TextInterfaceDrawVisitor::Draw(Deck* deck) const
   }
 }
 
-void TextInterfaceDrawVisitor::Draw(Waste* waste) const
+void InterfaceDrawVisitor::Draw(Waste* waste) const
 {
   assert(waste);
   if(waste->Size() > 0) {
@@ -70,7 +70,7 @@ void TextInterfaceDrawVisitor::Draw(Waste* waste) const
   }
 }
 
-void TextInterfaceDrawVisitor::Draw(std::vector<Foundation*>* foundations) const
+void InterfaceDrawVisitor::Draw(std::vector<Foundation*>* foundations) const
 {
   assert(foundations);
   for (auto foundations_it : *foundations) {
@@ -88,7 +88,7 @@ void TextInterfaceDrawVisitor::Draw(std::vector<Foundation*>* foundations) const
   }
 }
 
-void TextInterfaceDrawVisitor::DrawTableausIds(std::vector<Tableau*>* tableaus) const
+void InterfaceDrawVisitor::DrawTableausIds(std::vector<Tableau*>* tableaus) const
 {
   assert(tableaus);
   for (auto tableau_it : *tableaus) {
@@ -99,8 +99,8 @@ void TextInterfaceDrawVisitor::DrawTableausIds(std::vector<Tableau*>* tableaus) 
   std::cout << std::endl;
 }
 
-void TextInterfaceDrawVisitor::DrawTableausInLine(std::vector<Tableau*>* tableaus,
-                                                  const uint8_t& line) const
+void InterfaceDrawVisitor::DrawTableausInLine(std::vector<Tableau*>* tableaus,
+                                              const uint8_t& line) const
 {
   assert(tableaus);
   for (auto tableau_it : *tableaus) {
@@ -116,8 +116,8 @@ void TextInterfaceDrawVisitor::DrawTableausInLine(std::vector<Tableau*>* tableau
   }
 }
 
-void TextInterfaceDrawVisitor::Draw(std::vector<Tableau*>* tableaus,
-                                    const uint8_t& num_lines) const
+void InterfaceDrawVisitor::Draw(std::vector<Tableau*>* tableaus,
+                                const uint8_t& num_lines) const
 {
   assert(tableaus);
   DrawTableausIds(tableaus);
