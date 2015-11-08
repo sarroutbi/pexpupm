@@ -55,7 +55,6 @@ bool FoundationToTableau::PerformMovement(BoardLayout* layout)
   PileSet* pile_set = layout->GetPileSet();
   assert(pile_set);
   Foundation* foundation = pile_set->GetFoundation(m_origin_foundation);
-  assert(foundation);
   Card* card = NULL;
 
   if(!foundation || (foundation->Size() == 0)) {

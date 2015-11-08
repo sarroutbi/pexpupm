@@ -21,8 +21,8 @@ void SpanishLanguageHandler::initDict()
   m_dict[SURE]   = "Seguro";
   m_dict[INTRODUCE] = "Introduzca";
   m_dict[INSERT] = "Inserte";
-  m_dict[OPTION] = "Opción";
-  m_dict[YES_NO] = "(S)í/(N)o";
+  m_dict[OPTION] = "Opcion";
+  m_dict[YES_NO] = "(S)i/(N)o";
   m_dict[AVAILABLE] = "Disponibles";
   m_dict[OPTIONS] = "Opciones";
   m_dict[MOVEMENT] = "Movimiento";
@@ -32,4 +32,5 @@ void SpanishLanguageHandler::initDict()
   m_dict[ORIGIN_TABLEAU] = "Tableau de Origen";
   m_dict[DESTINATION_FOUNDATION] = "Fundacion Destino";
   m_dict[ORIGIN_FOUNDATION] = "Fundacion Origen";
+  m_dict[CARD_AMOUNT] = "Numero de cartas";
 }

@@ -27,6 +27,7 @@ public:
   Waste* GetWaste() { return m_waste; }
   Foundation* GetFoundation(const uint8_t& id) const;
   Foundation* GetFoundation(const Suit* suit);
+  Tableau* GetTableau(const uint8_t& tableau_id) const;
   std::vector<Foundation*>* GetFoundations() { return &m_foundations;};
   std::vector<Tableau*>* GetTableaus() { return &m_tableaus;};
   uint8_t CardAmountInBiggerTableau();

@@ -4,6 +4,7 @@
 #include "WasteToTableau.h"
 #include "TableauToFoundation.h"
 #include "FoundationToTableau.h"
+#include "TableauToTableau.h"
 
 MovementBuilder::MovementBuilder()
 {
@@ -12,12 +13,14 @@ MovementBuilder::MovementBuilder()
   Movement* waste_to_tableau = new WasteToTableau;
   Movement* tableau_to_foundation = new TableauToFoundation;
   Movement* foundation_to_tableau = new FoundationToTableau;
+  Movement* tableau_to_tableau = new TableauToTableau;
   
   m_movement_list.push_back(deck_to_waste);
   m_movement_list.push_back(waste_to_foundation);
   m_movement_list.push_back(waste_to_tableau);
   m_movement_list.push_back(tableau_to_foundation);
   m_movement_list.push_back(foundation_to_tableau);
+  m_movement_list.push_back(tableau_to_tableau);
 }
 
 MovementBuilder::~MovementBuilder()

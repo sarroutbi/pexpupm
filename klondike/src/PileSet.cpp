@@ -99,6 +99,16 @@ Foundation* PileSet::GetFoundation(const uint8_t& id) const
   return NULL;
 }
 
+Tableau* PileSet::GetTableau(const uint8_t& id) const
+{
+  for (auto tableau_it : m_tableaus) {
+    if(tableau_it->GetId() == id) {
+      return tableau_it;
+    }
+  }
+  return NULL;
+}
+
 Foundation* PileSet::GetFoundation(const Suit* suit)
 {
   assert(suit);
