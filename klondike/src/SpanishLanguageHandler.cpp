@@ -30,4 +30,6 @@ void SpanishLanguageHandler::initDict()
   m_dict[AVAILABLE_MOVEMENTS] = "Movimientos Disponibles";
   m_dict[DESTINATION_TABLEAU] = "Tableau de Destino";
   m_dict[ORIGIN_TABLEAU] = "Tableau de Origen";
+  m_dict[DESTINATION_FOUNDATION] = "Fundacion Destino";
+  m_dict[ORIGIN_FOUNDATION] = "Fundacion Origen";
 }

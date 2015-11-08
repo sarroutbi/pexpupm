@@ -30,4 +30,6 @@ void EnglishLanguageHandler::initDict()
   m_dict[AVAILABLE_MOVEMENTS] = "Available Movements";
   m_dict[DESTINATION_TABLEAU] = "Destination Tableau";
   m_dict[ORIGIN_TABLEAU] = "Origin Tableau";
+  m_dict[DESTINATION_FOUNDATION] = "Destination Foundation";
+  m_dict[ORIGIN_FOUNDATION] = "Origin Foundation";
 }

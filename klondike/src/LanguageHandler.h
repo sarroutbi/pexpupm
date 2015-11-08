@@ -24,6 +24,8 @@ typedef enum
   AVAILABLE_MOVEMENTS = 15,
   DESTINATION_TABLEAU = 16,
   ORIGIN_TABLEAU = 17,
+  DESTINATION_FOUNDATION = 18,
+  ORIGIN_FOUNDATION = 19,
 } word_e;
 
 class LanguageHandler

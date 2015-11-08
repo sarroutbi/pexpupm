@@ -89,6 +89,16 @@ bool PileSet::ResetTableaus()
   }
 }
 
+Foundation* PileSet::GetFoundation(const uint8_t& id) const
+{
+  for (auto foundations_it : m_foundations) {
+    if(foundations_it->GetId() == id) {
+      return foundations_it;
+    }
+  }
+  return NULL;
+}
+
 Foundation* PileSet::GetFoundation(const Suit* suit)
 {
   assert(suit);

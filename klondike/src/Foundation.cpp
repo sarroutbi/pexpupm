@@ -1,9 +1,9 @@
 #include <assert.h>
 #include "Foundation.h"
 
-Foundation::Foundation (Suit* suite, 
+Foundation::Foundation (const uint8_t& id, Suit* suite, 
                         const unsigned int max_cards) :
-  m_suit(suite), m_max_cards(max_cards), Pile()
+  m_id(id), m_suit(suite), m_max_cards(max_cards), Pile()
 {
   ;
 }
