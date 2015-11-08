@@ -33,4 +33,5 @@ void EnglishLanguageHandler::initDict()
   m_dict[DESTINATION_FOUNDATION] = "Destination Foundation";
   m_dict[ORIGIN_FOUNDATION] = "Origin Foundation";
   m_dict[CARD_AMOUNT] = "Card Amount";
+  m_dict[YES_CHARS] = "Yy";
 }

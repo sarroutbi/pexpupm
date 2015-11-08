@@ -33,4 +33,5 @@ void SpanishLanguageHandler::initDict()
   m_dict[DESTINATION_FOUNDATION] = "Fundacion Destino";
   m_dict[ORIGIN_FOUNDATION] = "Fundacion Origen";
   m_dict[CARD_AMOUNT] = "Numero de cartas";
+  m_dict[YES_CHARS] = "Ss";
 }

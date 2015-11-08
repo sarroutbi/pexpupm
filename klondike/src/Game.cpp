@@ -31,8 +31,9 @@ void Game::MainLoop ()
   while (!m_goal.CheckSuccess(m_layout)) {
     m_view.Draw(&m_layout);
     action = m_view.GetPlayerAction();
-    assert(action);
-    ProcessAction(action);
+    if(action) {
+      ProcessAction(action);
+    }
   }
   Init();
 }

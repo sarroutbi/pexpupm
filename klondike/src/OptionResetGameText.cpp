@@ -23,6 +23,9 @@ void OptionResetGameText::Display()
 GameAction* OptionResetGameText::GetGameAction()
 {
   char option = 0;
-  return new ActionReset;
+  if(IsUserSecure()) {
+    return new ActionReset;
+  }
+  return NULL;
 }
 

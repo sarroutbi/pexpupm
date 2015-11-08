@@ -4,8 +4,9 @@
 #include <string>
 #include "OptionResetGame.h"
 #include "OptionText.h"
+#include "OptionSecureText.h"
 
-class OptionResetGameText : public OptionResetGame, OptionText
+class OptionResetGameText : public OptionResetGame, OptionText, OptionSecureText
 {
 public:
   OptionResetGameText(const std::string& text,
@@ -13,6 +14,7 @@ public:
   ~OptionResetGameText();
   virtual void Display();
   virtual GameAction* GetGameAction();
+  virtual bool IsUserSecure() const { return OptionSecureText::IsUserSecure(); };
 protected:
 };
 

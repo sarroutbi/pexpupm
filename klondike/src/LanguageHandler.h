@@ -27,6 +27,7 @@ typedef enum
   DESTINATION_FOUNDATION = 18,
   ORIGIN_FOUNDATION = 19,
   CARD_AMOUNT = 20,
+  YES_CHARS = 21,
 } word_e;
 
 class LanguageHandler

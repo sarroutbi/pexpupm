@@ -23,6 +23,9 @@ bool Waste::Push(Card* card)
 
 Card* Waste::Pop()
 {
+  if(Size() == 0) {
+    return NULL;
+  }
   Card* card = m_card_pile.front();
   m_card_pile.erase(m_card_pile.begin());
   return card;

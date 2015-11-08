@@ -1,6 +1,7 @@
 #include <iostream>
 #include "OptionExitText.h"
 #include "ActionExit.h"
+#include "LanguageMap.h"
 
 OptionExitText::OptionExitText(const std::string& text,
                                const uint8_t& pos) : OptionText(text, pos)
@@ -20,6 +21,9 @@ void OptionExitText::Display()
 
 GameAction* OptionExitText::GetGameAction()
 {
-  return new ActionExit;
+  if(IsUserSecure()) {
+    return new ActionExit;
+  }
+  return NULL;
 }
 
