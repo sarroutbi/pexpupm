@@ -17,6 +17,7 @@ void TableausBuilder::CleanTableaus() const
   for (auto tableau : *m_tableau_list) {
     delete tableau;
   }
+  m_tableau_list->clear();
 }
 
 void TableausBuilder::AssocPileSet(PileSet* pile)
