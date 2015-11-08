@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "Goal.h"
-#include "Board.h"
 #include "PlayerView.h"
 #include "DealMode.h"
 #include "BoardLayout.h"
