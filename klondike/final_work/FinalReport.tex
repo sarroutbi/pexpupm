@@ -12,6 +12,7 @@
 \usepackage[bottom=14em]{geometry}
 \usepackage{amsmath}
 \usepackage{mathtools}
+\usepackage{pdflscape}
 
 \begin{document}
 
@@ -85,21 +86,132 @@ A parte de lo descrito anteriormente, se han presentado ciertas características
 \pagebreak
 
 \section{Fase de Análisis}
-La fase de análisis es, simplemente, un \textbf{``diseño preliminar''}. Se considera que esta fase de análisis se debe de llevar a cabo en una quinta parte del tiempo toal respecto a la fase de diseño.
+La fase de análisis es, simplemente, un \textbf{``diseño preliminar''}. Se considera que esta fase de análisis se debe de llevar a cabo en una quinta parte del tiempo total respecto a la fase de diseño.
 
 En esta fase de análisis, en el cual la solución al proceso de desarrollo empieza a tomar forma, se debe dar una primera visión interna del sistema, de forma que empiezan a aflorar los primeros diagramas estructurados por clases estereotipadas, y suele recoger aquellos detalles del dominio propios de los objetos tangibles del desarrollo en cuestión.
 
-En esta fase se debe empezar a comprender la forma del sistema por parte de los desarrolladores. En el caso del klondike, el análisis da lugar a un diagrama estructurado como el que sigue: 
+En esta fase se debe empezar a documentar en qué partes se va a descomponer el sistema de forma que se desarrolle una división del problema planteado en diversas clases que tendrán distintas responsabilidades e interactuarán entre sí para llegar a la solución final. En el caso del klondike, el análisis del sistema ha dado lugar a un diagrama estructurado como el que sigue: 
 
 \includepdf[pages=-]{analysis00.pdf}
 
-En este análisis preliminar se muestra un primer boceto de la jerarquía de clases. Para ello, se han identificado los distintos tipos de clases que formarán la jerarquía de clases que permitan implementar el juego.
+En este análisis preliminar se muestra un primer boceto de la jerarquía de clases. Normalmente, en esta fase de análisis, el diagrama de clases se centra en aquéllas que pertenecen al dominio del sistema. De esta forma, aparecen clases como "Deck", "Pile", "BoardLayout", "Game", etc. De esta forma, se han identificado en la fase de análisis los distintos tipos de clases que formarán la jerarquía que permitan implementar el juego.
 
 A continuación se describe de forma resumida cada una de ellas:
 
+\begin{itemize}
+\item{\textbf{Game}}. Clase que contendrá el flujo principal de programa.
+\item{\textbf{Goal}}. Clase encargada de chequear si ha terminado la partida.
+\item{\textbf{PlayerView}}. Clase que se encargará de proporcionar al jugador la vista del juego.
+\item{\textbf{DealMode}}. Clase encargada de mostrar los distintos tipos de reparto de cartas posibles.
+\item{\textbf{Layout}}. Clase que contiene las estructuras de datos permtenecientes al tablero de juego, y, en concreto, a los distintos mazos de cartas que conforman el juego.
+\item{\textbf{Pile}}. Clase padre de cada uno de los mazos específicos del juego. Recogerá las propiedades y métodos comunes de un mazo de carga.
+\item{\textbf{Foundation}}. Clase que aglutina las propiedades y los métodos típicos de los mazos agrupados por colores que deben rellenarse por completo para ganar el juego.
+\item{\textbf{Waste}}. Clase que modela el mazo en el que se sacan las cartas que provienen de la baraja.
+\item{\textbf{Tableau}}. Clase para modelar cada uno de los mazos que se sitúan en la parte inferior del juego. Normalmente existen siete mazos de este tipo.
+\item{\textbf{Deck}}. Clase que modela la baraja, situada en la parte superior derecha
+\item{\textbf{Suite}}. Clase padre para modelar los palos de la baraja.
+\item{\textbf{FrenchSuite}}. Clase para modelar los palos de la baraja francesa.
+\item{\textbf{SpanishSuite}}. Clase para modelar los palos de la baraja española.
+\item{\textbf{Card}}. Clase que modela una carta de la baraja. Típicamente tendrá un palo y un número.
+\item{\textbf{FrenchCard}}. Clase que modela una carta de la baraja francesa.
+\item{\textbf{SpanishCard}}. Clase que modela una carta de la baraja española.
+
+Como puede observarse, en esta fase de análisis se pretende ir modelando la solución final, mediante una representación de aquellas clases del entorno del dominio en el que se sitúa el software a desarrollar.
+
+En la fase de diseño, se acometerá el modelado completo de aquellas clases que se van a implementar, tanto aquellas que resultan del análisis del dominio como las que son resultado de la naturaleza intrínseca del software para acometer la resolución del problema final, en este caso, el desarrollo del juego del Klondike, también conocido como Solitario.
+\end{itemize}
+
+\pagebreak
+
 \section{Fase de Diseño}
-\subsection{Fase de Diseño}
+
+Como ya se comentó anteriormente, en la fase de diseño de software orientado se suele dedicar cinco veces el tiempo que se dedica en la fase de análisis. El objetivo final es realizar un diseño de clases que permita llegar a una arquitectura robusta. Para ello, el sistema debe cumplir una serie de características:
+
+\begin{itemize}
+\item{Flexibilidad}. El software del sistema debe ser sencillo de actualizar para incorporar nuevas funcionalidades.
+\item{Robustez}. El software que compone el software debe ser robusto en cuanto a que no debe romperse por múltiples sitios cuando se realizan actualizaciones del mismo.
+\item{Movilidad}. El software debe estar diseñado de forma que sea posible llevar partes del mismo (componentes) a otros sistemas, o bien para traer partes de otros sistemas a éste.
+\item{Fluidez}. El software no debe ser viscoso, entendiendo como viscosidad aquella característica que hace que modficar una pequeña parte del software afecte a otras muchas partes.
+\end{itemize}
+
+Para cumplir con lo anterior, y llegar a una arquitectura sólida basada en un diseño robusto, el software debe cumplir una serie de principios, conocidos como "SOLID".
+
+\begin{itemize}
+\item{SRP (Single ResPonsability)}. Cada una de las clases debe cumplir un único cometido y tener una única responsabilidad, conociendo como única responsabilidad un único motivo de cambio
+\item{OCP (Open Closed)}. Cada una de las clases debe proporcionar un interfaz abierto en cuanto a su comportamiento, pero a su vez cerrado en cuanto al soporte de la información que permite proporcionar dicho interfaz.
+\item{LSP (Liskov's Substitution)}. Principio que establece que las precondiciones en las clases hijas deben ser menos restrictivos que aquellas de la clase padre, y a su vez que las postcondiciones de las clases hijas deben ser más restrictivas que las de la clase padre.
+\item{DIP (Dependency Inversion Principle)}. Este principio establece que los módulos de orden superior no deben depender de módulos de menor nivel, sino que se deben establecer interfaces abstractos intermedios.
+\item{ISP (Interface Segregation Principle)}. Principio que establece que los módulos únicamente deben heredar de interfaces que vayan a utilizar, en lugar de un interfaz extenso con ciertas partes que no utilizan.
+\end{itemize}
+
+A parte de estos principios, hay dos características primordiales que debe cumplir el sistema:
+\begin{itemize}
+\item{DRY(Don't Repeat Yourself))}. Característica primordial del software que establece que el software debe reutilizarse, y nunca copiar software en distintos módulos o internamente en un módulo, para favorecer su mantenimiento y no tener que modificar en más de un sitio para modificar una funcionalidad o arreglar un problema.
+\item{KISS(Keep it simple)}. Característica que establece que se implementen clase y métodos sencillos para favorecer la reusabilidad y el mantenimiento del software.
+\end{itemize}
+
+El diseño propuesto en una primera iteración de la implementación se propone a través del siguiente diagrama de clases:
+
+\newgeometry{top=0cm,left=1cm,bottom=0.3cm}
+\begin{landscape}
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+\includegraphics[scale=0.65]{design00.pdf}
+   \label{fig:design}
+ \end{center}
+ \end{figure}
+\end{center}
+\end{landscape}
+\restoregeometry
+
+Como puede observarse, se trata de un diseño cuya máxima es mantener clases sencillas, principio KISS, que cumplan a su vez el principio SRP, en un diseño fuertemente jerárquico que permite el uso de las características de la orientación a objetos, como es el polimorfismo.
+
+Mientras, el principio OCP está también presente en el diseño, de forma que las responsabilidades encapsulan el soporte de la información ocultando los objetos y/o atributos internos. Un ejemplo es la clase Movement, que permite encapsular los distintos movimienos posibles en el juego, ocultando el uso de las distintas pilas del tablero para acometer su responsabilidad.
+
+Finalmente, y de forma principal, se ha evitado siempre tener que copiar y pegar código entre clases, ya que sus responsabilidades son muy distintas entre sí.
+
+En esta primera iteración del diseño no se observan, sin embargo, otros principios, como pueda ser ISP. Además, este primer diseño, no recoge funcionalidad necesaria que no se contempló en un primer momento. 
+
+Así, en una segunda iteración, el diseño final ha quedado como se muestra en el siguiente diagrama:
+
+\newgeometry{top=0cm,left=2.5cm,bottom=0.3cm}
+\begin{landscape}
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+\includegraphics[scale=0.93]{final_design00.pdf}
+   \label{fig:design}
+ \end{center}
+ \end{figure}
+\end{center}
+\end{landscape}
+\restoregeometry
+
+Este diseño mantiene las premisas de la primera iteración, pero incorpora básicamente:
+\begin{itemize}
+\item{Principio ISP}. Como puede observarse, por ejemplo, en las clases que heredan de la clase OptionSecureText, que son OptionExitText y OptionResetText, esto es, aquellas opciones que muestran texto por consola y que son las únicas que piden al usuario confirmación (Sí/No) debido a la importancia de las consecuencias de dichas opciones (salir del juego o bien reiniciarlo). Como puede observarse, las opciones que modelan los movimientos del tablero no necesitan confirmación del usuario, luego no heredan el interfaz OptionSecureText.
+\item{Patrones de diseño}. En segundo lugar, este diseño final recoge una serie de patrones de diseño que se incorporan como soluciones recurrentes en el diseño ante problemas recurrentes que suelen aparecer en esta fase, como puedan ser la aparición de BLOBs (Big Large Objects), la necesidad de separar la creación de objetos de aquellos otros que los van a usar o a contener, o bien la necesidad de tener acceso global a objetos de multiplicidad única.
+\end{itemize}
+
+En el siguiente apartado se detallan los patrones de diseño utilizados y su justificación.
+
+\subsection{Patrones de Diseño}
+
+
+\pagebreak
+
 
 \section{Fase de Implementación}
+
+\pagebreak
+
+\section{Fase de Pruebas}
+
+\pagebreak
+
+\section{Posibles Mejoras No Acometidas}
+
+\pagebreak
 
 \end{document}
