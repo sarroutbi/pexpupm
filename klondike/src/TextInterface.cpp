@@ -46,16 +46,29 @@ void TextInterface::DisplayOptions()
   Interface::DisplayOptions();
 }
 
+void TextInterface::DrawDeckWasteFoundationHeader(std::vector<Foundation*>*
+                                                  foundations) const
+{
+  std::cout << "[Deck][Waste]     ";
+  for (auto foundation_it : *foundations) {
+    std::cout.width(4);
+    std::cout << "[Fd" << std::to_string(foundation_it->GetId()) << "]";
+    std::cout.width(1);
+  }
+  std::cout << std::endl;
+}
+
 void TextInterface::Draw(const BoardLayout& layout)
 {
   PileSet* pile_set = layout.GetPileSet();
   assert(pile_set);
   system("clear");
+  DrawDeckWasteFoundationHeader(pile_set->GetFoundations());
   std::cout << "   ";
   Draw(pile_set->GetDeck());
-  std::cout << " ";
+  std::cout << "  ";
   Draw(pile_set->GetWaste());
-  std::cout << "       ";
+  std::cout << "      ";
   Draw(pile_set->GetFoundations());
   std::cout << std::endl;
   std::cout << std::endl;
@@ -66,7 +79,6 @@ void TextInterface::Draw(const BoardLayout& layout)
 int TextInterface::PromptOption() const
 {
   int option = -1;
-  // Prompt option
   LanguageHandler* lang_handler =
     LanguageMap::getInstance()->getLanguageHandler();
   while(option < 0 && (m_option_list.find(option) == m_option_list.end())) {

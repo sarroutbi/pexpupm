@@ -29,6 +29,7 @@ private:
   void DrawTableausIds(std::vector<Tableau*>* tableau) const;
   void DrawTableausInLine(std::vector<Tableau*>* tableau,
                           const uint8_t& num_lines) const;
+  void DrawDeckWasteFoundationHeader(std::vector<Foundation*>* foundation) const;
 };
 
 #endif // TEXT_INTERFACE_H
