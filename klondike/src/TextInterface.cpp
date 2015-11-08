@@ -7,7 +7,7 @@
 #include "OptionResetGameText.h"
 #include "LanguageMap.h"
 
-TextInterface::TextInterface()
+TextInterface::TextInterface() : m_pile_set(nullptr)
 {
   CreateOptions();
 }
@@ -46,34 +46,19 @@ void TextInterface::DisplayOptions()
   Interface::DisplayOptions();
 }
 
-void TextInterface::DrawDeckWasteFoundationHeader(std::vector<Foundation*>*
-                                                  foundations) const
+void TextInterface::accept(const TextInterfaceDrawVisitor& draw_visitor)
 {
-  std::cout << "[Deck][Waste]     ";
-  for (auto foundation_it : *foundations) {
-    std::cout.width(4);
-    std::cout << "[Fd" << std::to_string(foundation_it->GetId()) << "]";
-    std::cout.width(1);
-  }
-  std::cout << std::endl;
+  draw_visitor.visitTextInterface(this);
 }
 
 void TextInterface::Draw(const BoardLayout& layout)
 {
   PileSet* pile_set = layout.GetPileSet();
   assert(pile_set);
+  m_pile_set = pile_set;
   system("clear");
-  DrawDeckWasteFoundationHeader(pile_set->GetFoundations());
-  std::cout << "   ";
-  Draw(pile_set->GetDeck());
-  std::cout << "  ";
-  Draw(pile_set->GetWaste());
-  std::cout << "      ";
-  Draw(pile_set->GetFoundations());
-  std::cout << std::endl;
-  std::cout << std::endl;
-  Draw(pile_set->GetTableaus(), pile_set->CardAmountInBiggerTableau());
-  std::cout << std::endl;
+  TextInterfaceDrawVisitor draw_visitor;
+  accept(draw_visitor);
 }
 
 int TextInterface::PromptOption() const
@@ -96,87 +81,4 @@ GameAction* TextInterface::GetPlayerAction()
   option = PromptOption();
   GameAction* action = m_option_list[option]->GetGameAction();
   return action;
-}
-
-void TextInterface::Draw(Deck* deck) const
-{
-  assert(deck);
-  if(deck->Size() == 0) {
-    std::cout << "[ ]";
-  }
-  else {
-    std::cout << "[X]";
-  }
-}
-
-void TextInterface::Draw(Waste* waste) const
-{
-  assert(waste);
-  if(waste->Size() > 0) {
-    std::cout << "[";
-    std::cout.width(3);
-    std::cout << waste->TopCard()->ToShortString();
-    std::cout << "]";
-    std::cout.width(1);
-  }
-  else {
-    std::cout << "[   ]";
-  }
-}
-
-void TextInterface::Draw(std::vector<Foundation*>* foundations) const
-{
-  assert(foundations);
-  for (auto foundations_it : *foundations) {
-    if(foundations_it->Size() > 0) {
-      std::cout << "[";
-      std::cout.width(3);
-      std::cout << foundations_it->TopCard()->ToShortString();
-      std::cout << "]";
-      std::cout.width(1);
-    }
-    else {
-      std::cout << "[   ]";
-    }
-    std::cout << " ";
-  }
-}
-
-void TextInterface::DrawTableausIds(std::vector<Tableau*>* tableaus) const
-{
-  assert(tableaus);
-  for (auto tableau_it : *tableaus) {
-    std::cout.width(4);
-    std::cout << "[Tb" << std::to_string(tableau_it->GetId()) << "]";
-    std::cout.width(1);
-  }
-  std::cout << std::endl;
-}
-
-void TextInterface::DrawTableausInLine(std::vector<Tableau*>* tableaus,
-                                       const uint8_t& line) const
-{
-  assert(tableaus);
-  for (auto tableau_it : *tableaus) {
-    Card* card = tableau_it->CardAt(line);
-    if(card) {
-      std::cout.width(6);
-      std::cout << std::right << card->ToShortString();
-    }
-    else {
-      std::cout.width(6);
-      std::cout << std::right << "";
-    }
-  }
-}
-
-void TextInterface::Draw(std::vector<Tableau*>* tableaus,
-                         const uint8_t& num_lines) const
-{
-  assert(tableaus);
-  DrawTableausIds(tableaus);
-  for (uint8_t line_counter = 0; line_counter < num_lines; line_counter++) {
-    DrawTableausInLine(tableaus, line_counter);
-    std::cout << std::endl;
-  }
 }

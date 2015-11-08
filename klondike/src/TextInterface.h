@@ -7,6 +7,7 @@
 #include "Interface.h"
 #include "Deck.h"
 #include "Waste.h"
+#include "TextInterfaceDrawVisitor.h"
 
 class TextInterface : public Interface
 {
@@ -19,17 +20,11 @@ public:
   virtual void Draw(const BoardLayout& layout);
   int PromptOption() const;
   virtual GameAction* GetPlayerAction();
+  PileSet* GetPileSet() { return m_pile_set; };
+  void accept(const TextInterfaceDrawVisitor& draw_visitor);
 protected:
 private:
-  void Draw(Deck* deck) const;
-  void Draw(Waste* deck) const;
-  void Draw(std::vector<Foundation*>* foundation) const;
-  void Draw(std::vector<Tableau*>* tableau,
-            const uint8_t& num_lines) const;
-  void DrawTableausIds(std::vector<Tableau*>* tableau) const;
-  void DrawTableausInLine(std::vector<Tableau*>* tableau,
-                          const uint8_t& num_lines) const;
-  void DrawDeckWasteFoundationHeader(std::vector<Foundation*>* foundation) const;
+  PileSet* m_pile_set;
 };
 
 #endif // TEXT_INTERFACE_H
