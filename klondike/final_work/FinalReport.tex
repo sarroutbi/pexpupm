@@ -198,9 +198,17 @@ En el siguiente apartado se detallan los patrones de diseño utilizados y su jus
 
 \subsection{Patrones de Diseño}
 
+Los patrones de diseño describen soluciones estructuradas a problemas de diseño de software orientado a objetos que suelen ocurrir de forma recurrente. Normalmente, estas soluciones no se aplican de forma similar y suelen requerir modificaciones o combinaciones de patrones.
+
+En el caso del desarrollo del sistema del juego del Klondike, se han introducido los siguientes patrones de diseño:
+
+\begin{itemize}
+\item{\textbf{Singleton}}. Para la gestión de órdenes que se emiten a través de pantalla, se ha decidido crear un LanguageMap que permita obtener una palabra o frase de forma transparente en función del idioma elegido. Este LanguageMap está compuesto por un mapa que debe inicializarse una única vez y, además, es un objeto que debe ser accedido desde varias partes del sistema. Luego la necesidad de tener un objeto de \textbf{referencia única y alcance global} hace que aplique este patrón.
+\item{\textbf{Builder}}. El builder es un patrón creacional que permite separar la construcción de un objeto complejo de su representación. En la práctica del Klondike se han decidido crear distintos builders, para la baraja de cartas, DeckBuilder, para las fundaciones, FoundationBuilder, para los Tableaus, TableausBuilder y para los movimientos, MovementsBuilder. Este patrón se ha combinado con otro patrón creacional, la factoría de objetos, para crear según que Builders en función de parámetros como puedan ser, por ejemplo, el tipo de baraja utilizada.
+\item{\textbf{Visitor}}. En un momento determinado del desarrollo se ha identificado una clase que estaba empezando a tener un número muy elevado de métodos. En concreto, en este desarrollo, ha ocurrido con la clase TextInterface, que permite mostrar por pantalla el juego a través de texto por la consola. Cuando esto ocurre, el patrón Visitor es útil para, a través de la técnica del doble despacho, eliminar atributos y/o métodos de la clase visitada y reducir su complejidad. En el caso del Klondike, se ha implementado un InterfaceDrawVisitor que permite pintar las pilas en pantalla visitando la clase TextInterface.
+\end{itemize}
 
 \pagebreak
-
 
 \section{Fase de Implementación}
 
