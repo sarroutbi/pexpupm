@@ -10,7 +10,7 @@ class BoardLayout;
 class Movement
 {
 public:
-  explicit  Movement (uint8_t id) {};
+  explicit  Movement (uint8_t id) : m_id(id) {};
   virtual ~Movement () {};
   uint8_t GetId() { return m_id;}
   virtual std::string ToString() const = 0;
