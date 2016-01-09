@@ -159,7 +159,69 @@ Una forma de especificar qué ocurre dentro de cada uno de los distintos movimie
 
 \section{Modelo de Análisis}
 
+La fase de análisis es, simplemente, un \textbf{``diseño preliminar''}. Se considera que esta fase de análisis se debe de llevar a cabo en una quinta parte del tiempo total respecto a la fase de diseño.
 
+En esta fase de análisis, en la cual la solución al proceso de desarrollo empieza a tomar forma, se debe dar una primera visión interna del sistema, de forma que empiezan a aflorar los primeros diagramas estructurados por clases estereotipadas. Estos diagramas suelen recoger aquellos detalles del dominio propios de los objetos identficados en dicha fase.
 
-Desde el punto de vista del modelo de análisis, existen dos tipos de diagramas principales que permiten realizar 
+Por tanto, en esta fase de análisis se debe empezar a documentar en qué partes se va a descomponer el sistema de forma que se desarrolle una división del problema planteado en diversas clases que tendrán distintas responsabilidades e interactuarán entre sí para llegar a la solución final. 
+
+Por tanto, teniendo en cuenta lo anterior, desde el punto de vista del modelo de análisis, existen dos tipos de diagramas principales que permiten realizar el modelado de la fase de análisis.
+
+\begin{itemize}
+\item{Diagramas de Clases}. 
+\item{Diagramas de Colaboración entre Clases}.
+\end{itemize}
+
+En general, para el modelo de análisis, se deben tomar las clases esbozadas del modelo del dominio junto a la realización de casos de uso del modelo de casos de uso, para obtener un conjunto completo de clases de análisis y la relación de colaboración que existe entre ellas.
+
+Para una mejor clasificación de las clases, es recomendable que éstas se agrupen por casos de uso.
+
+\subsection{Diagramas de Clases}
+
+Así, para el juego del klondike, se han identificado las siguientes clases por caso de uso:
+
+\newgeometry{top=0cm,left=1cm,bottom=0cm}
+\begin{landscape}
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+ \includegraphics[scale=0.32]{Analysis/ExitGame00.jpg}
+   \caption{Diagrama de Clases: ``Exit Game''}
+   \label{fig:exitgame}
+ \end{center}
+ \end{figure}
+\end{center}
+\end{landscape}
+\restoregeometry
+
+\newgeometry{top=0cm,left=1cm,bottom=0cm}
+\begin{landscape}
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+ \includegraphics[scale=0.22]{Analysis/ResetGame00.jpg}
+   \caption{Diagrama de Clases: ``Reset Game''}
+   \label{fig:resetgame}
+ \end{center}
+ \end{figure}
+\end{center}
+\end{landscape}
+\restoregeometry
+
+\newgeometry{top=0cm,left=1cm,bottom=0cm}
+\begin{landscape}
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+ \includegraphics[scale=0.18]{Analysis/MoveCard00.jpg}
+   \caption{Diagrama de Clases: ``Move Card''}
+   \label{fig:movecard}
+ \end{center}
+ \end{figure}
+\end{center}
+\end{landscape}
+\restoregeometry
+
+\subsection{Diagramas de Colaboración} 
+
 \end{document}
