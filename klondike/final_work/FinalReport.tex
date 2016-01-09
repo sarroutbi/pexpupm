@@ -212,14 +212,38 @@ En el caso del desarrollo del sistema del juego del Klondike, se han introducido
 
 \section{Fase de Implementación}
 
+En cuanto a la implementación del código, se ha realizado en el lenguaje de programación C++. Si bien no se pretende en este documento entrar en demasiado nivel de detalle en cuanto a la implementación, cabe destacar que se ha procurado que el código cumpla una serie de premisas, sobre todo relacionadas con el principio KISS:
+\begin{itemize}
+\item{Clases sencillas}. Se ha procurado que las clases no sean demasiado grandes en cuanto a sus métodos y atributos. En el caso en el que se han identificado clases de este tipo, se han refactorizado partiendo en varias clases o aplicando patrones de diseño como el patrón Visitor.
+\item{Métodos sencillos}. En cuanto a los métodos, se ha procurado que tanto su complejidad interna como su uso, entendiendo como tal el número de parámetros que contienen, sea el menor posible.
+\end{itemize}
+
+Por otro lado, se ha utilizado la herramienta "cccc", que permite obtener ciertas métricas que alertan sobre posibles riesgos existentes en el código, como puedan ser la complejidad ciclomática de los métodos, el acoplamiento entre objetos o el número de hijos que tiene una clase padre, entre otras. 
+
+Se adjunta a la memoria el informe de esta herramienta en formato .html
+
 \pagebreak
 
 \section{Fase de Pruebas}
+
+Si bien no era el objetivo de esta práctica, cabe destacar que, a parte de las pruebas manuales realizadas sobre el juego para depurar su funcionamiento, se han incluido pruebas unitarias. En este caso se ha utilizado la librería Google Test.
+
+Se adjunta a la memoria la carpeta que contiene la definición de las pruebas unitarias.
 
 \pagebreak
 
 \section{Posibles Mejoras No Acometidas}
 
+En cuanto a posibles mejoras que han quedado pendientes, se han identificado básicamente las siguientes:
+
+\begin{enumerate}
+\item{Patrones de Diseño}. Se ha identificado al menos un patrón de diseño adicional que se podría haber acometido. Se trata del patrón Composite, que hubiera permitido establecer, para un conjunto de cartas, un comportamiento similar a la hora de utilizarlas en comparación con una sola carta. Sería un patrón posible que se podría aplicar a la hora de mover cartas entre Tableaus, ya que puede moverse una única carta o bien un conjunto de más de una carta.
+\item{Refactorización}. Si bien la herramienta utilizada para las métricas no identifica ninguna parte del código cuya complejidad sea muy elevada, sí que identifica dos partes que podrían ser refactorizadas:
+\begin{itemize}
+\item{Función PerformMovement, clase TableuToTableu}. Esta función posee un número de líneas de código y una complejidad ciclomática algo elevadas según la aplicación. Podría ser refactorizada.
+\item{Clase BoardLayout}. Según la herramienta, existe un riesgo en el alto acoplamiento que tienen el resto de clases sobre ésta, ya que tiene muchas clases que dependen de ella (un total de 20). Estaría bien refactorizar el código para que, o bien se minimice el número de clases que la utilicen o bien se dote a la clase de una abstracción máxima para cumplir con las reglas de dependencia/abstracción entre clases.
+\end{itemize}
+\end{enumerate}
 \pagebreak
 
 \end{document}
