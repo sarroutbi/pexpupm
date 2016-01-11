@@ -5,7 +5,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{pdfpages}
 \title{\textbf{RUP: Klondike}}
-\author{Sergio Arroutbi Braojos}
+\author{Israel Pavón Maculet,
+Sergio Arroutbi Braojos}
 \selectlanguage{spanish}
 \date{\today}
 %\addtolength{\topmargin}{-0.5in}
@@ -57,23 +58,59 @@ En cada turno, el jugador puede sacar cartas del ``Deck'' al ``Waste'', colocar 
 
 Este documento no busca describir de forma muy detallada el juego, que puede consultarse en el siguiente enlace: \url{https://en.wikipedia.org/wiki/Klondike_(solitaire)}
 
-Una vez conocida la funcionalidad básica del juego, se identifican tres casos de uso básicos en este dominio del problema, definido por el siguiente diagrama:
+
+\pagebreak
+
+\section{Modelo de Casos de Uso}
+
+Una vez conocida la funcionalidad básica del juego, se identifican cuatro casos de uso básicos en la aplicación, definidos por el siguiente diagrama:
 
 \begin{center}
  \begin{figure}[H]
  \begin{center}
-   \includegraphics[width=13cm]{DomainModel/KlondikeUseCases.jpg}
-   \caption{Acciones del Jugador}
-   \label{fig:actions}
+   \includegraphics[width=15cm]{DomainModel/KlondikeUseCases00.jpg}
+   \caption{Casos de uso}
+   \label{fig:usecases}
  \end{center}
  \end{figure}
 \end{center}
 
-No se ha considerado la acción ``Start Game'', ya que se asume que dicha acción existirá siempre, independientemente del dominio.
+A su vez, el diagrama que muestra la relación entre los distintos casos de uso puede observarse en el siguiente diagrama:
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=16cm]{DomainModel/UseCaseRelation00.jpg}
+   \caption{Relación entre casos de uso}
+   \label{fig:usecaserelation}
+ \end{center}
+ \end{figure}
+\end{center}
+
+Una vez encontrados los casos de uso y propuesta la relación existente entre ellos, cabe mencionar que el paso siguiente es priorizar los casos de uso.
+
+En este caso, los casos de uso con más riesgo (contemplando todo tipo de riesgos como puedan ser riesgos tecnológicos, de computación, etc.) se considera que son los casos de ``Start Game'' y ``Move Card'':
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=15cm]{DomainModel/UseCasePrio00.jpg}
+   \caption{Priorización de los casos de uso}
+   \label{fig:usecasepriorization}
+ \end{center}
+ \end{figure}
+\end{center}
+
+
+El caso de uso ``Start Game'' se describe a través del siguiente diagrama de estados:
+
+FALTA DIAGRAMA DE ESTADOS START GAME.
 
 Por otro lado, el caso de uso ``Reset Game'' hace referencia al reparto de las cartas, tanto si es el reparto inicial como si es un reparto que el jugador realiza en mitad de la partida, puesto que quiere comenzar la partida de nuevo. Por tanto, se estima que, a nivel de modelo del dominio, los casos de uso principales son los mencionados anteriormente.
 
-Las acciones en las que se reparten las cartas y se termina la partida no merecen mención especial, ya que son casos muy claros una vez conocido el funcionamiento del juego. Sin embargo, el modelo del dominio debe hacer hincapié en qué pasa cuando se posiciona una carta desde un mazo a otro dentro del juego.
+FALTA DIAGRAMA DE ESTADOS DE RESET GAME.
+
+Las acciones en las que se reparten las cartas y se termina la partida no merecen mención especial, ya que son casos muy claros una vez conocido el funcionamiento del juego. Sin embargo, el modelo de casos de uso debe hacer hincapié en qué pasa cuando se posiciona una carta desde un mazo a otro dentro del juego.
 
 En primer lugar, cabe indicar que hay una jerarquía de movimientos disponible dentro de este juego de cartas. De esta forma, se identifica el siguiente diagrama, que permite establecer, dentro del caso de uso ``Move Card'', los distintos tipos de movimientos posibles. Pueden observarse en la siguiente figura:
 
@@ -150,10 +187,6 @@ Una forma de especificar qué ocurre dentro de cada uno de los distintos movimie
  \end{center}
  \end{figure}
 \end{center}
-
-\pagebreak
-
-\section{Modelo de Casos de Uso}
 
 \pagebreak
 
@@ -240,7 +273,7 @@ Los diagramas de interacción permiten especificar, para cada caso de uso, las i
  \begin{figure}[H]
  \begin{center}
    \includegraphics[width=16cm]{Analysis/ResetGameSequence00.jpg}
-   \caption{Diagrama de Interacción: ``Reset Game''}
+   \caption{Diagrama de Interacción: ``Reset Game'' y ``Start Game''}
    \label{fig:exitgamesequence}
  \end{center}
  \end{figure}
