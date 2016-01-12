@@ -104,13 +104,41 @@ En este caso, los casos de uso con más riesgo (contemplando todo tipo de riesgo
 
 El caso de uso ``Start Game'' se describe a través del siguiente diagrama de estados:
 
-FALTA DIAGRAMA DE ESTADOS START GAME.
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=15cm]{DomainModel/StartApplication00.jpg}
+   \caption{Arrancar Aplicación}
+   \label{fig:startapplication}
+ \end{center}
+ \end{figure}
+\end{center}
 
-Por otro lado, el caso de uso ``Reset Game'' hace referencia al reparto de las cartas, tanto si es el reparto inicial como si es un reparto que el jugador realiza en mitad de la partida, puesto que quiere comenzar la partida de nuevo. Por tanto, se estima que, a nivel de modelo del dominio, los casos de uso principales son los mencionados anteriormente.
+Por otro lado, el caso de uso ``Start New Game'' hace referencia al reparto de las cartas, tanto si es el reparto inicial como si es un reparto que el jugador realiza en mitad de la partida, puesto que quiere comenzar la partida de nuevo. Puede observarse este caso de uso a través del siguiente diagrama:
 
-FALTA DIAGRAMA DE ESTADOS DE RESET GAME.
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=15cm]{DomainModel/StartNewGame00.jpg}
+   \caption{Comenzar Juego}
+   \label{fig:startnewgame}
+ \end{center}
+ \end{figure}
+\end{center}
 
-Las acciones en las que se reparten las cartas y se termina la partida no merecen mención especial, ya que son casos muy claros una vez conocido el funcionamiento del juego. Sin embargo, el modelo de casos de uso debe hacer hincapié en qué pasa cuando se posiciona una carta desde un mazo a otro dentro del juego.
+Finalmente, el caso de uso ``Close Application'' hace referencia al cierre de la aplicación por parte del usuario, como muestra el siguiente diagrama:
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=15cm]{DomainModel/CloseApplication00.jpg}
+   \caption{Finalizar Juego}
+   \label{fig:finishgame}
+ \end{center}
+ \end{figure}
+\end{center}
+
+Los casos de uso de arranque de la aplicación, reparto de cartas o fin de partida no merecen desarrollo adicional en cuanto a los diagramas que los representan, ya que son casos muy claros una vez conocido el funcionamiento del juego. Sin embargo, el modelo de casos de uso debe hacer hincapié en qué pasa cuando se posiciona una carta desde un mazo a otro dentro del juego.
 
 En primer lugar, cabe indicar que hay una jerarquía de movimientos disponible dentro de este juego de cartas. De esta forma, se identifica el siguiente diagrama, que permite establecer, dentro del caso de uso ``Move Card'', los distintos tipos de movimientos posibles. Pueden observarse en la siguiente figura:
 
@@ -233,7 +261,7 @@ Así, para el juego del klondike, se han identificado las siguientes clases por 
  \begin{figure}[H]
  \begin{center}
  \includegraphics[scale=0.22]{Analysis/ResetGame00.jpg}
-   \caption{Diagrama de Clases: ``Reset Game''}
+   \caption{Diagrama de Clases: ``Start New Game''}
    \label{fig:resetgame}
  \end{center}
  \end{figure}
@@ -273,7 +301,7 @@ Los diagramas de interacción permiten especificar, para cada caso de uso, las i
  \begin{figure}[H]
  \begin{center}
    \includegraphics[width=16cm]{Analysis/ResetGameSequence00.jpg}
-   \caption{Diagrama de Interacción: ``Reset Game'' y ``Start Game''}
+   \caption{Diagrama de Interacción: ``Start Game'' y ``Start New Game''}
    \label{fig:exitgamesequence}
  \end{center}
  \end{figure}
