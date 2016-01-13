@@ -58,6 +58,113 @@ En cada turno, el jugador puede sacar cartas del ``Deck'' al ``Waste'', colocar 
 
 Este documento no busca describir de forma muy detallada el juego, que puede consultarse en el siguiente enlace: \url{https://en.wikipedia.org/wiki/Klondike_(solitaire)}
 
+Sin embargo, en el modelo del dominio sí que se recomienda elaborar algunos diagramas que permitan especificar los detalles más importantes del juego.
+
+Así, para el juego del Klondike, se pueden especificar algunos diagramas que permiten mostrar las características básicas del juego.
+
+Para comenzar, hay que explicar el funcionamiento del juego desde el punto de vista de las acciones básicas que lleva a cabo el jugador, expresadas a través del siguiente diagrama:
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=15cm]{DomainModel/GameOverview00.jpg}
+   \caption{Funcionamiento básico}
+   \label{fig:gamebasics}
+ \end{center}
+ \end{figure}
+\end{center}
+
+En segundo lugar, se identifican los tipos de mazos involucrados en el juego, esto es, las cartas y los tipos de mazos de cartas que se compondrán:
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=15cm]{DomainModel/GameElements00.jpg}
+   \caption{Elementos del Juego}
+   \label{fig:gamelements}
+ \end{center}
+ \end{figure}
+\end{center}
+
+Además de los tipos de objetos tangibles existentes en el juego, es reseñable el ciclo de vida por el que pasa una carta en el transcurso del juego, como muestra el siguiente diagrama:
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=10cm]{DomainModel/CardLifeCycle00.jpg}
+   \caption{Ciclo de vida de una carta}
+   \label{fig:cardlifecycle}
+ \end{center}
+ \end{figure}
+\end{center}
+
+Y en cuanto a la disposición de los elementos en el juego, es decir, qué mazos contienen qué cartas y en qué estado en el reparto inicial de las mismas, se propone el siguiente diagrama:
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=16cm]{DomainModel/InitialSet00.jpg}
+   \caption{Disposición Inicial}
+   \label{fig:initialset}
+ \end{center}
+ \end{figure}
+\end{center}
+
+Una vez descritos los objetos presentes en el juego, su relación de composición su posicionamiento inicial, cabe destacar que a nivel de modelo del dominio hay que documentar cada uno de los tipos de movimientos posibles en el juego por separado, ya que hacerlo todo a través de un mismo diagrama podría resultar bastante complejo de comprender. Así, se proponen los siguientes diagramas para cada uno de los movimientos:
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=15cm]{DomainModel/MoveFromDeckToWaste00.jpg}
+   \caption{Move From Deck To Waste}
+   \label{fig:deck2waste}
+ \end{center}
+ \end{figure}
+\end{center}
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=15cm]{DomainModel/MoveFromWasteToDeck00.jpg}
+   \caption{Move From Waste To Deck}
+   \label{fig:waste2deck}
+ \end{center}
+ \end{figure}
+\end{center}
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=15cm]{DomainModel/MoveTableauToTableau00.jpg}
+   \caption{Move From Tableau To Tableau}
+   \label{fig:tableautotableau}
+ \end{center}
+ \end{figure}
+\end{center}
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=15cm]{DomainModel/MoveToFoundation00.jpg}
+   \caption{Move To Foundation}
+   \label{fig:tofoundation}
+ \end{center}
+ \end{figure}
+\end{center}
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=15cm]{DomainModel/MoveToTableauFromWasteAndFoundation00.jpg}
+   \caption{Move To Tableau From Waste Or Foundation}
+   \label{fig:totableaufromwasteorfoundation}
+ \end{center}
+ \end{figure}
+\end{center}
+
+Los anteriores diagramas de estados y de objetos permiten establecer una primera aproximación al juego del Klondike, a través de las nociones más básicas del juego.
+
+En los apartados posteriores se establecerán los casos de uso identificados en el modelo de casos de uso, así como el modelo de análisis con las clases resultantes de esta fase.
 
 \pagebreak
 
@@ -68,7 +175,7 @@ Una vez conocida la funcionalidad básica del juego, se identifican cuatro casos
 \begin{center}
  \begin{figure}[H]
  \begin{center}
-   \includegraphics[width=15cm]{DomainModel/KlondikeUseCases00.jpg}
+   \includegraphics[width=15cm]{DomainModel/KlondikeUseCases02.jpg}
    \caption{Casos de uso}
    \label{fig:usecases}
  \end{center}
@@ -80,7 +187,7 @@ A su vez, el diagrama que muestra la relación entre los distintos casos de uso 
 \begin{center}
  \begin{figure}[H]
  \begin{center}
-   \includegraphics[width=16cm]{DomainModel/UseCaseRelation00.jpg}
+   \includegraphics[width=16cm]{DomainModel/UseCaseRelation01.jpg}
    \caption{Relación entre casos de uso}
    \label{fig:usecaserelation}
  \end{center}
@@ -89,12 +196,12 @@ A su vez, el diagrama que muestra la relación entre los distintos casos de uso 
 
 Una vez encontrados los casos de uso y propuesta la relación existente entre ellos, cabe mencionar que el paso siguiente es priorizar los casos de uso.
 
-En este caso, los casos de uso con más riesgo (contemplando todo tipo de riesgos como puedan ser riesgos tecnológicos, de computación, etc.) se considera que son los casos de ``Start Game'' y ``Move Card'':
+En este caso, los casos de uso con más riesgo (contemplando todo tipo de riesgos como puedan ser riesgos tecnológicos, de computación, etc.) se considera que son los casos de ``Start New Game'' y ``Move Card'':
 
 \begin{center}
  \begin{figure}[H]
  \begin{center}
-   \includegraphics[width=15cm]{DomainModel/UseCasePrio00.jpg}
+   \includegraphics[width=15cm]{DomainModel/UseCasePrio02.jpg}
    \caption{Priorización de los casos de uso}
    \label{fig:usecasepriorization}
  \end{center}
@@ -126,6 +233,18 @@ Por otro lado, el caso de uso ``Start New Game'' hace referencia al reparto de l
  \end{figure}
 \end{center}
 
+Otro caso de uso identificado es aquél que permite a un usuario realizar cambios en la configuración del juego, en parámetros como el tipo de baraja a utilizar, el modo en que se pasan las cartas del Waste al Deck, etc.etc.etc. Dicho caso de uso queda reflejado a través del siguiente diagrama de estados:
+
+\begin{center}
+ \begin{figure}[H]
+ \begin{center}
+   \includegraphics[width=17cm]{DomainModel/ConfigureGame00.jpg}
+   \caption{Comenzar Juego}
+   \label{fig:startnewgame}
+ \end{center}
+ \end{figure}
+\end{center}
+
 Finalmente, el caso de uso ``Close Application'' hace referencia al cierre de la aplicación por parte del usuario, como muestra el siguiente diagrama:
 
 \begin{center}
@@ -145,7 +264,7 @@ En primer lugar, cabe indicar que hay una jerarquía de movimientos disponible d
 \begin{center}
  \begin{figure}[H]
  \begin{center}
-   \includegraphics[width=14cm]{DomainModel/MoveCardHierarchy.jpg}
+   \includegraphics[width=15cm]{DomainModel/MoveCardHierarchy.jpg}
    \caption{Movimientos}
    \label{fig:movements}
  \end{center}
@@ -159,7 +278,7 @@ Una forma de especificar qué ocurre dentro de cada uno de los distintos movimie
 \begin{center}
  \begin{figure}[H]
  \begin{center}
-   \includegraphics[width=14cm]{DomainModel/Deck2Waste.jpg}
+   \includegraphics[width=15cm]{DomainModel/Deck2Waste.jpg}
    \caption{Deck To Waste}
    \label{fig:deck2waste}
  \end{center}
@@ -169,7 +288,7 @@ Una forma de especificar qué ocurre dentro de cada uno de los distintos movimie
 
 \begin{figure}[H]
  \begin{center}
-   \includegraphics[width=14cm]{DomainModel/Waste2Foundation.jpg}
+   \includegraphics[width=15cm]{DomainModel/Waste2Foundation.jpg}
    \caption{Waste To Foundation}
    \label{fig:waste2foundation}
  \end{center}
@@ -179,7 +298,7 @@ Una forma de especificar qué ocurre dentro de cada uno de los distintos movimie
 \begin{center}
  \begin{figure}[H]
  \begin{center}
-   \includegraphics[width=14cm]{DomainModel/Waste2Tableau.jpg}
+   \includegraphics[width=15cm]{DomainModel/Waste2Tableau.jpg}
    \caption{Waste To Tableau}
    \label{fig:waste2tableau}
  \end{center}
@@ -189,7 +308,7 @@ Una forma de especificar qué ocurre dentro de cada uno de los distintos movimie
 \begin{center}
  \begin{figure}[H]
  \begin{center}
-   \includegraphics[width=14cm]{DomainModel/Foundation2Tableau.jpg}
+   \includegraphics[width=15cm]{DomainModel/Foundation2Tableau.jpg}
    \caption{Foundation To Tableau}
    \label{fig:foundation2tableau}
  \end{center}
@@ -199,7 +318,7 @@ Una forma de especificar qué ocurre dentro de cada uno de los distintos movimie
 \begin{center}
  \begin{figure}[H]
  \begin{center}
-   \includegraphics[width=14cm]{DomainModel/Tableau2Foundation.jpg}
+   \includegraphics[width=15cm]{DomainModel/Tableau2Foundation.jpg}
    \caption{Tableau To Foundation}
    \label{fig:tableau2foundation}
  \end{center}
@@ -209,12 +328,14 @@ Una forma de especificar qué ocurre dentro de cada uno de los distintos movimie
 \begin{center}
  \begin{figure}[H]
  \begin{center}
-   \includegraphics[width=14cm]{DomainModel/Tableau2Tableau.jpg}
+   \includegraphics[width=15cm]{DomainModel/Tableau2Tableau.jpg}
    \caption{Tableau To Tableau}
    \label{fig:tableau2tableau}
  \end{center}
  \end{figure}
 \end{center}
+
+A través de los diagramas anteriores se ha pretendido realizar una documentación clara y explícita de las condiciones por la que transiciona el sistema por cada uno de los casos de uso, básicamente, a través de diagramas de estado. De esta forma, la fase de análisis se podrá acometer de una manera más natural, ya que empiezan a aparecer conceptos que pueden ser directamente mapeados a clases, como, por ejemplo, los movimientos de las cartas, cada uno de los tipos de mazos que hay involucrados en el juego, etc.
 
 \pagebreak
 
