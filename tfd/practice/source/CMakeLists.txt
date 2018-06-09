@@ -7,10 +7,14 @@ project(eqresolver)
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+
+# eqresolver particular directories
 set(EQRESOLVER_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
+set(EQRESOLVER_UNIT_TESTS_DIR ${PROJECT_SOURCE_DIR}/test)
   
 # The following folder will be included
-include_directories("${PROJECT_SOURCE_DIR}")
+include_directories("${EQRESOLVER_SOURCE_DIR}")
 
 # The following subdirectories are included in the build path
 add_subdirectory("${EQRESOLVER_SOURCE_DIR}")
+add_subdirectory("${EQRESOLVER_UNIT_TESTS_DIR}")
