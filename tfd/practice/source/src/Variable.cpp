@@ -22,28 +22,28 @@
 #include <sstream>
 #include <iomanip>
 
-Variable::Variable() : floatPart_(0.0),
-                       namePart_()
+Variable::Variable() : name_(),
+                       Term()
 {}
 
 Variable::Variable(const float& value, const std::string& name) :
-    floatPart_(value),
-    namePart_(name)
+    name_(name),
+    Term(value)
 {}
 
 bool Variable::hasName(const std::string& promptname) const {
-  return promptname == namePart_;
+  return promptname == name_;
 }
 
 const std::string& Variable::getName() const {
-  return namePart_;
+  return name_;
 }
 
 const std::string Variable::toString() const {
-  if(floatPart_) {
+  if(value_) {
     std::ostringstream oss;
-    oss << std::setprecision(8) << std::noshowpoint << floatPart_;
-    return (oss.str() + namePart_);
+    oss << std::setprecision(8) << std::noshowpoint << value_;
+    return (oss.str() + name_);
   }
   return "";
 }

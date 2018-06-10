@@ -20,10 +20,10 @@
 // DEALINGS IN THE SOFTWARE.
 #ifndef __EQRESOLVER_VARIABLE_HPP__
 #define __EQRESOLVER_VARIABLE_HPP__
-
+#include "Term.hpp"
 #include <string>
 
-class Variable {
+class Variable final : public Term {
  public:
   Variable();
   Variable(const float& value, const std::string& name);
@@ -31,8 +31,7 @@ class Variable {
   const std::string& getName() const;
   const std::string toString() const;
  private:
-  float floatPart_;
-  std::string namePart_;
+  std::string name_;
 };
 
 #endif // __EQRESOLVER_VARIABLE_HPP__

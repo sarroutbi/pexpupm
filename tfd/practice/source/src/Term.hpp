@@ -18,42 +18,17 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-#include "Variable.hpp"
-#include "Term.hpp"
-#include "gtest/gtest.h"
+#ifndef __EQRESOLVER_TERM_HPP__
+#define __EQRESOLVER_TERM_HPP__
+class Term {
+ public:
+  Term();
+  Term(const float& value);
+  const float& getValue() const;
+ protected:
+  float value_;
+ private:
+};
 
-TEST(VariableTest, GivenEmptyVarWhenGetNameIsPromptedEmptyIsReturned) {
-  Variable var;
-  EXPECT_EQ(var.getName(), std::string());
-}
+#endif // __EQRESOLVER_TERM_HPP__
 
-TEST(VariableTest, GivenVarWithXWhenGetNameIsPromptedXIsReturned) {
-  Variable var(3, "x");
-  EXPECT_EQ(var.getName(), "x");
-}
-
-TEST(VariableTest, GivenEmptyVarWhenHasNameIsPromptedFalseIsReturned) {
-  Variable var;
-  EXPECT_EQ(var.hasName("x"), false);
-}
-
-TEST(VariableTest, GivenVarWithCertaiValueWhenHasNameIsPromptedTrueIsReturned) {
-  Variable var(3, "x");
-  EXPECT_EQ(var.hasName("x"), true);
-}
-
-TEST(VariableTest, GivenEmptyVarWhenToStringIsCalledEmptyIsReturned) {
-  Variable var;
-  EXPECT_EQ(var.toString(), std::string());
-}
-
-TEST(VariableTest,
-     GivenCertainVarWithXVarAnd3ValueWhenToStringIsCalled3xIsReturned) {
-  Variable var(3, "x");
-  EXPECT_EQ(var.toString(), "3x");
-}
-
-TEST(TermTest, GivenATermWithCertainValueThenGetValueReturnsItProperly) {
-  Term term(3.55);
-  EXPECT_EQ(term.getValue(), 3.55f);
-}
