@@ -26,6 +26,11 @@ TEST(VariableTest, GivenEmptyVarWhenGetNameIsPromptedEmptyIsReturned) {
   EXPECT_EQ(var.getName(), std::string());
 }
 
+TEST(VariableTest, GivenVarWithXWhenGetNameIsPromptedXIsReturned) {
+  Variable var(3, "x");
+  EXPECT_EQ(var.getName(), "x");
+}
+
 TEST(VariableTest, GivenEmptyVarWhenHasNameIsPromptedFalseIsReturned) {
   Variable var;
   EXPECT_EQ(var.hasName("x"), false);
