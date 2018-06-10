@@ -19,29 +19,31 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #include "Variable.hpp"
-#include "gtest/gtest.h"
+#include <sstream>
+#include <iomanip>
 
-TEST(VariableTest, GivenEmptyVarWhenGetNameIsPromptedEmptyIsReturned) {
-  Variable var;
-  EXPECT_EQ(var.getName(), std::string());
+Variable::Variable() : floatPart_(0.0),
+                       namePart_()
+{}
+
+Variable::Variable(const float& value, const std::string& name) :
+    floatPart_(value),
+    namePart_(name)
+{}
+
+bool Variable::hasName(const std::string& promptname) const {
+  return promptname == namePart_;
 }
 
-TEST(VariableTest, GivenEmptyVarWhenHasNameIsPromptedFalseIsReturned) {
-  Variable var;
-  EXPECT_EQ(var.hasName("x"), false);
+const std::string& Variable::getName() const {
+  return namePart_;
 }
 
-TEST(VariableTest, GivenVarWithCertaiValueWhenHasNameIsPromptedTrueIsReturned) {
-  Variable var(3, "x");
-  EXPECT_EQ(var.hasName("x"), true);
-}
-
-TEST(VariableTest, GivenEmptyVarWhenToStringIsCalledEmptyIsReturned) {
-  Variable var;
-  EXPECT_EQ(var.toString(), std::string());
-}
-
-TEST(VariableTest, GivenCertainVarWithXVarAnd3ValueWhenToStringIsCalled3xIsReturned) {
-  Variable var(3, "x");
-  EXPECT_EQ(var.toString(), "3x");
+const std::string Variable::toString() const {
+  if(floatPart_) {
+    std::ostringstream oss;
+    oss << std::setprecision(8) << std::noshowpoint << floatPart_;
+    return (oss.str() + namePart_);
+  }
+  return "";
 }

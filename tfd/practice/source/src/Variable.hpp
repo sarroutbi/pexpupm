@@ -21,9 +21,18 @@
 #ifndef __EQRESOLVER_VARIABLE_HPP__
 #define __EQRESOLVER_VARIABLE_HPP__
 
+#include <string>
+
 class Variable {
  public:
-  bool dumbMethodThatReturnsTrue() const {return true;}
+  Variable();
+  Variable(const float& value, const std::string& name);
+  bool hasName(const std::string& name) const;
+  const std::string& getName() const;
+  const std::string toString() const;
+ private:
+  float floatPart_;
+  std::string namePart_;
 };
 
 #endif // __EQRESOLVER_VARIABLE_HPP__
