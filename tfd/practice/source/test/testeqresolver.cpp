@@ -22,6 +22,7 @@
 #include "gtest/gtest.h"
 #include "Variable.hpp"
 #include "Constant.hpp"
+#include "Expression.hpp"
 
 TEST(VariableTest, GivenEmptyVarWhenGetNameIsPromptedEmptyIsReturned) {
   Variable var;
@@ -60,12 +61,14 @@ TEST(VariableTest,
   EXPECT_EQ(var.toString(), "0.03x");
 }
 
-TEST(TermTest, GivenAConstantTermWithCertainValueThenGetValueReturnsItProperly) {
+TEST(TermTest,
+     GivenAConstantTermWithCertainValueThenGetValueReturnsItProperly) {
   Term* term = std::make_unique<Constant>(3.55).get();
   EXPECT_EQ(term->getValue(), 3.55f);
 }
 
-TEST(TermTest, GivenAVariableTermWithCertainValueThenGetValueReturnsItProperly) {
+TEST(TermTest,
+     GivenAVariableTermWithCertainValueThenGetValueReturnsItProperly) {
   Term* term = std::make_unique<Variable>(2.25f, "x").get();
   EXPECT_EQ(term->getValue(), 2.25f);
 }
@@ -84,7 +87,8 @@ TEST(VariableTest,
 }
 
 TEST(VariableTest,
-     GivenAVariableIfClonIsObtainedThenEqualMethodWithOtherVarWithSameValuesReturnsTrue) {
+     GivenAVariableWhenClonIsObtainedThenEqualMethodWithOtherVarWithSameValues\
+ReturnsTrue) {
   Variable var(0.0011f, "y");
   Variable var2(0.0011f, "y");
   EXPECT_EQ(var2.equal(*var.clon().get()), true);
@@ -193,4 +197,38 @@ TEST(ConstantTest,
      GivenAConstantIfToStringIsCalledThenCorrectValueIsReturned) {
   Constant constant(0.05f);
   EXPECT_EQ(constant.toString(), "0.05");
+}
+
+TEST(ExpressionTest,
+     GivenAExpressionWithEmptyTermsWhenEmptyIsCalledThenTrueIsObtained) {
+  Constant econstant(0);
+  Variable evar(0, "x");
+  Expression expression;
+  expression.addTerm(econstant);
+  expression.addTerm(evar);
+  EXPECT_EQ(expression.empty(), true);
+}
+
+TEST(ExpressionTest,
+     GivenAExpressionWithNonEmptyTermsWhenEmptyIsCalledThenFalseIsObtained) {
+  Constant econstant(0);
+  Variable evar(1, "z");
+  Expression expression;
+  expression.addTerm(econstant);
+  expression.addTerm(evar);
+  EXPECT_EQ(expression.empty(), false);
+}
+
+TEST(ExpressionTest,
+     GivenAExpressionWithEmptyExpressionWhenEmptyIsCalledThenTrueIsObtained) {
+  Constant econstant(0);
+  Variable evar(0, "x");
+  Expression expression;
+  expression.addTerm(econstant);
+  expression.addTerm(evar);
+  Expression expression2;
+  Variable evar2(0, "y");
+  expression2.addTerm(evar2);
+  expression2.addTerm(expression);
+  EXPECT_EQ(expression2.empty(), true);
 }
