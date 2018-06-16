@@ -28,3 +28,5 @@ bool Constant::equal(const Term & term) const {
 }
 
 void Constant::dispatch(/*TODO TERM VISITOR*/) const {}
+
+std::unique_ptr<Term> Constant::clon() const {return std::make_unique<Constant>(value_);}

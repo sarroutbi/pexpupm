@@ -32,8 +32,8 @@ class Variable final : public Term {
   bool hasName(const std::set<std::string>& nameList) const override;
   const std::string& getName() const;
   std::string toString() const override;
-  // TODO
-  // Term clon() const override;
+  bool equal(const Term& term) const override;
+  std::unique_ptr<Term> clon() const;
   void dispatch(/*TODO TERM VISITOR*/) const override;
  private:
   std::string name_;

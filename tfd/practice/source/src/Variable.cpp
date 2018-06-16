@@ -58,5 +58,13 @@ std::string Variable::toString() const {
   return "";
 }
 
-//Term Variable::clon() const { return Term(value_); }
 void Variable::dispatch( /*TODO TERM VISITOR*/) const {}
+
+std::unique_ptr<Term> Variable::clon() const {
+  return std::make_unique<Variable>(value_, name_);
+}
+
+bool Variable::equal(const Term& term) const
+{
+  return term.getValue() == value_ && term.hasName(name_);
+}

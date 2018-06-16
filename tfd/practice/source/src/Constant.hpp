@@ -26,8 +26,7 @@ class Constant final : public Term {
  public:
   explicit Constant(const float & value);
   bool equal(const Term & term) const override;
-  // TODO
-  // Term clon() const override;
+  std::unique_ptr<Term> clon() const override;
   void dispatch(/*TODO TERM VISITOR*/) const override;
 };
 

@@ -54,9 +54,14 @@ TEST(VariableTest,
   EXPECT_EQ(var.toString(), "3x");
 }
 
-TEST(TermTest, GivenATermWithCertainValueThenGetValueReturnsItProperly) {
+TEST(TermTest, GivenAConstantTermWithCertainValueThenGetValueReturnsItProperly) {
   Term* term = std::make_unique<Constant>(3.55).get();
   EXPECT_EQ(term->getValue(), 3.55f);
+}
+
+TEST(TermTest, GivenAVariableTermWithCertainValueThenGetValueReturnsItProperly) {
+  Term* term = std::make_unique<Variable>(2.25f, "x").get();
+  EXPECT_EQ(term->getValue(), 2.25f);
 }
 
 TEST(ConstantTest,
@@ -69,4 +74,69 @@ TEST(ConstantTest,
      GivenAConstantIfTermWithDifferentConstantIsCheckedToBeEqualThenFalseIsReturned) {
   Constant constant(0.0011f);
   EXPECT_EQ(constant.equal(Constant(0.0012f)), false);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfClonIsObtainedThenEqualMethodOfBothReturnsTrue) {
+  Constant constant(0.0011f);
+  EXPECT_EQ(constant.equal(*constant.clon().get()), true);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfClonIsObtainedThenEqualMethodWithDifferentReturnsFalse) {
+  Constant constant(0.0011f);
+  Constant constant2(0.0012f);
+  EXPECT_EQ(constant2.equal(*constant.clon().get()), false);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfHasNameIsCalledThenFalseIsReturned) {
+  Constant constant(0.0011f);
+  EXPECT_EQ(constant.hasName("x"), false);
+}
+
+TEST(VariableTest,
+     GivenAVariableIfTermWithDifferentValueIsCheckedEqualThenTrueIsReturned)
+{
+  Variable var(0.0012f, "x");
+  EXPECT_EQ(var.equal(Variable(0.0012f, "x")), true);
+}
+
+TEST(VariableTest,
+     GivenAVariableIfClonIsObtainedThenEqualMethodOfBothReturnsTrue) {
+  Variable var(0.0011f, "y");
+  EXPECT_EQ(var.equal(*var.clon().get()), true);
+}
+
+TEST(VariableTest,
+     GivenAVariableIfClonIsObtainedThenEqualMethodWithOtherVarWithSameValuesReturnsTrue) {
+  Variable var(0.0011f, "y");
+  Variable var2(0.0011f, "y");
+  EXPECT_EQ(var2.equal(*var.clon().get()), true);
+}
+
+TEST(VariableTest,
+     GivenAVariableIfClonIsObtainedThenEqualMethodWithOtherValueReturnsFalse) {
+  Variable var(0.0011f, "x");
+  Variable var2(0.0012f, "x");
+  EXPECT_EQ(var2.equal(*var.clon().get()), false);
+}
+
+TEST(VariableTest,
+     GivenAVariableIfClonIsObtainedThenEqualMethodWithOtherVarReturnsFalse) {
+  Variable var(0.0011f, "x");
+  Variable var2(0.0011f, "y");
+  EXPECT_EQ(var2.equal(*var.clon().get()), false);
+}
+
+TEST(VariableTest,
+     GivenAVariableIfHasNameWithSameVarIsCalledThenFalseIsReturned) {
+  Variable var(0.0011f, "x");
+  EXPECT_EQ(var.hasName("x"), true);
+}
+
+TEST(VariableTest,
+     GivenAVariableIfHasNameWithOtherVarIsCalledThenFalseIsReturned) {
+  Variable var(0.0011f, "x");
+  EXPECT_EQ(var.hasName("y"), false);
 }

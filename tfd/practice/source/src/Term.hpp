@@ -22,6 +22,7 @@
 #ifndef __EQRESOLVER_TERM_HPP__
 #define __EQRESOLVER_TERM_HPP__
 
+#include <memory>
 #include <set>
 #include <string>
 
@@ -35,7 +36,7 @@ class Term {
   virtual bool hasName(const std::set<std::string>& nameList) const;
   virtual bool equal(const Term & term) const;
   virtual std::string toString() const;
-  // virtual Term clon() const = 0;
+  virtual std::unique_ptr<Term> clon() const = 0;
   virtual void dispatch( /*TODO TERM VISITOR*/) const = 0;
  protected:
   float value_;
