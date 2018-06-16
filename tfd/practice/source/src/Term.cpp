@@ -45,8 +45,7 @@ bool Term::hasName(const std::set<std::string>& nameList) const {
 
 std::string Term::toString() const {
   std::ostringstream oss;
-  oss << std::setprecision(Term::FLOAT_PRECISION) << std::noshowpoint <<
-      value_;
+  oss << value_;
   return oss.str();
 }
 

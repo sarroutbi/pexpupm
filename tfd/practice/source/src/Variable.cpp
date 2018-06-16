@@ -51,8 +51,7 @@ const std::string& Variable::getName() const {
 std::string Variable::toString() const {
   if (value_) {
     std::ostringstream oss;
-    oss << std::setprecision(Term::FLOAT_PRECISION) << std::noshowpoint <<
-        value_;
+    oss << value_;
     return (oss.str() + name_);
   }
   return "";

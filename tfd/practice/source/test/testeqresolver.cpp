@@ -54,6 +54,12 @@ TEST(VariableTest,
   EXPECT_EQ(var.toString(), "3x");
 }
 
+TEST(VariableTest,
+     GivenCertainVarWithXVarAnd0Dot03ValueWhenToStringIsCalled3xIsReturned) {
+  Variable var(0.03f, "x");
+  EXPECT_EQ(var.toString(), "0.03x");
+}
+
 TEST(TermTest, GivenAConstantTermWithCertainValueThenGetValueReturnsItProperly) {
   Term* term = std::make_unique<Constant>(3.55).get();
   EXPECT_EQ(term->getValue(), 3.55f);
@@ -181,4 +187,10 @@ TEST(ConstantTest,
   Constant constant(0);
   constant.multiply(0);
   EXPECT_EQ(constant.getValue(), 0.00f);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfToStringIsCalledThenCorrectValueIsReturned) {
+  Constant constant(0.05f);
+  EXPECT_EQ(constant.toString(), "0.05");
 }
