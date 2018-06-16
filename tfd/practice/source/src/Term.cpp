@@ -49,3 +49,8 @@ std::string Term::toString() const {
       value_;
   return oss.str();
 }
+
+void Term::multiply(const float& value)
+{
+  value_ *= value;
+}

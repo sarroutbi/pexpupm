@@ -64,37 +64,6 @@ TEST(TermTest, GivenAVariableTermWithCertainValueThenGetValueReturnsItProperly) 
   EXPECT_EQ(term->getValue(), 2.25f);
 }
 
-TEST(ConstantTest,
-     GivenAConstantIfTermWithThatConstantIsCheckedToBeEqualThenTrueIsReturned) {
-  Constant constant(4.23f);
-  EXPECT_EQ(constant.equal(Constant(4.23f)), true);
-}
-
-TEST(ConstantTest,
-     GivenAConstantIfTermWithDifferentConstantIsCheckedToBeEqualThenFalseIsReturned) {
-  Constant constant(0.0011f);
-  EXPECT_EQ(constant.equal(Constant(0.0012f)), false);
-}
-
-TEST(ConstantTest,
-     GivenAConstantIfClonIsObtainedThenEqualMethodOfBothReturnsTrue) {
-  Constant constant(0.0011f);
-  EXPECT_EQ(constant.equal(*constant.clon().get()), true);
-}
-
-TEST(ConstantTest,
-     GivenAConstantIfClonIsObtainedThenEqualMethodWithDifferentReturnsFalse) {
-  Constant constant(0.0011f);
-  Constant constant2(0.0012f);
-  EXPECT_EQ(constant2.equal(*constant.clon().get()), false);
-}
-
-TEST(ConstantTest,
-     GivenAConstantIfHasNameIsCalledThenFalseIsReturned) {
-  Constant constant(0.0011f);
-  EXPECT_EQ(constant.hasName("x"), false);
-}
-
 TEST(VariableTest,
      GivenAVariableIfTermWithDifferentValueIsCheckedEqualThenTrueIsReturned)
 {
@@ -139,4 +108,77 @@ TEST(VariableTest,
      GivenAVariableIfHasNameWithOtherVarIsCalledThenFalseIsReturned) {
   Variable var(0.0011f, "x");
   EXPECT_EQ(var.hasName("y"), false);
+}
+
+TEST(VariableTest,
+     GivenAVariableIfMultiplyIsCalledThenCorrectValueIsReturned) {
+  Variable var(0.0011f, "x");
+  var.multiply(3);
+  EXPECT_EQ(var.getValue(), 0.0033f);
+}
+
+TEST(VariableTest,
+     GivenAVariableIfMultiplyByZeroIsCalledThenCorrectValueIsReturned) {
+  Variable var(0.0011f, "x");
+  var.multiply(0);
+  EXPECT_EQ(var.getValue(), 0.00f);
+}
+
+TEST(VariableTest,
+     GivenAZeroCVariableIfMultiplyByZeroIsCalledThenCorrectValueIsReturned) {
+  Variable variable(0, "z");
+  variable.multiply(0);
+  EXPECT_EQ(variable.getValue(), 0.00f);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfTermWithThatConstantIsCheckedToBeEqualThenTrueIsReturned) {
+  Constant constant(4.23f);
+  EXPECT_EQ(constant.equal(Constant(4.23f)), true);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfTermWithDifferentConstantIsCheckedToBeEqualThenFalseIsReturned) {
+  Constant constant(0.0011f);
+  EXPECT_EQ(constant.equal(Constant(0.0012f)), false);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfClonIsObtainedThenEqualMethodOfBothReturnsTrue) {
+  Constant constant(0.0011f);
+  EXPECT_EQ(constant.equal(*constant.clon().get()), true);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfClonIsObtainedThenEqualMethodWithDifferentReturnsFalse) {
+  Constant constant(0.0011f);
+  Constant constant2(0.0012f);
+  EXPECT_EQ(constant2.equal(*constant.clon().get()), false);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfHasNameIsCalledThenFalseIsReturned) {
+  Constant constant(0.0011f);
+  EXPECT_EQ(constant.hasName("x"), false);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfMultiplyIsCalledThenCorrectValueIsReturned) {
+  Constant constant(0.0011f);
+  constant.multiply(4);
+  EXPECT_EQ(constant.getValue(), 0.0044f);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfMultiplyByZeroIsCalledThenCorrectValueIsReturned) {
+  Constant constant(0.3f);
+  constant.multiply(0);
+  EXPECT_EQ(constant.getValue(), 0.00f);
+}
+
+TEST(ConstantTest,
+     GivenAZeroConstantIfMultiplyByZeroIsCalledThenCorrectValueIsReturned) {
+  Constant constant(0);
+  constant.multiply(0);
+  EXPECT_EQ(constant.getValue(), 0.00f);
 }
