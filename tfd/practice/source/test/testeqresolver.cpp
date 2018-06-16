@@ -20,6 +20,7 @@
 // DEALINGS IN THE SOFTWARE.
 #include "Variable.hpp"
 #include "Term.hpp"
+#include "Constant.hpp"
 #include "gtest/gtest.h"
 
 TEST(VariableTest, GivenEmptyVarWhenGetNameIsPromptedEmptyIsReturned) {
@@ -56,4 +57,16 @@ TEST(VariableTest,
 TEST(TermTest, GivenATermWithCertainValueThenGetValueReturnsItProperly) {
   Term term(3.55);
   EXPECT_EQ(term.getValue(), 3.55f);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfTermWithThatConstantIsCheckedToBeEqualThenTrueIsReturned) {
+  Constant constant(4.23f);
+  EXPECT_EQ(constant.equal(Term(4.23f)), true);
+}
+
+TEST(ConstantTest,
+     GivenAConstantIfTermWithDifferentConstantIsCheckedToBeEqualThenFalseIsReturned) {
+  Constant constant(0.0011f);
+  EXPECT_EQ(constant.equal(Term(0.0012f)), false);
 }

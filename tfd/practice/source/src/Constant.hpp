@@ -18,25 +18,17 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-#ifndef __EQRESOLVER_VARIABLE_HPP__
-#define __EQRESOLVER_VARIABLE_HPP__
-#include <set>
-#include <string>
+#ifndef __EQRESOLVER_CONSTANT_HPP__
+#define __EQRESOLVER_CONSTANT_HPP__
 #include "Term.hpp"
 
-class Variable final : public Term {
+class Constant final : public Term {
  public:
-  Variable();
-  Variable(const float& value, const std::string& name);
-  bool hasName(const std::string& name) const override;
-  bool hasName(const std::set<std::string>& nameList) const override;
-  const std::string& getName() const;
-  std::string toString() const override;
+  explicit Constant(const float & value);
+  bool equal(const Term & term) const override;
   // TODO
-  // void dispatch( /*TODO TERM VISITOR*/) const override;
   // Term clon() const override;
- private:
-  std::string name_;
+  // void dispatch( /*TODO TERM VISITOR*/)  const override;
 };
 
-#endif // __EQRESOLVER_VARIABLE_HPP__
+#endif // __EQRESOLVER_CONSTANT_HPP__

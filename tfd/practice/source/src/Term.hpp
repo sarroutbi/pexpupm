@@ -20,13 +20,25 @@
 // DEALINGS IN THE SOFTWARE.
 #ifndef __EQRESOLVER_TERM_HPP__
 #define __EQRESOLVER_TERM_HPP__
+
+#include <set>
+#include <string>
+
 class Term {
  public:
   Term();
-  Term(const float& value);
+  explicit Term(const float& value);
   const float& getValue() const;
+  void multiply(const float& value);
+  virtual bool hasName(const std::string& name) const;
+  virtual bool hasName(const std::set<std::string>& nameList) const;
+  virtual bool equal(const Term & term) const;
+  virtual std::string toString() const;
+  // virtual Term clon() const = 0;
+  // virtual void dispatch( /*TODO TERM VISITOR*/) const = 0;
  protected:
   float value_;
+  static auto constexpr FLOAT_PRECISION = 8;
  private:
 };
 

@@ -18,13 +18,34 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
+
+#include <iomanip>
+#include <sstream>
 #include "Term.hpp"
 
 Term::Term() : value_(0.0) {}
 
 Term::Term(const float& value) : value_(value) {}
 
-const float& Term::getValue() const
-{
+const float& Term::getValue() const {
   return value_;
+}
+
+bool Term::equal(const Term & term) const {
+  return term.getValue() == value_;
+}
+
+bool Term::hasName(const std::string& name) const {
+  return false;
+}
+
+bool Term::hasName(const std::set<std::string>& nameList) const {
+  return false;
+}
+
+std::string Term::toString() const {
+  std::ostringstream oss;
+  oss << std::setprecision(Term::FLOAT_PRECISION) << std::noshowpoint <<
+      value_;
+  return oss.str();
 }

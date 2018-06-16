@@ -35,15 +35,28 @@ bool Variable::hasName(const std::string& promptname) const {
   return promptname == name_;
 }
 
+bool Variable::hasName(const std::set<std::string>& nameList) const {
+  for (auto const& var : nameList) {
+    if (name_ == var) {
+      return true;
+    }
+  }
+  return false;
+}
+
 const std::string& Variable::getName() const {
   return name_;
 }
 
-const std::string Variable::toString() const {
-  if(value_) {
+std::string Variable::toString() const {
+  if (value_) {
     std::ostringstream oss;
-    oss << std::setprecision(8) << std::noshowpoint << value_;
+    oss << std::setprecision(Term::FLOAT_PRECISION) << std::noshowpoint <<
+        value_;
     return (oss.str() + name_);
   }
   return "";
 }
+
+//Term Variable::clon() const { return Term(value_); }
+//void Variable::dispatch( /*TODO TERM VISITOR*/) const {}
