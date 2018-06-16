@@ -23,6 +23,8 @@
 #define __EQRESOLVER_EXPRESSION_HPP__
 
 #include <memory>
+#include <set>
+#include <string>
 #include <vector>
 #include "Term.hpp"
 
@@ -32,8 +34,24 @@ class Expression final {
   bool empty() const;
   void addTerm(const Term& term);
   void addTerm(const Expression& expression);
+  void multiply(const float& value);
+  // TODO(esergbr): Implement simplification
+  void simplify() const;
+  void simplify(const std::string name) const;
+  // TODO(esergbr): End Implement simplification
+  float getValue() const;
+  float getValue(const std::string& name) const;
+  bool hasName(const std::string& name) const;
+  std::set<std::string> getNameSet() const;
+  // TODO(esergbr): Ask for apply meaning
+  void apply(const std::string& name, const float& value);
+  // TODO(esergbr): End of Ask for apply meaning
+  bool equal(const Expression& expression) const;
+  Expression clon() const;
+  std::string toString() const;
  protected:
  private:
+  bool compare_floats(float A, float B, float epsilon = 0.001f) const;
   std::vector<std::unique_ptr<Term>> termList_;
 };
 

@@ -232,3 +232,103 @@ TEST(ExpressionTest,
   expression2.addTerm(expression);
   EXPECT_EQ(expression2.empty(), true);
 }
+
+TEST(ExpressionTest,
+     GivenAExpressionWhenMultiplyIsCalledThenCorrectValueIsObtained) {
+  Variable var(1.1f, "x");
+  Variable var2(2.2f, "y");
+  Constant con(3.3f);
+  Expression expression;
+  expression.addTerm(var);
+  expression.addTerm(var2);
+  expression.multiply(2);
+  EXPECT_FLOAT_EQ(expression.getValue("x"), 2.2f);
+  EXPECT_FLOAT_EQ(expression.getValue("y"), 4.4f);
+  EXPECT_FLOAT_EQ(expression.getValue(), 6.6f);
+}
+
+TEST(ExpressionTest,
+     GivenAExpressionWithMultipleVariablesCheckHasNameReturnsTrue) {
+  Variable var(1.1f, "x");
+  Variable var2(2.2f, "y");
+  Expression expression;
+  expression.addTerm(var);
+  expression.addTerm(var2);
+  EXPECT_FLOAT_EQ(expression.hasName("x"), true);
+  EXPECT_FLOAT_EQ(expression.hasName("y"), true);
+}
+
+TEST(ExpressionTest,
+     GivenAExpressionWithMultipleVariablesCheckHasNameReturnsFalse) {
+  Variable var(1.1f, "x");
+  Variable var2(2.2f, "y");
+  Expression expression;
+  EXPECT_FLOAT_EQ(expression.hasName("x"), false);
+  EXPECT_FLOAT_EQ(expression.hasName("y"), false);
+  expression.addTerm(var);
+  expression.addTerm(var2);
+  EXPECT_FLOAT_EQ(expression.hasName("z"), false);
+}
+
+TEST(ExpressionTest,
+     GivenTwoEqualExpressionsWhenEqualIsCalledThenTrueIsReturned) {
+  Variable var(1.1f, "x");
+  Variable var2(2.2f, "y");
+  Constant constant(3);
+  Expression expression;
+  expression.addTerm(var);
+  expression.addTerm(var2);
+  expression.addTerm(constant);
+  Variable var3(1.1f, "x");
+  Variable var4(2.2f, "y");
+  Constant constant2(3);
+  Expression expression2;
+  expression2.addTerm(var3);
+  expression2.addTerm(var4);
+  expression2.addTerm(constant2);
+  EXPECT_FLOAT_EQ(expression.equal(expression2), true);
+}
+
+TEST(ExpressionTest,
+     GivenTwoEquivalentExpressionsWhenEqualIsCalledThenTrueIsReturned) {
+  Variable var(1.1f, "x");
+  Variable var2(2.2f, "x");
+  Constant constant(2);
+  Constant constant2(-1);
+  Expression expression;
+  expression.addTerm(var);
+  expression.addTerm(var2);
+  expression.addTerm(constant);
+  expression.addTerm(constant2);
+  Variable var3(3.3f, "x");
+  Constant constant3(1);
+  Expression expression2;
+  expression2.addTerm(var3);
+  expression2.addTerm(constant3);
+  EXPECT_FLOAT_EQ(expression.equal(expression2), true);
+}
+
+TEST(ExpressionTest,
+     GivenAExpressionWhenCloneIsObtainThenExpressionAndCloneAreEqual) {
+  Variable var(1.1f, "x");
+  Variable var2(2.2f, "x");
+  Constant constant(2);
+  Constant constant2(-1);
+  Expression expression;
+  expression.addTerm(var);
+  expression.addTerm(var2);
+  expression.addTerm(constant);
+  expression.addTerm(constant2);
+  Expression expression2 = expression.clon();
+  EXPECT_FLOAT_EQ(expression.equal(expression2), true);
+}
+
+TEST(ExpressionTest,
+     GivenAExpressionWithVar3xAndCons4WhenToStringIsCalledThen3xPlus4) {
+  Variable var(3.0f, "x");
+  Constant constant(4);
+  Expression expression;
+  expression.addTerm(var);
+  expression.addTerm(constant);
+  EXPECT_EQ(expression.toString(), "3x + 4");
+}

@@ -19,7 +19,10 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include <math.h>
+#include <algorithm>
 #include "Expression.hpp"
+#include "Variable.hpp"
 
 Expression::Expression() : termList_() {}
 
@@ -40,4 +43,93 @@ bool Expression::empty() const {
     }
   }
   return true;
+}
+
+void Expression::multiply(const float& value) {
+  for (auto const& term : termList_) {
+    term->multiply(value);
+  }
+}
+
+float Expression::getValue() const {
+  float expression_value = 0.0f;
+  for (auto const& term : termList_) {
+    for (auto const& name : getNameSet()) {
+      if (term->hasName(name)) {
+        break;
+      }
+    }
+    expression_value += term->getValue();
+  }
+  return expression_value * 1.0f;
+}
+
+std::set<std::string> Expression::getNameSet() const {
+  std::set<std::string> nameSet;
+  for (auto const& term : termList_) {
+    // I dont like this cast, I prefer the option to have
+    // a method to check if variable or constant, or a hasName(),
+    // but it is not in the design
+    Variable* var;
+    if (var = dynamic_cast<Variable*>(term.get())) {
+      nameSet.insert(var->getName());
+    }
+  }
+  return nameSet;
+}
+
+float Expression::getValue(const std::string& name) const {
+  float expression_value = 0.0f;
+  for (auto const& term : termList_) {
+    if (term->hasName(name)) {
+      expression_value += term->getValue();
+    }
+  }
+  return expression_value * 1.0f;
+}
+
+bool Expression::hasName(const std::string& name) const {
+  std::set<std::string> names = getNameSet();
+  return (names.find(name) != names.end());
+}
+
+bool Expression::equal(const Expression& expression) const {
+  if (!compare_floats(expression.getValue(), getValue())) {
+    return false;
+  }
+  std::set<std::string> expNameSet = expression.getNameSet();
+  std::set<std::string> myNameSet = getNameSet();
+  for (auto const& expName : expNameSet) {
+    if (!compare_floats(expression.getValue(expName), getValue(expName))) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool Expression::compare_floats(float A, float B, float epsilon) const
+{
+  return (std::fabs(A - B) < epsilon);
+}
+
+Expression Expression::clon() const {
+  Expression cloned;
+  for (auto const& term : termList_) {
+    cloned.addTerm(*term.get());
+  }
+  return cloned;
+}
+
+std::string Expression::toString() const {
+  std::string expstring;
+  bool elem_added = false;
+  for (auto const& term : termList_) {
+    if (elem_added) {
+      expstring += " + ";
+    } else {
+      elem_added = true;
+    }
+    expstring += term->toString();
+  }
+  return expstring;
 }
