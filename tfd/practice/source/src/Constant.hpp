@@ -28,7 +28,7 @@ class Constant final : public Term {
   bool equal(const Term & term) const override;
   // TODO
   // Term clon() const override;
-  // void dispatch( /*TODO TERM VISITOR*/)  const override;
+  void dispatch(/*TODO TERM VISITOR*/) const override;
 };
 
 #endif // __EQRESOLVER_CONSTANT_HPP__

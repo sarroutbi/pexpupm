@@ -18,10 +18,10 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
-#include "Variable.hpp"
-#include "Term.hpp"
-#include "Constant.hpp"
+#include <memory>
 #include "gtest/gtest.h"
+#include "Variable.hpp"
+#include "Constant.hpp"
 
 TEST(VariableTest, GivenEmptyVarWhenGetNameIsPromptedEmptyIsReturned) {
   Variable var;
@@ -55,18 +55,18 @@ TEST(VariableTest,
 }
 
 TEST(TermTest, GivenATermWithCertainValueThenGetValueReturnsItProperly) {
-  Term term(3.55);
-  EXPECT_EQ(term.getValue(), 3.55f);
+  Term* term = std::make_unique<Constant>(3.55).get();
+  EXPECT_EQ(term->getValue(), 3.55f);
 }
 
 TEST(ConstantTest,
      GivenAConstantIfTermWithThatConstantIsCheckedToBeEqualThenTrueIsReturned) {
   Constant constant(4.23f);
-  EXPECT_EQ(constant.equal(Term(4.23f)), true);
+  EXPECT_EQ(constant.equal(Constant(4.23f)), true);
 }
 
 TEST(ConstantTest,
      GivenAConstantIfTermWithDifferentConstantIsCheckedToBeEqualThenFalseIsReturned) {
   Constant constant(0.0011f);
-  EXPECT_EQ(constant.equal(Term(0.0012f)), false);
+  EXPECT_EQ(constant.equal(Constant(0.0012f)), false);
 }

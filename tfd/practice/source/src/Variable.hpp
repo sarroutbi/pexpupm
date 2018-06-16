@@ -33,8 +33,8 @@ class Variable final : public Term {
   const std::string& getName() const;
   std::string toString() const override;
   // TODO
-  // void dispatch( /*TODO TERM VISITOR*/) const override;
   // Term clon() const override;
+  void dispatch(/*TODO TERM VISITOR*/) const override;
  private:
   std::string name_;
 };

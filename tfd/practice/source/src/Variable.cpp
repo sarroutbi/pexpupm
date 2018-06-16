@@ -59,4 +59,4 @@ std::string Variable::toString() const {
 }
 
 //Term Variable::clon() const { return Term(value_); }
-//void Variable::dispatch( /*TODO TERM VISITOR*/) const {}
+void Variable::dispatch( /*TODO TERM VISITOR*/) const {}

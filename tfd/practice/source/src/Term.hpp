@@ -18,6 +18,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
+
 #ifndef __EQRESOLVER_TERM_HPP__
 #define __EQRESOLVER_TERM_HPP__
 
@@ -35,7 +36,7 @@ class Term {
   virtual bool equal(const Term & term) const;
   virtual std::string toString() const;
   // virtual Term clon() const = 0;
-  // virtual void dispatch( /*TODO TERM VISITOR*/) const = 0;
+  virtual void dispatch( /*TODO TERM VISITOR*/) const = 0;
  protected:
   float value_;
   static auto constexpr FLOAT_PRECISION = 8;
@@ -43,4 +44,3 @@ class Term {
 };
 
 #endif // __EQRESOLVER_TERM_HPP__
-
