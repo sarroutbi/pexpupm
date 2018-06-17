@@ -112,6 +112,12 @@ bool Expression::equal(const Expression& expression) const {
   return true;
 }
 
+Expression::Expression(const Expression& expression) {
+  for (auto const& term : expression.termList_) {
+    add(*term.get());
+  }
+}
+
 bool Expression::compare_floats(float A, float B, float epsilon) const
 {
   return (std::fabs(A - B) < epsilon);

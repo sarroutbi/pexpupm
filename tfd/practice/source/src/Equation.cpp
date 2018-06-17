@@ -19,40 +19,47 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-#ifndef __EQRESOLVER_EXPRESSION_HPP__
-#define __EQRESOLVER_EXPRESSION_HPP__
+#include "Equation.hpp"
+#include "Side.hpp"
 
-#include <memory>
-#include <set>
-#include <string>
-#include <vector>
-#include "Term.hpp"
+Equation::Equation() : members_() {}
 
-class Expression final {
- public:
-  Expression();
-  Expression(const Expression& expression);
-  Expression& operator=(const Expression&) = delete;
-  bool empty() const;
-  void add(const Term& term);
-  void add(const Expression& expression);
-  void multiply(const float& value);
-  void simplify();
-  void simplify(const std::string& name);
-  float getValue() const;
-  float getValue(const std::string& name) const;
-  bool hasName(const std::string& name) const;
-  std::set<std::string> getNameSet() const;
-  // TODO(esergbr): Ask for apply meaning
-  void apply(const std::string& name, const float& value);
-  // TODO(esergbr): End of Ask for apply meaning
-  bool equal(const Expression& expression) const;
-  Expression clon() const;
-  std::string toString() const;
- protected:
- private:
-  bool compare_floats(float A, float B, float epsilon = 0.001f) const;
-  std::vector<std::unique_ptr<Term>> termList_;
-};
+void Equation::add(const side_t& side, const Term& term) {
+  Expression exp;
+  exp.add(term);
+  members_[side].push_back(exp);
+}
 
-#endif //__EQRESOLVER_EXPRESSION_HPP__
+std::string Equation::toString() const {
+  std::string equation;
+  auto left = members_.find(LEFT);
+  if (left != members_.end()) {
+    bool elem_added = false;
+    for (auto const& elem : left->second) {
+      if (elem_added) {
+        equation += " + ";
+      } else {
+        elem_added = true;
+      }
+      equation += elem.toString();
+    }
+  } else {
+    equation += "0";
+  }
+  equation += " = ";
+  auto right = members_.find(RIGHT);
+  if (right != members_.end()) {
+    bool elem_added = false;
+    for (auto const& elem : right->second) {
+      if (elem_added) {
+        equation += " + ";
+      } else {
+        elem_added = true;
+      }
+      equation += elem.toString();
+    }
+  } else {
+    equation += "0";
+  }
+  return equation;
+}

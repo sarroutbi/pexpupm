@@ -24,6 +24,7 @@
 #include "Constant.hpp"
 #include "Expression.hpp"
 #include "Side.hpp"
+#include "Equation.hpp"
 
 TEST(VariableTest, GivenEmptyVarWhenGetNameIsPromptedEmptyIsReturned) {
   Variable var;
@@ -383,10 +384,13 @@ ThenSimplificationIsObtained) {
   EXPECT_EQ(expression.toString(), "7x + 5y - 1");
 }
 
-TEST(SideTest,
-     GivenASideWhenFirstIsCalledThenFirstSideIsLeftThenRight) {
-  Side side;
-  side.next() == Side::LEFT;
-  side.next() == Side::RIGHT;
-  side.next() == Side::LEFT;
+TEST(EquationTest,
+     GivenAEquationWithTwoTermsInLeftWhenToStringIsCalledThen\
+CorrectRepresentationIsObtained) {
+  Variable var(4.0f, "x");
+  Variable var2(5.0f, "y");
+  Equation equation;
+  equation.add(LEFT, var);
+  equation.add(LEFT, var2);
+  EXPECT_EQ(equation.toString(), "4x + 5y = 0");
 }

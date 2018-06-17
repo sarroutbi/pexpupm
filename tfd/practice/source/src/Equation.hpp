@@ -19,40 +19,26 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
-#ifndef __EQRESOLVER_EXPRESSION_HPP__
-#define __EQRESOLVER_EXPRESSION_HPP__
+#ifndef __EQRESOLVER_EQUATION_HPP__
+#define __EQRESOLVER_EQUATION_HPP__
 
-#include <memory>
-#include <set>
 #include <string>
+#include <unordered_map>
 #include <vector>
-#include "Term.hpp"
+#include "Expression.hpp"
+#include "Side.hpp"
 
-class Expression final {
+using exp_list_t =  std::vector<Expression>;
+using side_t = std::uint8_t;
+using members_t = std::unordered_map<side_t, exp_list_t>;
+class Equation {
  public:
-  Expression();
-  Expression(const Expression& expression);
-  Expression& operator=(const Expression&) = delete;
-  bool empty() const;
-  void add(const Term& term);
-  void add(const Expression& expression);
-  void multiply(const float& value);
-  void simplify();
-  void simplify(const std::string& name);
-  float getValue() const;
-  float getValue(const std::string& name) const;
-  bool hasName(const std::string& name) const;
-  std::set<std::string> getNameSet() const;
-  // TODO(esergbr): Ask for apply meaning
-  void apply(const std::string& name, const float& value);
-  // TODO(esergbr): End of Ask for apply meaning
-  bool equal(const Expression& expression) const;
-  Expression clon() const;
+  Equation();
+  void add(const side_t& side, const Term& term);
+  // TODO(esergbr): Many methods here pending
   std::string toString() const;
- protected:
  private:
-  bool compare_floats(float A, float B, float epsilon = 0.001f) const;
-  std::vector<std::unique_ptr<Term>> termList_;
+  members_t members_;
 };
 
-#endif //__EQRESOLVER_EXPRESSION_HPP__
+#endif // __EQRESOLVER_EQUATION_HPP__

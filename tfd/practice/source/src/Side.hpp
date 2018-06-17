@@ -24,21 +24,22 @@
 
 #include <cstdint>
 
+typedef enum {LEFT, RIGHT} t_side;
+
 class Side final {
  public:
-  enum{LEFT, RIGHT};
-  inline std::uint8_t next();
+  inline Side next();
  private:
-  std::uint8_t now_side = LEFT;
+  t_side now_side = LEFT;
 };
 
-inline std::uint8_t Side::next() {
-  if(LEFT == now_side) {
+inline Side Side::next() {
+  if (LEFT == now_side) {
     now_side = RIGHT;
-    return LEFT;
+    return *this;
   }
   now_side = LEFT;
-  return RIGHT;
+  return *this;
 }
 
 #endif // __EQRESOLVER_SIDE_HPP__
