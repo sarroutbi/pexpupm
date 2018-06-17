@@ -20,17 +20,19 @@
 // DEALINGS IN THE SOFTWARE.
 
 #include <math.h>
+#include <cstdint>
 #include <algorithm>
 #include "Expression.hpp"
 #include "Variable.hpp"
+#include "Constant.hpp"
 
 Expression::Expression() : termList_() {}
 
-void Expression::addTerm(const Term& term) {
+void Expression::add(const Term& term) {
   termList_.push_back(term.clon());
 }
 
-void Expression::addTerm(const Expression& expression) {
+void Expression::add(const Expression& expression) {
   for (auto const& term : expression.termList_) {
     termList_.push_back(term->clon());
   }
@@ -54,12 +56,16 @@ void Expression::multiply(const float& value) {
 float Expression::getValue() const {
   float expression_value = 0.0f;
   for (auto const& term : termList_) {
+    bool isVar = false;
     for (auto const& name : getNameSet()) {
       if (term->hasName(name)) {
+        isVar = true;
         break;
       }
     }
-    expression_value += term->getValue();
+    if (!isVar) {
+      expression_value += term->getValue();
+    }
   }
   return expression_value * 1.0f;
 }
@@ -98,7 +104,6 @@ bool Expression::equal(const Expression& expression) const {
     return false;
   }
   std::set<std::string> expNameSet = expression.getNameSet();
-  std::set<std::string> myNameSet = getNameSet();
   for (auto const& expName : expNameSet) {
     if (!compare_floats(expression.getValue(expName), getValue(expName))) {
       return false;
@@ -115,7 +120,7 @@ bool Expression::compare_floats(float A, float B, float epsilon) const
 Expression Expression::clon() const {
   Expression cloned;
   for (auto const& term : termList_) {
-    cloned.addTerm(*term.get());
+    cloned.add(*term.get());
   }
   return cloned;
 }
@@ -123,13 +128,55 @@ Expression Expression::clon() const {
 std::string Expression::toString() const {
   std::string expstring;
   bool elem_added = false;
+
   for (auto const& term : termList_) {
     if (elem_added) {
-      expstring += " + ";
+      if (term->getValue() < 0.0f) {
+        expstring += " - ";
+      } else {
+        expstring += " + ";
+      }
     } else {
       elem_added = true;
     }
-    expstring += term->toString();
+    auto no_minus = term->toString();
+    no_minus.erase(0, no_minus.find_first_not_of('-'));
+    expstring += no_minus;
   }
   return expstring;
+}
+
+void Expression::simplify(const std::string& name) {
+  float name_value = 0.0f;
+  if (!hasName(name)) {
+    return;
+  }
+  name_value += getValue(name);
+  termList_.erase(std::remove_if(termList_.begin(),
+                                 termList_.end(),
+                                 [name](const std::unique_ptr<Term>& term){
+                                   return term->hasName(name);
+                                 }),
+                  termList_.end());
+  add(Variable(name_value, name));
+}
+
+void Expression::simplify() {
+  auto expression_constant_value = getValue();
+  std::set<std::string> myNameSet = getNameSet();
+  for (auto const& name : myNameSet) {
+    simplify(name);
+  }
+  termList_.erase(std::remove_if(termList_.begin(),
+                                 termList_.end(),
+                                 [myNameSet](const std::unique_ptr<Term>& term){
+                                   for (auto const& name : myNameSet) {
+                                     if (term->hasName(name)) {
+                                       return false;
+                                     }
+                                   }
+                                   return true;
+                                 }),
+                  termList_.end());
+  add(Constant(expression_constant_value));
 }

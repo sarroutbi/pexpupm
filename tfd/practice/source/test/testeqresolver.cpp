@@ -204,8 +204,8 @@ TEST(ExpressionTest,
   Constant econstant(0);
   Variable evar(0, "x");
   Expression expression;
-  expression.addTerm(econstant);
-  expression.addTerm(evar);
+  expression.add(econstant);
+  expression.add(evar);
   EXPECT_EQ(expression.empty(), true);
 }
 
@@ -214,8 +214,8 @@ TEST(ExpressionTest,
   Constant econstant(0);
   Variable evar(1, "z");
   Expression expression;
-  expression.addTerm(econstant);
-  expression.addTerm(evar);
+  expression.add(econstant);
+  expression.add(evar);
   EXPECT_EQ(expression.empty(), false);
 }
 
@@ -224,12 +224,12 @@ TEST(ExpressionTest,
   Constant econstant(0);
   Variable evar(0, "x");
   Expression expression;
-  expression.addTerm(econstant);
-  expression.addTerm(evar);
+  expression.add(econstant);
+  expression.add(evar);
   Expression expression2;
   Variable evar2(0, "y");
-  expression2.addTerm(evar2);
-  expression2.addTerm(expression);
+  expression2.add(evar2);
+  expression2.add(expression);
   EXPECT_EQ(expression2.empty(), true);
 }
 
@@ -237,14 +237,31 @@ TEST(ExpressionTest,
      GivenAExpressionWhenMultiplyIsCalledThenCorrectValueIsObtained) {
   Variable var(1.1f, "x");
   Variable var2(2.2f, "y");
-  Constant con(3.3f);
+  Constant con(4.0f);
   Expression expression;
-  expression.addTerm(var);
-  expression.addTerm(var2);
+  expression.add(var);
+  expression.add(var2);
+  expression.add(con);
   expression.multiply(2);
   EXPECT_FLOAT_EQ(expression.getValue("x"), 2.2f);
   EXPECT_FLOAT_EQ(expression.getValue("y"), 4.4f);
-  EXPECT_FLOAT_EQ(expression.getValue(), 6.6f);
+  EXPECT_FLOAT_EQ(expression.getValue(), 8.0f);
+}
+
+TEST(ExpressionTest,
+     GivenAExpressionWithMultipleValuesWhenGetValueIsCalled\
+ThenCorrectValueIsObtained) {
+  Variable var(1.1f, "x");
+  Variable var2(2.2f, "x");
+  Constant con(1.0f);
+  Constant con2(2.0f);
+  Expression expression;
+  expression.add(var);
+  expression.add(var2);
+  expression.add(con);
+  expression.add(con2);
+  EXPECT_FLOAT_EQ(expression.getValue("x"), 3.3f);
+  EXPECT_FLOAT_EQ(expression.getValue(), 3.0f);
 }
 
 TEST(ExpressionTest,
@@ -252,8 +269,8 @@ TEST(ExpressionTest,
   Variable var(1.1f, "x");
   Variable var2(2.2f, "y");
   Expression expression;
-  expression.addTerm(var);
-  expression.addTerm(var2);
+  expression.add(var);
+  expression.add(var2);
   EXPECT_FLOAT_EQ(expression.hasName("x"), true);
   EXPECT_FLOAT_EQ(expression.hasName("y"), true);
 }
@@ -265,8 +282,8 @@ TEST(ExpressionTest,
   Expression expression;
   EXPECT_FLOAT_EQ(expression.hasName("x"), false);
   EXPECT_FLOAT_EQ(expression.hasName("y"), false);
-  expression.addTerm(var);
-  expression.addTerm(var2);
+  expression.add(var);
+  expression.add(var2);
   EXPECT_FLOAT_EQ(expression.hasName("z"), false);
 }
 
@@ -276,16 +293,16 @@ TEST(ExpressionTest,
   Variable var2(2.2f, "y");
   Constant constant(3);
   Expression expression;
-  expression.addTerm(var);
-  expression.addTerm(var2);
-  expression.addTerm(constant);
+  expression.add(var);
+  expression.add(var2);
+  expression.add(constant);
   Variable var3(1.1f, "x");
   Variable var4(2.2f, "y");
   Constant constant2(3);
   Expression expression2;
-  expression2.addTerm(var3);
-  expression2.addTerm(var4);
-  expression2.addTerm(constant2);
+  expression2.add(var3);
+  expression2.add(var4);
+  expression2.add(constant2);
   EXPECT_FLOAT_EQ(expression.equal(expression2), true);
 }
 
@@ -296,15 +313,15 @@ TEST(ExpressionTest,
   Constant constant(2);
   Constant constant2(-1);
   Expression expression;
-  expression.addTerm(var);
-  expression.addTerm(var2);
-  expression.addTerm(constant);
-  expression.addTerm(constant2);
+  expression.add(var);
+  expression.add(var2);
+  expression.add(constant);
+  expression.add(constant2);
   Variable var3(3.3f, "x");
   Constant constant3(1);
   Expression expression2;
-  expression2.addTerm(var3);
-  expression2.addTerm(constant3);
+  expression2.add(var3);
+  expression2.add(constant3);
   EXPECT_FLOAT_EQ(expression.equal(expression2), true);
 }
 
@@ -315,10 +332,10 @@ TEST(ExpressionTest,
   Constant constant(2);
   Constant constant2(-1);
   Expression expression;
-  expression.addTerm(var);
-  expression.addTerm(var2);
-  expression.addTerm(constant);
-  expression.addTerm(constant2);
+  expression.add(var);
+  expression.add(var2);
+  expression.add(constant);
+  expression.add(constant2);
   Expression expression2 = expression.clon();
   EXPECT_FLOAT_EQ(expression.equal(expression2), true);
 }
@@ -328,7 +345,39 @@ TEST(ExpressionTest,
   Variable var(3.0f, "x");
   Constant constant(4);
   Expression expression;
-  expression.addTerm(var);
-  expression.addTerm(constant);
+  expression.add(var);
+  expression.add(constant);
   EXPECT_EQ(expression.toString(), "3x + 4");
+}
+
+TEST(ExpressionTest,
+     GivenASimplifiableByVarExpressionWhenSimplifyByNameIsCalled\
+ThenSimplificationIsObtained) {
+  Variable var(3.0f, "x");
+  Variable var2(4.0f, "x");
+  Expression expression;
+  expression.add(var);
+  expression.add(var2);
+  EXPECT_EQ(expression.toString(), "3x + 4x");
+  expression.simplify("x");
+  EXPECT_EQ(expression.toString(), "7x");
+}
+
+TEST(ExpressionTest,
+     GivenASimplifiableByAllExpressionWhenSimplifyByNameIsCalled\
+ThenSimplificationIsObtained) {
+  Variable var(3.0f, "x");
+  Variable var2(4.0f, "x");
+  Variable var3(5.0f, "y");
+  Constant con1(3);
+  Constant con2(-4);
+  Expression expression;
+  expression.add(var);
+  expression.add(var2);
+  expression.add(var3);
+  expression.add(con1);
+  expression.add(con2);
+  EXPECT_EQ(expression.toString(), "3x + 4x + 5y + 3 - 4");
+  expression.simplify();
+  EXPECT_EQ(expression.toString(), "7x + 5y - 1");
 }

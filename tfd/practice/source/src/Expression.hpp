@@ -32,12 +32,12 @@ class Expression final {
  public:
   Expression();
   bool empty() const;
-  void addTerm(const Term& term);
-  void addTerm(const Expression& expression);
+  void add(const Term& term);
+  void add(const Expression& expression);
   void multiply(const float& value);
   // TODO(esergbr): Implement simplification
-  void simplify() const;
-  void simplify(const std::string name) const;
+  void simplify();
+  void simplify(const std::string& name);
   // TODO(esergbr): End Implement simplification
   float getValue() const;
   float getValue(const std::string& name) const;
