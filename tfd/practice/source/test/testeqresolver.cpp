@@ -23,6 +23,7 @@
 #include "Variable.hpp"
 #include "Constant.hpp"
 #include "Expression.hpp"
+#include "Side.hpp"
 
 TEST(VariableTest, GivenEmptyVarWhenGetNameIsPromptedEmptyIsReturned) {
   Variable var;
@@ -380,4 +381,12 @@ ThenSimplificationIsObtained) {
   EXPECT_EQ(expression.toString(), "3x + 4x + 5y + 3 - 4");
   expression.simplify();
   EXPECT_EQ(expression.toString(), "7x + 5y - 1");
+}
+
+TEST(SideTest,
+     GivenASideWhenFirstIsCalledThenFirstSideIsLeftThenRight) {
+  Side side;
+  side.next() == Side::LEFT;
+  side.next() == Side::RIGHT;
+  side.next() == Side::LEFT;
 }
