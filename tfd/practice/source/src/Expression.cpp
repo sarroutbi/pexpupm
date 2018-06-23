@@ -164,7 +164,9 @@ void Expression::simplify(const std::string& name) {
                                    return term->hasName(name);
                                  }),
                   termList_.end());
-  add(Variable(name_value, name));
+  if(name_value != 0.0f) {
+    add(Variable(name_value, name));
+  }
 }
 
 void Expression::simplify() {
@@ -184,5 +186,15 @@ void Expression::simplify() {
                                    return true;
                                  }),
                   termList_.end());
-  add(Constant(expression_constant_value));
+  if (expression_constant_value) {
+    add(Constant(expression_constant_value));
+  }
+}
+
+Expression& Expression::operator=(const Expression& exp) {
+  termList_.clear();
+  for (auto const& term : exp.termList_) {
+    add(*term.get());
+  }
+  return *this;
 }

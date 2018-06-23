@@ -19,7 +19,10 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include <algorithm>
 #include "Equation.hpp"
+#include "Variable.hpp"
+#include "Constant.hpp"
 #include "Side.hpp"
 
 Equation::Equation() : members_() {}
@@ -68,6 +71,71 @@ const float Equation::getValue(const side_t& side) {
   return value;
 }
 
+void Equation::simplify(const side_t& side, const std::string& name) {
+  float name_value = 0;
+  for (auto& expression : members_[side]) {
+    expression.simplify(name);
+    name_value += expression.getValue(name);
+  }
+
+  members_[side].erase(std::remove_if(members_[side].begin(),
+                                      members_[side].end(),
+                                      [name](const Expression& expression){
+                                   return expression.hasName(name);
+                                 }),
+                       members_[side].end());
+  Expression exp;
+  Variable var(name_value, name);
+  exp.add(var);
+  members_[side].push_back(exp);
+}
+
+void Equation::simplify(const side_t& side) {
+  float value = 0.0f;
+  std::set<std::string> expNameSet = getNameSet();
+  for (auto const& name : expNameSet) {
+    simplify(side, name);
+  }
+  for (auto& expression : members_[side]) {
+    expression.simplify();
+    if (expression.getValue()) {
+      value += expression.getValue();
+      expression.add(Constant(-1.0f * expression.getValue()));
+    }
+    expression.simplify();
+  }
+  members_[side].erase(std::remove_if(members_[side].begin(),
+                                      members_[side].end(),
+                                      [expNameSet](const Expression& expression){
+                                        for (auto const& name : expNameSet) {
+                                          if (expression.hasName(name)) {
+                                            return false;
+                                          }
+                                        }
+                                        return 0 == expression.getValue();
+                                 }),
+                       members_[side].end());
+
+  if (value != 0.0f) {
+    Expression exp;
+    Constant constant(value);
+    exp.add(constant);
+    members_[side].push_back(exp);
+  }
+}
+
+std::set<std::string> Equation::getNameSet() {
+  std::set<std::string> nameSet;
+  for (const auto& side : ALL_SIDES) {
+    for (auto& expression : members_[side]) {
+      for(const auto& name: expression.getNameSet()) {
+        nameSet.insert(name);
+      }
+    }
+  }
+  return nameSet;
+}
+
 std::string Equation::toString() const {
   std::string equation;
   auto left = members_.find(LEFT);
@@ -101,3 +169,7 @@ std::string Equation::toString() const {
   }
   return equation;
 }
+
+
+
+

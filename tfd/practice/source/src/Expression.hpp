@@ -32,7 +32,7 @@ class Expression final {
  public:
   Expression();
   Expression(const Expression& expression);
-  Expression& operator=(const Expression&) = delete;
+  Expression& operator=(const Expression& expression);
   bool empty() const;
   void add(const Term& term);
   void add(const Expression& expression);

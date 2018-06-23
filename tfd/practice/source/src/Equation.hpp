@@ -22,6 +22,7 @@
 #ifndef __EQRESOLVER_EQUATION_HPP__
 #define __EQRESOLVER_EQUATION_HPP__
 
+#include <set>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -40,7 +41,13 @@ class Equation {
   void multiply(const float value);
   const float getValue(const std::string& name);
   const float getValue(const side_t& side);
-  // TODO(esergbr): Many methods here pending
+  void simplify(const side_t& side, const std::string& name);
+  void simplify(const side_t& side);
+  std::set<std::string> getNameSet();
+  // TODO(esergbr): Methods pending:
+  // equal
+  // clon
+  // apply (first implement apply in Expression)
   std::string toString() const;
  private:
   members_t members_;

@@ -369,17 +369,17 @@ TEST(ExpressionTest,
      GivenASimplifiableByAllExpressionWhenSimplifyByNameIsCalled\
 ThenSimplificationIsObtained) {
   Variable var(3.0f, "x");
-  Variable var2(4.0f, "x");
   Variable var3(5.0f, "y");
+  Variable var2(4.0f, "x");
   Constant con1(3);
   Constant con2(-4);
   Expression expression;
   expression.add(var);
-  expression.add(var2);
   expression.add(var3);
+  expression.add(var2);
   expression.add(con1);
   expression.add(con2);
-  EXPECT_EQ(expression.toString(), "3x + 4x + 5y + 3 - 4");
+  EXPECT_EQ(expression.toString(), "3x + 5y + 4x + 3 - 4");
   expression.simplify();
   EXPECT_EQ(expression.toString(), "7x + 5y - 1");
 }
@@ -477,4 +477,47 @@ ThenCorrectValueIsObtained) {
   equation.add(RIGHT, constant2);
   EXPECT_EQ(equation.getValue(LEFT), 4);
   EXPECT_EQ(equation.getValue(RIGHT), 7);
+}
+
+TEST(EquationTest,
+     GivenAEquationWhenSimplifyIsAppliedToASideAndValue\
+ThenCorrectValueIsObtained) {
+  Variable var(2.0f, "x");
+  Constant constant1(4.0f);
+  Variable varb(3.0f, "x");
+  Equation equation;
+  equation.add(LEFT, var);
+  equation.add(LEFT, constant1);
+  equation.add(LEFT, varb);
+  Variable var2(6.0f, "y");
+  Constant constant2(8.0f);
+  equation.add(RIGHT, var2);
+  equation.add(RIGHT, constant2);
+  EXPECT_EQ(equation.toString(), "2x + 4 + 3x = 6y + 8");
+  equation.simplify(LEFT, "x");
+  EXPECT_EQ(equation.toString(), "4 + 5x = 6y + 8");
+}
+
+TEST(EquationTest,
+     GivenAEquationWhenSimplifyIsAppliedToASide\
+ThenCorrectValueIsObtained) {
+  Variable var(2.0f, "x");
+  Variable varb(3.0f, "x");
+  Constant constant1(4.0f);
+  Constant constant2(3.0f);
+  Equation equation;
+  equation.add(LEFT, var);
+  equation.add(LEFT, varb);
+  equation.add(LEFT, constant1);
+  equation.add(LEFT, constant2);
+  Variable var2(6.0f, "y");
+  Constant constant3(8.0f);
+  Constant constant4(3.0f);
+  equation.add(RIGHT, var2);
+  equation.add(RIGHT, constant3);
+  equation.add(RIGHT, constant4);
+  EXPECT_EQ(equation.toString(), "2x + 3x + 4 + 3 = 6y + 8 + 3");
+  equation.simplify(LEFT);
+  equation.simplify(RIGHT);
+  EXPECT_EQ(equation.toString(), "5x + 7 = 6y + 11");
 }
