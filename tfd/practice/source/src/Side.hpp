@@ -25,6 +25,8 @@
 #include <cstdint>
 
 typedef enum {LEFT, RIGHT} t_side;
+auto constexpr DEFAULT_SIDE = LEFT;
+auto constexpr ALL_SIDES = {LEFT,  RIGHT};
 
 class Side final {
  public:

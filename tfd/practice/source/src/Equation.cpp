@@ -24,10 +24,24 @@
 
 Equation::Equation() : members_() {}
 
+void Equation::add(const Term& term) {
+  Expression exp;
+  exp.add(term);
+  members_[DEFAULT_SIDE].push_back(exp);
+}
+
 void Equation::add(const side_t& side, const Term& term) {
   Expression exp;
   exp.add(term);
   members_[side].push_back(exp);
+}
+
+void Equation::add(Equation equation) {
+  for (const auto& side : ALL_SIDES) {
+    for (const auto& expression : equation.members_[side]) {
+      members_[side].push_back(expression);
+    }
+  }
 }
 
 std::string Equation::toString() const {

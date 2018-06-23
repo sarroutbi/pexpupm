@@ -385,6 +385,19 @@ ThenSimplificationIsObtained) {
 }
 
 TEST(EquationTest,
+     GivenAEquationWithTwoTermsWithoutIndicatingSideWhenToStringIsCalledThen\
+CorrectRepresentationIsObtained) {
+  Variable var(4.0f, "x");
+  Variable var2(5.0f, "y");
+  Variable var3(3.0f, "z");
+  Equation equation;
+  equation.add(var);
+  equation.add(var2);
+  equation.add(RIGHT, var3);
+  EXPECT_EQ(equation.toString(), "4x + 5y = 3z");
+}
+
+TEST(EquationTest,
      GivenAEquationWithTwoTermsInLeftWhenToStringIsCalledThen\
 CorrectRepresentationIsObtained) {
   Variable var(4.0f, "x");
@@ -393,4 +406,23 @@ CorrectRepresentationIsObtained) {
   equation.add(LEFT, var);
   equation.add(LEFT, var2);
   EXPECT_EQ(equation.toString(), "4x + 5y = 0");
+}
+
+TEST(EquationTest,
+     GivenAEquationWhenOtherEquationIsAdded\
+ThenCorrectRepresentationIsObtained) {
+  Variable var(4.0f, "x");
+  Variable var2(5.0f, "y");
+  Constant constant1(3.0f);
+  Equation equation;
+  equation.add(LEFT, var);
+  equation.add(LEFT, var2);
+  equation.add(RIGHT, constant1);
+  Variable var4(7.0f, "x");
+  Constant constant2(5.0f);
+  Equation equation2;
+  equation2.add(RIGHT, var4);
+  equation2.add(RIGHT, constant2);
+  equation.add(equation2);
+  EXPECT_EQ(equation.toString(), "4x + 5y = 3 + 7x + 5");
 }
