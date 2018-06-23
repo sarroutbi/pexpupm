@@ -204,3 +204,13 @@ bool Equation::equal(Equation equation) {
   }
   return true;
 }
+
+Equation Equation::clon() {
+  Equation cloned;
+  for (const auto& side : ALL_SIDES) {
+    for (auto& expression : members_[side]) {
+      cloned.members_[side].push_back(expression);
+    }
+  }
+  return cloned;
+}

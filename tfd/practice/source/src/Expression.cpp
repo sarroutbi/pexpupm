@@ -214,3 +214,4 @@ void Expression::apply(const std::string& name, const float& value) {
     add(Constant(var_value * 1.0f * value));
   }
 }
+

@@ -588,3 +588,15 @@ WhenEqualIsCalledThenFalseIsReturned) {
   equation2.add(RIGHT, Constant(2));
   EXPECT_EQ(equation2.equal(equation), false);
 }
+
+TEST(EquationTest,
+     GivenAnEquationWithVariablesInBothSidesWhenClonIsExecuted\
+ThenClonIsEqualToTheClonedEquation) {
+  Equation equation;
+  equation.add(RIGHT, Constant(3));
+  equation.add(RIGHT, Variable(5.0f, "y"));
+  equation.add(LEFT, Variable(2.0f, "x"));
+  equation.add(RIGHT, Constant(5));
+  Equation equation2 = equation.clon();
+  EXPECT_EQ(equation2.equal(equation), true);
+}

@@ -46,8 +46,8 @@ class Equation {
   void simplify(const side_t& side);
   std::set<std::string> getNameSet();
   // TODO(esergbr): Methods pending:
-  // equal
   // clon
+  Equation clon();
   bool equal(Equation equation);
   void apply(const std::string& name, const float& value);
   std::string toString() const;
