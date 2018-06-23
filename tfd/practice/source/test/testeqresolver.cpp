@@ -426,3 +426,22 @@ ThenCorrectRepresentationIsObtained) {
   equation.add(equation2);
   EXPECT_EQ(equation.toString(), "4x + 5y = 3 + 7x + 5");
 }
+
+TEST(EquationTest,
+     GivenAEquationWhenMultiplyByValueIsApplied\
+ThenCorrectRepresentationIsObtained) {
+  Variable var(2.0f, "x");
+  Variable var2(3.0f, "y");
+  Constant constant1(4.0f);
+  Equation equation;
+  equation.add(LEFT, var);
+  equation.add(LEFT, var2);
+  equation.add(LEFT, constant1);
+  Variable var3(5.0f, "z");
+  Equation equation2;
+  equation2.add(RIGHT, var3);
+  equation.add(equation2);
+  EXPECT_EQ(equation.toString(), "2x + 3y + 4 = 5z");
+  equation.multiply(3);
+  EXPECT_EQ(equation.toString(), "6x + 9y + 12 = 15z");
+}

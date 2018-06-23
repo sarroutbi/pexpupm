@@ -44,6 +44,14 @@ void Equation::add(Equation equation) {
   }
 }
 
+void Equation::multiply(const float value) {
+  for (const auto& side : ALL_SIDES) {
+    for (auto& expression : members_[side]) {
+      expression.multiply(value);
+    }
+  }
+}
+
 std::string Equation::toString() const {
   std::string equation;
   auto left = members_.find(LEFT);

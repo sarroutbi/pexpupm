@@ -37,6 +37,7 @@ class Equation {
   void add(const Term& term);
   void add(const side_t& side, const Term& term);
   void add(Equation equation);
+  void multiply(const float value);
   // TODO(esergbr): Many methods here pending
   std::string toString() const;
  private:
