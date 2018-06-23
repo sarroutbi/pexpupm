@@ -41,12 +41,14 @@ class Equation {
   void multiply(const float value);
   const float getValue(const std::string& name);
   const float getValue(const side_t& side);
+  const float getValue(const side_t& side, const std::string& name);
   void simplify(const side_t& side, const std::string& name);
   void simplify(const side_t& side);
   std::set<std::string> getNameSet();
   // TODO(esergbr): Methods pending:
   // equal
   // clon
+  bool equal(Equation equation);
   void apply(const std::string& name, const float& value);
   std::string toString() const;
  private:

@@ -536,7 +536,7 @@ ThenCorrectValueIsObtained) {
 }
 
 TEST(EquationTest,
-     GivenAEquationWithDifferentExpressionsInBothSideseWhen\
+     GivenAEquationWithDifferentExpressionsInBothSides\
 WhenApplyIsCalledThenCorrectApplicationOfValueToVarIsPerformed) {
   Variable var(4.0f, "x");
   Variable var2(5.0f, "y");
@@ -551,4 +551,40 @@ WhenApplyIsCalledThenCorrectApplicationOfValueToVarIsPerformed) {
   equation.apply("y", 0.5f);
   EXPECT_EQ(equation.toString(), "8 + 2.5 = 6");
 
+}
+
+TEST(EquationTest,
+     GivenTwoEquationsWithEquivalentExpressionsInBothSides\
+WhenEqualIsCalledThenTrueIsReturned) {
+  Variable var(4.0f, "x");
+  Variable var2(5.0f, "y");
+  Constant constant1(3.0f);
+  Equation equation;
+  equation.add(LEFT, var);
+  equation.add(LEFT, var2);
+  equation.add(LEFT, constant1);
+  equation.add(RIGHT, Constant(2));
+  EXPECT_EQ(equation.toString(), "4x + 5y + 3 = 2");
+  Equation equation2;
+  equation2.add(LEFT, Constant(3));
+  equation2.add(LEFT, Variable(5.0f, "y"));
+  equation2.add(LEFT, Variable(4.0f, "x"));
+  equation2.add(RIGHT, Constant(2));
+  EXPECT_EQ(equation.equal(equation2), true);
+}
+
+TEST(EquationTest,
+     GivenTwoEquationsWithUnequivalentExpressionsInBothSides\
+WhenEqualIsCalledThenFalseIsReturned) {
+  Equation equation;
+  equation.add(RIGHT, Constant(3));
+  equation.add(RIGHT, Variable(5.0f, "y"));
+  equation.add(LEFT, Variable(2.0f, "x"));
+  equation.add(RIGHT, Constant(5));
+  Equation equation2;
+  equation2.add(LEFT, Constant(3));
+  equation2.add(LEFT, Variable(5.0f, "y"));
+  equation2.add(LEFT, Variable(4.0f, "x"));
+  equation2.add(RIGHT, Constant(2));
+  EXPECT_EQ(equation2.equal(equation), false);
 }

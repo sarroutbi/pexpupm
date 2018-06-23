@@ -71,6 +71,14 @@ const float Equation::getValue(const side_t& side) {
   return value;
 }
 
+const float Equation::getValue(const side_t& side, const std::string& name) {
+  float value = 0;
+  for (const auto& expression : members_[side]) {
+    value += expression.getValue(name);
+  }
+  return value;
+}
+
 void Equation::simplify(const side_t& side, const std::string& name) {
   float name_value = 0;
   for (auto& expression : members_[side]) {
@@ -176,4 +184,23 @@ void Equation::apply(const std::string& name, const float& value) {
       expression.apply(name, value);
     }
   }
+}
+
+bool Equation::equal(Equation equation) {
+  auto eqNameSet = equation.getNameSet();
+  auto myNameSet = getNameSet();
+  if (!(eqNameSet == myNameSet)) {
+    return false;
+  }
+  for (const auto& side : ALL_SIDES) {
+    if (equation.getValue(side) != getValue(side)) {
+      return false;
+    }
+    for (const auto& name : eqNameSet) {
+      if (equation.getValue(side, name) != getValue(side, name)) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
