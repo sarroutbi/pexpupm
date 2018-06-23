@@ -47,7 +47,7 @@ class Equation {
   // TODO(esergbr): Methods pending:
   // equal
   // clon
-  // apply (first implement apply in Expression)
+  void apply(const std::string& name, const float& value);
   std::string toString() const;
  private:
   members_t members_;

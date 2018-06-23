@@ -534,3 +534,21 @@ ThenCorrectValueIsObtained) {
   equation.simplify(RIGHT);
   EXPECT_EQ(equation.toString(), "5x + 7 = 6y + 11");
 }
+
+TEST(EquationTest,
+     GivenAEquationWithDifferentExpressionsInBothSideseWhen\
+WhenApplyIsCalledThenCorrectApplicationOfValueToVarIsPerformed) {
+  Variable var(4.0f, "x");
+  Variable var2(5.0f, "y");
+  Variable var3(3.0f, "x");
+  Equation equation;
+  equation.add(LEFT, var);
+  equation.add(LEFT, var2);
+  equation.add(RIGHT, var3);
+  EXPECT_EQ(equation.toString(), "4x + 5y = 3x");
+  equation.apply("x", 2);
+  EXPECT_EQ(equation.toString(), "8 + 5y = 6");
+  equation.apply("y", 0.5f);
+  EXPECT_EQ(equation.toString(), "8 + 2.5 = 6");
+
+}

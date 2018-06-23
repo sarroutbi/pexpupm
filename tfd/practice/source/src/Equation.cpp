@@ -170,6 +170,10 @@ std::string Equation::toString() const {
   return equation;
 }
 
-
-
-
+void Equation::apply(const std::string& name, const float& value) {
+  for (const auto& side : ALL_SIDES) {
+    for (auto& expression : members_[side]) {
+      expression.apply(name, value);
+    }
+  }
+}
