@@ -38,6 +38,8 @@ class Equation {
   void add(const side_t& side, const Term& term);
   void add(Equation equation);
   void multiply(const float value);
+  const float getValue(const std::string& name);
+  const float getValue(const side_t& side);
   // TODO(esergbr): Many methods here pending
   std::string toString() const;
  private:

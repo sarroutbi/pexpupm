@@ -445,3 +445,36 @@ ThenCorrectRepresentationIsObtained) {
   equation.multiply(3);
   EXPECT_EQ(equation.toString(), "6x + 9y + 12 = 15z");
 }
+
+TEST(EquationTest,
+     GivenAEquationWhenGetValueOfAVariableIsExecuted\
+ThenCorrectValueIsObtained) {
+  Variable var(2.0f, "x");
+  Variable var2(3.0f, "y");
+  Constant constant1(4.0f);
+  Equation equation;
+  equation.add(LEFT, var);
+  equation.add(LEFT, var2);
+  equation.add(LEFT, constant1);
+  EXPECT_EQ(equation.getValue("x"), 2);
+}
+
+TEST(EquationTest,
+     GivenAEquationWhenGetValueIsExecuted\
+ThenCorrectValueIsObtained) {
+  Variable var(2.0f, "x");
+  Variable var2(3.0f, "y");
+  Constant constant1(4.0f);
+  Equation equation;
+  equation.add(LEFT, var);
+  equation.add(LEFT, var2);
+  equation.add(LEFT, constant1);
+  Variable var3(5.0f, "x");
+  Variable var4(6.0f, "y");
+  Constant constant2(7.0f);
+  equation.add(RIGHT, var3);
+  equation.add(RIGHT, var4);
+  equation.add(RIGHT, constant2);
+  EXPECT_EQ(equation.getValue(LEFT), 4);
+  EXPECT_EQ(equation.getValue(RIGHT), 7);
+}

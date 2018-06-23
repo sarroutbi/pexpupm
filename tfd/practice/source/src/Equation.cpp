@@ -52,6 +52,22 @@ void Equation::multiply(const float value) {
   }
 }
 
+const float Equation::getValue(const std::string& name) {
+  float value = 0;
+  for (const auto& expression : members_[LEFT]) {
+    value += expression.getValue(name);
+  }
+  return value;
+}
+
+const float Equation::getValue(const side_t& side) {
+  float value = 0;
+  for (const auto& expression : members_[side]) {
+    value += expression.getValue();
+  }
+  return value;
+}
+
 std::string Equation::toString() const {
   std::string equation;
   auto left = members_.find(LEFT);
