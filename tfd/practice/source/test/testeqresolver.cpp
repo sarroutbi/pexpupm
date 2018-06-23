@@ -384,6 +384,19 @@ ThenSimplificationIsObtained) {
   EXPECT_EQ(expression.toString(), "7x + 5y - 1");
 }
 
+TEST(ExpressionTest,
+     GivenAExpressionWithVarWhenApplyIsExecuted\
+ThenCorrectValueIsObtained) {
+  Variable var(3.0f, "x");
+  Variable var3(5.0f, "y");
+  Expression expression;
+  expression.add(var);
+  expression.add(var3);
+  EXPECT_EQ(expression.toString(), "3x + 5y");
+  expression.apply("x", 2);
+  EXPECT_EQ(expression.toString(), "5y + 6");
+}
+
 TEST(EquationTest,
      GivenAEquationWithTwoTermsWithoutIndicatingSideWhenToStringIsCalledThen\
 CorrectRepresentationIsObtained) {

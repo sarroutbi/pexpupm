@@ -198,3 +198,20 @@ Expression& Expression::operator=(const Expression& exp) {
   }
   return *this;
 }
+
+void Expression::apply(const std::string& name, const float& value) {
+  if (!hasName(name)) {
+    return;
+  }
+  float var_value = getValue(name);
+  termList_.erase(std::remove_if(termList_.begin(),
+                                 termList_.end(),
+                                 [name](const std::unique_ptr<Term>& term){
+                                   return term->hasName(name);
+                                 }),
+                  termList_.end());
+  if (var_value != 0.0f) {
+    add(Constant(var_value * 1.0f * value));
+  }
+}
+

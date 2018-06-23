@@ -43,9 +43,7 @@ class Expression final {
   float getValue(const std::string& name) const;
   bool hasName(const std::string& name) const;
   std::set<std::string> getNameSet() const;
-  // TODO(esergbr): Ask for apply meaning
   void apply(const std::string& name, const float& value);
-  // TODO(esergbr): End of Ask for apply meaning
   bool equal(const Expression& expression) const;
   Expression clon() const;
   std::string toString() const;
