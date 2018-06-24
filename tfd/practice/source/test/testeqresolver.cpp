@@ -25,6 +25,7 @@
 #include "Expression.hpp"
 #include "Side.hpp"
 #include "Equation.hpp"
+#include "EquationSystem.hpp"
 
 TEST(VariableTest, GivenEmptyVarWhenGetNameIsPromptedEmptyIsReturned) {
   Variable var;
@@ -273,8 +274,8 @@ TEST(ExpressionTest,
   Expression expression;
   expression.add(var);
   expression.add(var2);
-  EXPECT_FLOAT_EQ(expression.hasName("x"), true);
-  EXPECT_FLOAT_EQ(expression.hasName("y"), true);
+  EXPECT_EQ(expression.hasName("x"), true);
+  EXPECT_EQ(expression.hasName("y"), true);
 }
 
 TEST(ExpressionTest,
@@ -282,11 +283,11 @@ TEST(ExpressionTest,
   Variable var(1.1f, "x");
   Variable var2(2.2f, "y");
   Expression expression;
-  EXPECT_FLOAT_EQ(expression.hasName("x"), false);
-  EXPECT_FLOAT_EQ(expression.hasName("y"), false);
+  EXPECT_EQ(expression.hasName("x"), false);
+  EXPECT_EQ(expression.hasName("y"), false);
   expression.add(var);
   expression.add(var2);
-  EXPECT_FLOAT_EQ(expression.hasName("z"), false);
+  EXPECT_EQ(expression.hasName("z"), false);
 }
 
 TEST(ExpressionTest,
@@ -305,7 +306,7 @@ TEST(ExpressionTest,
   expression2.add(var3);
   expression2.add(var4);
   expression2.add(constant2);
-  EXPECT_FLOAT_EQ(expression.equal(expression2), true);
+  EXPECT_EQ(expression.equal(expression2), true);
 }
 
 TEST(ExpressionTest,
@@ -324,7 +325,7 @@ TEST(ExpressionTest,
   Expression expression2;
   expression2.add(var3);
   expression2.add(constant3);
-  EXPECT_FLOAT_EQ(expression.equal(expression2), true);
+  EXPECT_EQ(expression.equal(expression2), true);
 }
 
 TEST(ExpressionTest,
@@ -339,7 +340,7 @@ TEST(ExpressionTest,
   expression.add(constant);
   expression.add(constant2);
   Expression expression2 = expression.clon();
-  EXPECT_FLOAT_EQ(expression.equal(expression2), true);
+  EXPECT_EQ(expression.equal(expression2), true);
 }
 
 TEST(ExpressionTest,
@@ -599,4 +600,118 @@ ThenClonIsEqualToTheClonedEquation) {
   equation.add(RIGHT, Constant(5));
   Equation equation2 = equation.clon();
   EXPECT_EQ(equation2.equal(equation), true);
+}
+
+TEST(EquationSystemTest,
+     GivenAnEquationSystemWithTwoEquationsWhenGetNameSetIsCalled\
+ThenCorrectSetWithExistingVariablesNamesIsObtained) {
+  Equation equation;
+  equation.add(RIGHT, Constant(3));
+  equation.add(RIGHT, Variable(5.0f, "y"));
+  equation.add(LEFT, Variable(2.0f, "x"));
+  equation.add(RIGHT, Constant(5));
+  Equation equation2;
+  equation2.add(RIGHT, Constant(3));
+  equation2.add(RIGHT, Variable(5.0f, "y"));
+  equation2.add(LEFT, Variable(2.0f, "z"));
+  EquationSystem eqsystem;
+  eqsystem.add(equation);
+  eqsystem.add(equation2);
+  auto nameSet =  eqsystem.getNameSet();
+  EXPECT_NE(nameSet.find("x"), nameSet.end());
+  EXPECT_NE(nameSet.find("y"), nameSet.end());
+  EXPECT_NE(nameSet.find("z"), nameSet.end());
+  EXPECT_EQ(nameSet.find("k"), nameSet.end());
+}
+
+TEST(EquationSystemTest,
+     GivenAnEquationSystemWithThreeEquationsWhenGetOfAParticularIndexIsExecuted\
+ThenCorrectEquationIsObtained) {
+  Equation equation;
+  equation.add(LEFT, Variable(2.0f, "x"));
+  equation.add(RIGHT, Constant(5));
+  Equation equation2;
+  equation2.add(LEFT, Variable(5.0f, "y"));
+  equation2.add(RIGHT, Constant(3));
+  Equation equation3;
+  equation3.add(LEFT, Variable(2.0f, "z"));
+  equation3.add(RIGHT, Constant(4));
+  EquationSystem eqsystem;
+  eqsystem.add(equation);
+  eqsystem.add(equation2);
+  eqsystem.add(equation3);
+  EXPECT_EQ(eqsystem.get(0).getValue("x"), 2.0f);
+  EXPECT_EQ(eqsystem.get(0).getValue(RIGHT), 5.0f);
+  EXPECT_EQ(eqsystem.get(0).getValue("y"), 0.0f);
+  EXPECT_EQ(eqsystem.get(0).getValue("z"), 0.0f);
+  EXPECT_EQ(eqsystem.get(1).getValue("y"), 5.0f);
+  EXPECT_EQ(eqsystem.get(1).getValue(RIGHT), 3.0f);
+  EXPECT_EQ(eqsystem.get(1).getValue("x"), 0.0f);
+  EXPECT_EQ(eqsystem.get(1).getValue("z"), 0.0f);
+  EXPECT_EQ(eqsystem.get(2).getValue("z"), 2.0f);
+  EXPECT_EQ(eqsystem.get(2).getValue(RIGHT), 4.0f);
+  EXPECT_EQ(eqsystem.get(2).getValue("x"), 0.0f);
+  EXPECT_EQ(eqsystem.get(2).getValue("y"), 0.0f);
+  EXPECT_EQ(eqsystem.get(3).equal(Equation()), true);
+}
+
+TEST(EquationSystemTest,
+     GivenAnEquationSystemWithThreeEquationsWhenGetLastIsExecuted\
+ThenCorrectEquationIsObtained) {
+  Equation equation;
+  equation.add(LEFT, Variable(2.0f, "x"));
+  equation.add(RIGHT, Constant(5));
+  Equation equation2;
+  equation2.add(LEFT, Variable(5.0f, "y"));
+  equation2.add(RIGHT, Constant(3));
+  Equation equation3;
+  equation3.add(LEFT, Variable(2.0f, "z"));
+  equation3.add(RIGHT, Constant(4));
+  EquationSystem eqsystem;
+  eqsystem.add(equation);
+  eqsystem.add(equation2);
+  eqsystem.add(equation3);
+  EXPECT_EQ(eqsystem.getLast().getValue("z"), 2.0f);
+  EXPECT_EQ(eqsystem.getLast().getValue(RIGHT), 4.0f);
+  EXPECT_EQ(eqsystem.getLast().getValue("x"), 0.0f);
+  EXPECT_EQ(eqsystem.getLast().getValue("y"), 0.0f);
+}
+
+TEST(EquationSystemTest,
+     GivenAnEquationSystemWithThreeEquationsWhenGetLastBeforeIndexIsExecuted\
+ThenCorrectEquationIsObtained) {
+  Equation equation;
+  equation.add(LEFT, Variable(2.0f, "x"));
+  equation.add(RIGHT, Constant(5));
+  Equation equation2;
+  equation2.add(LEFT, Variable(5.0f, "y"));
+  equation2.add(RIGHT, Constant(3));
+  Equation equation3;
+  equation3.add(LEFT, Variable(2.0f, "z"));
+  equation3.add(RIGHT, Constant(4));
+  EquationSystem eqsystem;
+  eqsystem.add(equation);
+  eqsystem.add(equation2);
+  eqsystem.add(equation3);
+  EXPECT_EQ(eqsystem.getLast(2).getValue("y"), 5.0f);
+  EXPECT_EQ(eqsystem.getLast(2).getValue(RIGHT), 3.0f);
+  EXPECT_EQ(eqsystem.getLast(2).getValue("x"), 0.0f);
+  EXPECT_EQ(eqsystem.getLast(2).getValue("z"), 0.0f);
+}
+
+TEST(EquationSystemTest,
+     GivenAnEquationSystemWithTwoEquationsWhenToStringIsExecuted\
+ThenCorrectStringRepresentingBothEquationsIsObtained) {
+  Equation equation;
+  equation.add(LEFT, Variable(2.0f, "x"));
+  equation.add(LEFT, Variable(3.0f, "y"));
+  equation.add(RIGHT, Constant(5));
+  Equation equation2;
+  equation2.add(LEFT, Variable(5.0f, "y"));
+  equation2.add(RIGHT, Constant(3));
+  equation2.add(RIGHT, Variable(4.0f, "x"));
+  EquationSystem eqsystem;
+  eqsystem.add(equation);
+  eqsystem.add(equation2);
+  EXPECT_EQ(eqsystem.toString(), "2x + 3y = 5\n5y = 3 + 4x\n");
 }
