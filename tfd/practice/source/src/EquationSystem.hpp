@@ -26,29 +26,37 @@
 #include <string>
 #include <vector>
 #include "Equation.hpp"
+#include "SolutionMethod.hpp"
 
 using equation_list_t = std::vector<Equation>;
+using solution_list_t = std::unordered_map<std::string, Equation>;
+
+class SolutionMethod;
 
 class EquationSystem {
  public:
   EquationSystem();
+  EquationSystem(const EquationSystem&) = delete;
+  EquationSystem(const EquationSystem&&) = delete;
+  EquationSystem& operator=(const EquationSystem&) = delete;
+  ~EquationSystem() = default;
   void add(const Equation& equation);
-  // TODO(esergbr): add set(solution) void method
-  // TODO(esergbr): add resolve() void method
+  void set(std::unique_ptr<SolutionMethod> solution_method);
+  void resolve();
   std::set<std::string> getNameSet();
   Equation get(const std::uint32_t index) const;
   Equation getLast(const std::uint32_t before) const;
   Equation getLast() const;
+  void setSolution(const std::string& name, const Equation& equation);
+  float getSolution(const std::string& name);
   // TODO(esergbr): add copyBefore(int) void method
   // TODO(esergbr): add copyBefore() void method
-  // TODO(esergbr): add setSolution(string, Equation) void method
-  // TODO(esergbr): add getSolution(string) float method
   // TODO(esergbr): add equal(EquationSystem) void method
   std::string toString() const;
-  ~EquationSystem() = default;
  private:
   equation_list_t equationList_;
-  equation_list_t solutionList_;
+  solution_list_t solutionList_;
+  std::unique_ptr<SolutionMethod> solutionMethod_;
 };
 
 #endif // __EQRESOLVER_EQUATION_SYSTEM_HPP__

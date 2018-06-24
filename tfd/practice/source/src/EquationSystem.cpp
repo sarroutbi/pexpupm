@@ -19,9 +19,11 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+#include <cassert>
 #include "EquationSystem.hpp"
 
-EquationSystem::EquationSystem() : equationList_(), solutionList_() {}
+EquationSystem::EquationSystem() : equationList_(), solutionList_(),
+                                   solutionMethod_(nullptr) {}
 
 void EquationSystem::add(const Equation& equation) {
   equationList_.push_back(equation);
@@ -64,5 +66,30 @@ Equation EquationSystem::getLast() const {
     return Equation();
   }
   return equationList_.back();
+}
+
+void EquationSystem::set(std::unique_ptr<SolutionMethod> solution_method) {
+  assert(solution_method);
+  solutionMethod_.swap(solution_method);
+  solutionMethod_.get()->set(this);
+}
+
+void EquationSystem::resolve() {
+  if (nullptr != solutionMethod_) {
+    solutionMethod_.get()->resolve();
+  }
+}
+
+void EquationSystem::setSolution(const std::string& name,
+                                 const Equation& equation) {
+  solutionList_.emplace(name, equation);
+}
+
+float EquationSystem::getSolution(const std::string& name) {
+  if (solutionList_.find(name) == solutionList_.end()) {
+    return 0.0f;
+  }
+  Equation solution = solutionList_[name];
+  return solution.getValue(name);
 }
 

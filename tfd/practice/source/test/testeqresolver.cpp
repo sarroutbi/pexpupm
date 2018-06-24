@@ -26,6 +26,7 @@
 #include "Side.hpp"
 #include "Equation.hpp"
 #include "EquationSystem.hpp"
+#include "ReductionMethod.hpp"
 
 TEST(VariableTest, GivenEmptyVarWhenGetNameIsPromptedEmptyIsReturned) {
   Variable var;
@@ -714,4 +715,26 @@ ThenCorrectStringRepresentingBothEquationsIsObtained) {
   eqsystem.add(equation);
   eqsystem.add(equation2);
   EXPECT_EQ(eqsystem.toString(), "2x + 3y = 5\n5y = 3 + 4x\n");
+}
+
+TEST(EquationSystemTest,
+     GivenAnEquationSystemWithTwoEquationsAndResolutionMethodWhenResolveIsCalled\
+ThenCorrectSolutionIsObtained) {
+  Equation equation;
+  equation.add(LEFT, Variable(2.0f, "x"));
+  equation.add(LEFT, Variable(1.0f, "y"));
+  equation.add(RIGHT, Constant(4));
+  Equation equation2;
+  equation2.add(LEFT, Variable(1.0f, "x"));
+  equation2.add(LEFT, Variable(3.0f, "y"));
+  equation2.add(RIGHT, Constant(7));
+  EquationSystem eqsystem;
+  eqsystem.add(equation);
+  eqsystem.add(equation2);
+  eqsystem.set(std::make_unique<ReductionMethod>());
+  eqsystem.resolve();
+  // TODO: This test case should pass
+  // when resolve method of ReductionMethod is implemented
+  EXPECT_EQ(eqsystem.getSolution("x"), 1.0f);
+  EXPECT_EQ(eqsystem.getSolution("y"), 2.0f);
 }
