@@ -14,7 +14,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # C++ Flags
 set(GCC_DEBUG_FLAGS "-g -ggdb -std=c++14")
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_DEBUG_FLAGS}" )
+set(GCC_LINK_FLAGS "-L/usr/local/lib")
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_DEBUG_FLAGS} ${GCC_LINK_FLAGS}")
 
 # eqresolver particular directories
 set(EQRESOLVER_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
