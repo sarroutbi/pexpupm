@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # C++ Flags
-set(GCC_DEBUG_FLAGS "-g -ggdb")
+set(GCC_DEBUG_FLAGS "-g -ggdb -std=c++14")
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_DEBUG_FLAGS}" )
 
 # eqresolver particular directories

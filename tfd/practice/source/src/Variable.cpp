@@ -21,6 +21,7 @@
 #include "Variable.hpp"
 #include <sstream>
 #include <iomanip>
+#include <memory>
 
 Variable::Variable() : name_(),
                        Term()
